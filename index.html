@@ -16,17 +16,62 @@
   <body>
     <header>
 <!-- Logo en-tête du site -->  
-        <div>
-            <a href="./index.html" aria-label="Lien vers l'accueil">
-                <img  class="logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats">
+        <div class="header">
+            <a class="header__link" href="./index.html" aria-label="Lien vers l'accueil">
+                <img  class="header__link--logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats">
             </a>
         </div>
     </header>
-    <main class="container main">
+    <main class="main">
 <!-- Barre de recherche-->
-        <div class="main_searchbar" >
-            <input type="text" class="main_searchbar--field" id="searchbar" aria-label="Champ de recherche" tabindex="0" placeholder="Rechercher votre recette">
-            <span class="main_searchbar--icon fa-solid fa-magnifying-glass" aria-hidden="true"></span>
-        </div>
+        <section class="main_searchbar" >
+            <input type="text" role="textbox" class="main__searchbar--field" id="searchbar" aria-label="Champ de recherche" tabindex="0" placeholder="Rechercher une recette">
+            <span class="main__searchbar--icon fa-solid fa-magnifying-glass" aria-hidden="true"></span>
+        </section>
+<!-- Zone de stockage des tags sélectiés -->
+        <section class="tag__parking">
+
+        </section> 
+<!-- Zone de recherche par tag--> 
+        <section class="tag__filter">
+            <div class="tag__filter--ingredients" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ingrédients">
+                <span class="filter__ingredients">Ingredients</span>
+                <input type="text" role="textbox" class="filter__ingredient--input" placeholder="Rechercher un ingredients">
+                <div class="filter__ingredients--chevron">
+                    <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                    <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                </div>
+                <ul class="filter__ingredients--list" aria-label="Liste de filtre par ingrediants">
+
+                </ul>
+            </div>
+            <div class="tag__filter--appareils" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par appareils">
+                <span class="appareils">Appareils</span>
+                <input type="text" role="textbox" class="filter__appareils--input" placeholder="Rechercher un appareils">
+                <div class="filter__appareils--chevron">
+                    <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                    <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                </div>
+                <ul class="filter__ingredients--list" aria-label="Liste de filtre par appareils">
+
+                </ul>
+            </div>
+            <div class="tag__filter--ustensiles" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ustensiles">
+                <span class="appareils">Ustensiles</span>
+                <input type="text" role="textbox" class="filter__ustensiles--input" placeholder="Rechercher un ustensiles">
+                <div class="filter__ustensiles--chevron">
+                    <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                    <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                </div>
+                <ul class="filter__ustensiles--list" aria-label="Liste de filtre par ustensiles">
+
+                </ul>
+            </div>
+        </section>
+<!-- Zone d'affichage des recettes-->  
+        <section class="container recipeDisplay">
+
+        </section>
     </main>
+    <script src=""></script>
   </body>

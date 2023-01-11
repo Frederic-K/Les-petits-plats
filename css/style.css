@@ -1,0 +1,24 @@
+* {
+  max-width: 1440px;
+  margin: 0px auto;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.header {
+  width: 100%;
+}
+.header__link {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.header__link--logo {
+  padding: 25px;
+}
+
+/*# sourceMappingURL=style.css.map */
