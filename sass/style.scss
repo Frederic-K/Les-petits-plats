@@ -1,3 +1,4 @@
-@import "../sass/base/base";
-@import "../sass/layout/header", "../sass/layout/searchbar";
-@import "../sass/pages/pages";
+@import "../sass/utils/mixins", "../sass/components/tag-filter";
+@import "../sass/base/base", "../sass/base/typo";
+@import "../sass/layout/header";
+@import "../sass/pages/searchbar", "../sass/pages/msg-recipeNotFound";

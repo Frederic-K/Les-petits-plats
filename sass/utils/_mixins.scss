@@ -1,0 +1,7 @@
+@mixin border-rad {
+    border-radius: 5px;
+};
+
+@mixin focus {
+    outline: 5px solid black;
+};
