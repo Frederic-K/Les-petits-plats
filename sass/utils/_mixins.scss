@@ -5,3 +5,13 @@
 @mixin focus {
     outline: 5px solid black;
 };
+
+@mixin display-taglist {
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    column-gap: 15px;
+    list-style: none;
+    padding: 20px;
+    z-index: 1;
+};

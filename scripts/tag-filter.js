@@ -18,11 +18,15 @@ function dropdownIngredients() {
     ingredientFilterInput.classList.toggle("hidden")
     ingredientFilterIconChevronDown.classList.toggle("hidden")
     ingredientFilterIconChevronUp.classList.toggle("hidden")
-    ingredientfilterList.classList.toggle("hidden")
-    const isIngredientfilterListHidden = ingredientfilterList.classList.contains("hidden")
-    if (!isIngredientfilterListHidden) {
+    //ingredientfilterList.classList.toggle("hidden")
+    const isIngredientFilterInputHidden = ingredientFilterInput.classList.contains("hidden")
+    if (!isIngredientFilterInputHidden) {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
+        ingredientfilterList.classList.remove("hidden")
+        ingredientfilterList.classList.add("display-flex")
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
+        ingredientfilterList.classList.add("hidden")
+        ingredientfilterList.classList.remove("display-flex")
     }
 }

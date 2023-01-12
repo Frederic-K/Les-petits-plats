@@ -52,7 +52,6 @@
   transform: scale(2);
 }
 .tag__filter .filter__ingredients--list {
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 15px;
@@ -75,6 +74,10 @@
 
 .hidden {
   display: none;
+}
+
+.display-flex {
+  display: flex;
 }
 
 * {
