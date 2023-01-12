@@ -9,16 +9,23 @@ const ingredientFilterIconChevronUp = document.getElementsByClassName("filter__i
 const ingredientfilterList = document.getElementsByClassName("filter__ingredients--list")[0];
 
 /// Dropdown ///
-
 ingredientFilterBtn.addEventListener("click", () => dropdownIngredients());
-ingredientFilterBtn.addEventListener("keydonw", () => KeyboardDropdowIngredients());
+ingredientFilterBtn.addEventListener("keydown", KeyboardDropdowIngredients);
+
+function KeyboardDropdowIngredients(e) {
+    if (e.key === "Enter") {
+        dropdownIngredients()
+    } else if (e.key === "Escape") {
+        dropdownIngredients()
+        console.log('e.key', e.key)
+    }
+}
 
 function dropdownIngredients() {
     ingredientFilterTitle.classList.toggle("hidden")
     ingredientFilterInput.classList.toggle("hidden")
     ingredientFilterIconChevronDown.classList.toggle("hidden")
     ingredientFilterIconChevronUp.classList.toggle("hidden")
-    //ingredientfilterList.classList.toggle("hidden")
     const isIngredientFilterInputHidden = ingredientFilterInput.classList.contains("hidden")
     if (!isIngredientFilterInputHidden) {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
