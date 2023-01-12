@@ -33,10 +33,14 @@
   background-color: #1683FF;
   border: none;
   font-size: 20px;
+  color: white;
   z-index: 1;
 }
 .tag__filter--header .filter__ingredients--input::placeholder {
   color: white;
+}
+.tag__filter--header .filter__ingredients--input:focus {
+  outline: none;
 }
 .tag__filter--header .filter__ingredients--chevron {
   width: 50px;
