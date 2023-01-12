@@ -18,14 +18,14 @@
 <!-- Logo header -->  
         <div class="header">
             <a class="header__link" href="./index.html" aria-label="Lien vers l'accueil">
-                <img  class="header__link--logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats">
+                <img  class="header__link--logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats" tabindex="0">
             </a>
         </div>
     </header>
     <main class="main">
 <!-- Barre de recherche-->
         <section class="main__searchbar">
-            <input type="text" role="textbox" class="main__searchbar--input" id="searchbar" aria-label="Champ de recherche" tabindex="0" placeholder="Rechercher une recette">
+            <input type="text" role="textbox" class="main__searchbar--input" id="searchbar" aria-label="Champ de recherche de recettes" tabindex="0" placeholder="Rechercher une recette">
             <span class="main__searchbar--icon fa-solid fa-magnifying-glass" aria-hidden="true"></span>
         </section>
 <!--Message d'erreur : aucune recette trouvée-->
@@ -42,10 +42,14 @@
             <div class="tag__filter--ingredients" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ingrédients">
                 <div class="tag__filter--header">
                     <span class="filter__ingredients">Ingredients</span>
-                    <input type="text" role="textbox" class="filter__ingredient--input hidden" placeholder="Rechercher un ingredients">
+                    <input type="text" role="textbox" class="filter__ingredients--input hidden" placeholder="Rechercher un ingredients">
                     <div class="filter__ingredients--chevron">
-                        <span class="fa-solid fa-chevron-down filter__ingredients--chevronDown" aria-hidden="true"></span>
-                        <span class="fa-solid fa-chevron-up filter__ingredients--chevronUp" aria-hidden="true"></span>
+                        <div class="filter__ingredients--chevronDown">
+                            <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                        </div>
+                        <div class="filter__ingredients--chevronUp hidden">
+                            <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                        </div>
                     </div>
                 </div>
                 <ul class="filter__ingredients--list hidden" aria-label="Liste de filtre par ingrediants">
@@ -95,6 +99,6 @@
 
         </section>
     </main>
-    <!--<script src="../Les petits plats/data/recipes.js"></script>-->
-    <script src="../Les petits plats/scripts/tag-filter.js"></script>
+    <script src="/data/recipes.js"></script>
+    <script src="/scripts/tag-filter.js"></script>
   </body>
