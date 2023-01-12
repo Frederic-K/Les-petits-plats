@@ -4,6 +4,13 @@
   cursor: pointer;
 }
 .tag__filter--ingredients {
+  /*width: 100%;
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px;
+  @include border-rad;*/
   width: 100%;
   min-height: 80px;
   display: flex;
@@ -14,6 +21,14 @@
   background-color: #1683FF;
 }
 .tag__filter--header {
+  /*width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 20px;*/
   width: 100%;
   height: 100%;
   padding: 10px 10px;
@@ -27,6 +42,20 @@
   width: 100%;
 }
 .tag__filter--header .filter__ingredients--input {
+  /*width: 100%;
+  min-height: 60px;
+  @include border-rad;
+  background-color: #1683FF;
+  border: none;
+  font-size: 20px;
+  color: white;
+  z-index: 1;
+  &::placeholder {
+      color: white;
+  }
+  &:focus {
+      outline: none;
+  }*/
   width: 100%;
   min-height: 60px;
   border-radius: 5px;
@@ -43,6 +72,13 @@
   outline: none;
 }
 .tag__filter--header .filter__ingredients--chevron {
+  /*width: 50px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  &:hover {
+      transform: scale(2);
+  }*/
   width: 50px;
   min-height: 80px;
   display: flex;
