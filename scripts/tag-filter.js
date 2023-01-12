@@ -1,8 +1,9 @@
 
 /// DOM ///
-const ingredientFilterBtn = document.getElementsByClassName("tag__filter--ingredients")[0];
+const ingredientFilterTag = document.getElementsByClassName("tag__filter--ingredients")[0];
 const ingredientFilterTitle = document.getElementsByClassName("filter__ingredients")[0];
 const ingredientFilterInput = document.getElementsByClassName("filter__ingredients--input")[0];
+const ingredientFilterBtn = document.getElementsByClassName("filter__ingredients--chevron")[0];
 const ingredientFilterIconChevronDown = document.getElementsByClassName("filter__ingredients--chevronDown")[0];
 const ingredientFilterIconChevronUp = document.getElementsByClassName("filter__ingredients--chevronUp")[0];
 const ingredientfilterList = document.getElementsByClassName("filter__ingredients--list")[0];
@@ -20,8 +21,8 @@ function dropdownIngredients() {
     ingredientfilterList.classList.toggle("hidden")
     const isIngredientfilterListHidden = ingredientfilterList.classList.contains("hidden")
     if (!isIngredientfilterListHidden) {
-        ingredientFilterBtn.setAttribute("aria-expanded", "true")
+        ingredientFilterTag.setAttribute("aria-expanded", "true")
     } else {
-        ingredientFilterBtn.setAttribute("aria-expanded", "false")
+        ingredientFilterTag.setAttribute("aria-expanded", "false")
     }
 }
