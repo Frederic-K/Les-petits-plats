@@ -17,12 +17,13 @@
 };
 
 @mixin tag-filter-items {
-    width: 100%;
+    //width: 350px;
     min-height: 80px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 5px;
+    background-color: #1683FF;
     @include border-rad;
 };
 
@@ -37,9 +38,14 @@
     font-size: 20px;
 };
 
+@mixin tag-filter-title {
+    margin-left: 10px;
+}
+
 @mixin tag-filter-input {
     width: 100%;
     min-height: 60px;
+    margin-left: 5px;
     @include border-rad;
     background-color: #1683FF;
     border: none;
@@ -59,6 +65,7 @@
     min-height: 80px;
     display: flex;
     align-items: center;
+    margin-right: 0px;
     cursor: pointer;
     &:hover {
         transform: scale(2);

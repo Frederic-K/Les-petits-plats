@@ -1,5 +1,4 @@
 .tag__filter {
-  width: 100%;
   margin-top: 15px;
 }
 .tag__filter--ingredients {
@@ -10,14 +9,13 @@
   flex-direction: column;
   padding: 5px;
   @include border-rad;*/
-  width: 100%;
   min-height: 80px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 5px;
-  border-radius: 5px;
   background-color: #1683FF;
+  border-radius: 5px;
 }
 .tag__filter--header {
   /*width: 100%;
@@ -38,7 +36,7 @@
   font-size: 20px;
 }
 .tag__filter--header .filter__ingredients {
-  width: 100%;
+  margin-left: 10px;
 }
 .tag__filter--header .filter__ingredients--input {
   /*width: 100%;
@@ -57,6 +55,7 @@
   }*/
   width: 100%;
   min-height: 60px;
+  margin-left: 5px;
   border-radius: 5px;
   background-color: #1683FF;
   border: none;
@@ -82,6 +81,7 @@
   min-height: 80px;
   display: flex;
   align-items: center;
+  margin-right: 0px;
   cursor: pointer;
 }
 .tag__filter--header .filter__ingredients--chevron:hover {

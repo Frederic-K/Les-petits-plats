@@ -1,5 +1,5 @@
 .tag__filter {
-    width: 100%;
+    //width: 100%;
     margin-top: 15px;
     &--ingredients {
         /*width: 100%;
@@ -9,8 +9,7 @@
         flex-direction: column;
         padding: 5px;
         @include border-rad;*/
-        @include tag-filter-items;
-        background-color: #1683FF;
+        @include tag-filter-items;        
     }
     &--header {
         /*width: 100%;
@@ -23,7 +22,7 @@
         font-size: 20px;*/
         @include tag-filter-header;
         .filter__ingredients {
-            width: 100%;
+            @include tag-filter-title;
         }
         .filter__ingredients--input {
             /*width: 100%;

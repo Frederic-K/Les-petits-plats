@@ -29,10 +29,14 @@ function dropdownIngredients() {
     const isIngredientFilterInputHidden = ingredientFilterInput.classList.contains("hidden")
     if (!isIngredientFilterInputHidden) {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
+        ingredientFilterTag.classList.remove("width-350")
+        ingredientFilterTag.classList.add("width-650")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
+        ingredientFilterTag.classList.remove("width-650")
+        ingredientFilterTag.classList.add("width-350")
         ingredientfilterList.classList.add("hidden")
         ingredientfilterList.classList.remove("display-flex")
     }
