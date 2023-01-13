@@ -1,7 +1,6 @@
 .tag__filter {
   width: 100%;
   margin-top: 15px;
-  cursor: pointer;
 }
 .tag__filter--ingredients {
   /*width: 100%;
@@ -83,6 +82,7 @@
   min-height: 80px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .tag__filter--header .filter__ingredients--chevron:hover {
   transform: scale(2);

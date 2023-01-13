@@ -59,6 +59,7 @@
     min-height: 80px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     &:hover {
         transform: scale(2);
     }
