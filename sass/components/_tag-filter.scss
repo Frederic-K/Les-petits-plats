@@ -54,5 +54,8 @@
     }
     .filter__ingredients--list {
         @include display-taglist;
+        .itemsList {
+            @include items-list;
+        }
     }
 };

@@ -85,8 +85,7 @@ function setUpperCaseFirstChar(string) {
 function getTagFilterDOM(data) {
     console.log('data', data);
     const ingredientfilterListItem = document.createElement("li")
-    ingredientfilterListItem.classList.add("itemsTest")
-    //ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
+    ingredientfilterListItem.classList.add("itemsList")
     ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
     ingredientfilterList.appendChild(ingredientfilterListItem)
     return (ingredientfilterList)
