@@ -1,4 +1,5 @@
-@import "../sass/utils/mixins", "../sass/components/tag-filter";
+
+@import "../sass/utils/mixins", "../sass/utils/variables", "../sass/components/tag-filter";
 @import "../sass/base/base", "../sass/base/typo";
 @import "../sass/layout/header";
 @import "../sass/pages/searchbar", "../sass/pages/errorMsg";
