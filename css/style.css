@@ -9,7 +9,7 @@
   flex-direction: column;
   padding: 5px;
   @include border-rad;*/
-  min-height: 80px;
+  min-height: 60px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -121,11 +121,11 @@
 }
 
 .width-650 {
-  width: 650px;
+  max-width: 650px;
 }
 
 .width-350 {
-  width: 350px;
+  max-width: 350px;
 }
 
 * {

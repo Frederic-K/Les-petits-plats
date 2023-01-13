@@ -33,6 +33,7 @@ function dropdownIngredients() {
         ingredientFilterTag.classList.add("width-650")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
+        displayTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
         ingredientFilterTag.classList.remove("width-650")
@@ -41,3 +42,56 @@ function dropdownIngredients() {
         ingredientfilterList.classList.remove("display-flex")
     }
 }
+
+/*function displayTagFilter() {
+    recipes.forEach((recipe) => {
+        const allIngredients = recipe.ingredients
+        console.log('allIngredients', allIngredients)
+        allIngredients.forEach((ingredientType) => { 
+            const ingredientX = ingredientType.ingredient
+            const arrayIngredients  = []
+            arrayIngredients.push(ingredientX)
+            console.log('arrayIngredients', arrayIngredients);
+            const ingredient = [...new Set(arrayIngredients)]
+            console.log('ingredientX', ingredientX);
+            console.log('ingredient', ingredient);
+            getTagFilterDOM(ingredientX)
+        })
+    })
+}*/
+
+
+function displayTagFilter() {
+    for (const recipe of recipes) {
+        const allIngredients = recipe.ingredients
+        console.log('allIngredients', allIngredients)
+        for (const ingredient of allIngredients) {
+            const ingredientX = ingredient.ingredient
+            getTagFilterDOM(ingredientX)
+        }
+    }
+}
+
+/*function setUpperCaseFirstChar(a) {
+    return (a+'').charAt(0).toUpperCase()+a.substr(1);
+}*/
+
+/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
+
+function setUpperCaseFirstChar(string) {
+    return string && string[0].toUpperCase() + string.slice(1);
+}
+
+function getTagFilterDOM(data) {
+    console.log('data', data);
+    const ingredientfilterListItem = document.createElement("li")
+    ingredientfilterListItem.classList.add("itemsTest")
+    //ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
+    ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
+    ingredientfilterList.appendChild(ingredientfilterListItem)
+    return (ingredientfilterList)
+}
+
+
+
+
