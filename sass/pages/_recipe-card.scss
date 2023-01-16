@@ -56,7 +56,11 @@
     }
     &--title {
         margin-left: 0;
-        font-size: 16px;
+        font-size: 14px;
+        font-weight: normal;
+        @media screen and (min-width: 768px) {
+            font-size: 17px;
+        }    
     }
     &--time {
         width: 70px;
@@ -65,6 +69,7 @@
         align-items: center;
         gap: 2px;
         margin-right: 0;
+        font-weight: bold;
     }
     &--timeIcon {
         font-size: 15px;
