@@ -1,7 +1,9 @@
 .tag__filter {
   display: flex;
   flex-direction: column;
-  margin: 15px 0px 0px 0px;
+  margin: 15px 0px 30px 0px;
+  z-index: 10;
+  position: relative;
 }
 @media screen and (min-width: 1024px) {
   .tag__filter {
@@ -20,6 +22,7 @@
   padding: 5px;
   background-color: #1683FF;
   border-radius: 5px;
+  position: absolute;
 }
 .tag__filter--header {
   width: 100%;
@@ -43,7 +46,6 @@
   border: none;
   font-size: 20px;
   color: white;
-  z-index: 1;
 }
 .tag__filter--header .filter__ingredients--input::placeholder {
   color: white;
@@ -71,7 +73,6 @@
   row-gap: 15px;
   column-gap: 15px;
   list-style: none;
-  z-index: 1;
 }
 .tag__filter .filter__ingredients--list .itemsList {
   width: 180px;
@@ -175,6 +176,7 @@
 .recipes__section {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 25px;
 }
 @media screen and (min-width: 1024px) {

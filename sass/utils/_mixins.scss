@@ -16,6 +16,7 @@
     padding: 5px;
     background-color: #1683FF;
     @include border-rad;
+    position: absolute;
 };
 
 @mixin tag-filter-header {
@@ -42,7 +43,6 @@
     border: none;
     font-size: 20px;
     color: white;
-    z-index: 1;
     &::placeholder {
         color: white;
     }
@@ -72,7 +72,6 @@
     row-gap: 15px;
     column-gap: 15px;
     list-style: none;
-    z-index: 1;
 };
 
 @mixin items-list {
