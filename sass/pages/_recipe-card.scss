@@ -42,7 +42,8 @@
         height: 40%;
         display: flex;
         flex-direction: column;
-        overflow: scroll;
+        //overflow: scroll;
+        overflow: hidden;
         padding: 0px 10px 0px 10px;
         background-color: $bg-color-grey;
     }
@@ -69,7 +70,8 @@
         align-items: center;
         gap: 2px;
         margin-right: 0;
-        font-weight: bold;
+        font-weight: bold
+        ;
     }
     &--timeIcon {
         font-size: 15px;
@@ -81,14 +83,22 @@
         width: 100%; 
         display: flex;
         flex-direction: row;
-        font-size: 11px;
-        gap: 5px; 
+        font-size: 9px;
+        gap: 5px;
+        @media screen and (min-width: 768px) {
+            font-size: 12px;
+        } 
     }
     &--ingredients {
         width: 49%;
         display: flex;
         flex-direction: column;
         margin-left: 0;
+        padding: 1px;
+        @include mobile-text-ellipsis;
+        @media screen and (min-width: 768px) {
+            @include desktop-text-ellipsis;
+        }
     }
     &--ingredientX {
         display: flex;
@@ -98,7 +108,14 @@
     }
     &--cookingDescription {
         width: 49%;
+        height: 100%;
         display: flex;
+        padding: 5px;
         margin-left: 0;
+        @include mobile-text-ellipsis;
+        @media screen and (min-width: 768px) {
+            padding: 1px;
+            @include desktop-text-ellipsis;
+        }  
     }
 }

@@ -257,7 +257,7 @@
   height: 40%;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow: hidden;
   padding: 0px 10px 0px 10px;
   background-color: #F0F3F4;
 }
@@ -298,14 +298,34 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  font-size: 11px;
+  font-size: 9px;
   gap: 5px;
+}
+@media screen and (min-width: 768px) {
+  .recipe__card--explanation {
+    font-size: 12px;
+  }
 }
 .recipe__card--ingredients {
   width: 49%;
   display: flex;
   flex-direction: column;
   margin-left: 0;
+  padding: 1px;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+@media screen and (min-width: 768px) {
+  .recipe__card--ingredients {
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
 }
 .recipe__card--ingredientX {
   display: flex;
@@ -315,8 +335,25 @@
 }
 .recipe__card--cookingDescription {
   width: 49%;
+  height: 100%;
   display: flex;
+  padding: 5px;
   margin-left: 0;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+@media screen and (min-width: 768px) {
+  .recipe__card--cookingDescription {
+    padding: 1px;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

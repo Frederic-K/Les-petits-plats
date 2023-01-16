@@ -81,4 +81,20 @@
     color: white;
     font-size: 20px;
     cursor: pointer;
-}
+};
+
+@mixin mobile-text-ellipsis {
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+};
+
+@mixin desktop-text-ellipsis {
+    overflow:hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+};
