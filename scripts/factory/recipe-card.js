@@ -46,7 +46,7 @@ class testRecipeCard {
 }
 
 function displayRecipeCard() {
-    const cardSection = document.getElementsByClassName("testRecipeCard")[0]
+    const cardSection = document.getElementsByClassName("recipes__section")[0]
     const newRecipeCard = new testRecipeCard(recipes)
     const cardRecipe = newRecipeCard.createCard()
     console.log('cardReceipe', cardRecipe);
