@@ -4,9 +4,10 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
         &--logo {
-            width: 90%;
-            padding: 25px;
+            max-width: 300px;
+            padding: 15px 15px 0px 15px;
         }
     }
 };

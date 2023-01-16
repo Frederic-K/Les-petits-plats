@@ -1,0 +1,99 @@
+.recipe__section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    @media screen and (min-width: 1024px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.recipe__card {
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    background-color: $bg-color-grey;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;  
+    @media screen and (min-width: 768px) {
+        width: 400px;
+        height: 400px;
+    }
+    &--imgContainer {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-top: 0;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &--description {
+        width: 100%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        padding: 0px 10px 0px 10px;
+        background-color: $bg-color-grey;
+    }
+    &--header {
+        width: 100%;
+        height: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &--title {
+        margin-left: 0;
+        font-size: 16px;
+    }
+    &--time {
+        width: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        margin-right: 0;
+    }
+    &--timeIcon {
+        font-size: 15px;
+    }
+    &--cookingTime {
+        font-size: 15px;
+    }
+    &--explanation {
+        width: 100%; 
+        display: flex;
+        flex-direction: row;
+        font-size: 11px;
+        gap: 5px; 
+    }
+    &--ingredients {
+        width: 49%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+    }
+    &--ingredientX {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 0;
+    }
+    &--cookingDescription {
+        width: 49%;
+        display: flex;
+        margin-left: 0;
+    }
+}

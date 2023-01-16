@@ -119,13 +119,13 @@
 
 * {
   max-width: 1440px;
-  margin: 0px auto;
+  margin: 5px auto;
   box-sizing: border-box;
   text-decoration: none;
 }
 
 .main {
-  padding: 25px;
+  padding: 0px 15px 15px 15px;
 }
 
 .hidden {
@@ -159,10 +159,11 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .header__link--logo {
-  width: 90%;
-  padding: 25px;
+  max-width: 300px;
+  padding: 15px 15px 0px 15px;
 }
 
 .main__searchbar {
@@ -205,6 +206,110 @@
   border-radius: 5px;
   color: white;
   background-color: #E36D17;
+}
+
+.recipe__section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+@media screen and (min-width: 1024px) {
+  .recipe__section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.recipe__card {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #F0F3F4;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+@media screen and (min-width: 768px) {
+  .recipe__card {
+    width: 400px;
+    height: 400px;
+  }
+}
+.recipe__card--imgContainer {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: 0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.recipe__card--imgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recipe__card--description {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding: 0px 10px 0px 10px;
+  background-color: #F0F3F4;
+}
+.recipe__card--header {
+  width: 100%;
+  height: 7%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.recipe__card--title {
+  margin-left: 0;
+  font-size: 16px;
+}
+.recipe__card--time {
+  width: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  margin-right: 0;
+}
+.recipe__card--timeIcon {
+  font-size: 15px;
+}
+.recipe__card--cookingTime {
+  font-size: 15px;
+}
+.recipe__card--explanation {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 11px;
+  gap: 5px;
+}
+.recipe__card--ingredients {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+}
+.recipe__card--ingredientX {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0;
+}
+.recipe__card--cookingDescription {
+  width: 49%;
+  display: flex;
+  margin-left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
