@@ -29,34 +29,57 @@ function dropdownIngredients() {
     const isIngredientFilterInputHidden = ingredientFilterInput.classList.contains("hidden")
     if (!isIngredientFilterInputHidden) {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
-        ingredientFilterTag.classList.remove("width-350")
-        ingredientFilterTag.classList.add("width-650")
+        ingredientFilterTag.classList.remove("width-small")
+        ingredientFilterTag.classList.add("width-large")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
         displayTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
-        ingredientFilterTag.classList.remove("width-650")
-        ingredientFilterTag.classList.add("width-350")
+        ingredientFilterTag.classList.remove("width-large")
+        ingredientFilterTag.classList.add("width-small")
         ingredientfilterList.classList.add("hidden")
         ingredientfilterList.classList.remove("display-flex")
     }
 }
 
 function displayTagFilter() {
+    recipes.forEach((recipe) => {
+        const allIngredients = recipe.ingredients
+        //console.log('allIngredients', allIngredients)
+        allIngredients.forEach((ingredientType) => { 
+            const ingredientX = ingredientType.ingredient
+            console.log('ingredientX', ingredientX);
+            getTagFilterDOM(ingredientX)
+        })
+    })
+}
+
+/*let arrayIngredients = [];
+let ingredientX = [];
+
+function displayTagFilter() {
     for (const recipe of recipes) {
         const allIngredients = recipe.ingredients
         console.log('allIngredients', allIngredients)
-        for (const ingredient of allIngredients) {
-            const ingredientX = ingredient.ingredient
-            getTagFilterDOM(ingredientX)
+        for (const ingredients of allIngredients) {
+            //console.log('ingredients', ingredients);
+            ingredientX = ingredients.ingredient
+            //console.log('ingredientX', ingredientX);
+            //arrayIngredients.push(ingredientX)
+            //console.log('arrayIngredients', arrayIngredients);
+            //finalArrayIngredients = [...new Set(arrayIngredients)].sort();
+            //console.log('finalArrayIngredients', finalArrayIngredients);
+            for (const ingredient of finalArrayIngredients) {
+                //console.log('ingredient', ingredient);
+                getTagFilterDOM(ingredient)
+            }
         }
     }
-}
-
-/*function setUpperCaseFirstChar(a) {
-    return (a+'').charAt(0).toUpperCase()+a.substr(1);
 }*/
+
+
+
 
 /// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
 
@@ -65,7 +88,7 @@ function setUpperCaseFirstChar(string) {
 }
 
 function getTagFilterDOM(data) {
-    console.log('data', data);
+    //console.log('data', data);
     const ingredientfilterListItem = document.createElement("li")
     ingredientfilterListItem.classList.add("itemsList")
     ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
