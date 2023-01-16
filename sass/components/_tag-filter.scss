@@ -1,6 +1,12 @@
 .tag__filter {
-    //width: 100%;
-    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px 0px 0px;
+    @media screen and (min-width: 1024px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
     &--ingredients {
         /*width: 100%;
         min-height: 80px;

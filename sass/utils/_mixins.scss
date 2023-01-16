@@ -7,9 +7,12 @@
 };
 
 @mixin tag-filter-items {
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-right: 0px;
+    margin-left: 0px;
     padding: 5px;
     background-color: #1683FF;
     @include border-rad;

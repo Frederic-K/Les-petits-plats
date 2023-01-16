@@ -29,38 +29,33 @@ function dropdownIngredients() {
     const isIngredientFilterInputHidden = ingredientFilterInput.classList.contains("hidden")
     if (!isIngredientFilterInputHidden) {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
-        ingredientFilterTag.classList.remove("width-350")
-        ingredientFilterTag.classList.add("width-650")
+        ingredientFilterTag.classList.remove("width-small")
+        ingredientFilterTag.classList.add("width-large")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
         displayTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
-        ingredientFilterTag.classList.remove("width-650")
-        ingredientFilterTag.classList.add("width-350")
+        ingredientFilterTag.classList.remove("width-large")
+        ingredientFilterTag.classList.add("width-small")
         ingredientfilterList.classList.add("hidden")
         ingredientfilterList.classList.remove("display-flex")
     }
 }
 
-/*function displayTagFilter() {
+function displayTagFilter() {
     recipes.forEach((recipe) => {
         const allIngredients = recipe.ingredients
-        console.log('allIngredients', allIngredients)
+        //console.log('allIngredients', allIngredients)
         allIngredients.forEach((ingredientType) => { 
             const ingredientX = ingredientType.ingredient
-            const arrayIngredients  = []
-            arrayIngredients.push(ingredientX)
-            console.log('arrayIngredients', arrayIngredients);
-            const ingredient = [...new Set(arrayIngredients)]
             console.log('ingredientX', ingredientX);
-            console.log('ingredient', ingredient);
             getTagFilterDOM(ingredientX)
         })
     })
-}*/
+}
 
-let arrayIngredients = [];
+/*let arrayIngredients = [];
 let ingredientX = [];
 
 function displayTagFilter() {
@@ -71,17 +66,17 @@ function displayTagFilter() {
             //console.log('ingredients', ingredients);
             ingredientX = ingredients.ingredient
             //console.log('ingredientX', ingredientX);
-            arrayIngredients.push(ingredientX)
+            //arrayIngredients.push(ingredientX)
             //console.log('arrayIngredients', arrayIngredients);
-            finalArrayIngredients = [...new Set(arrayIngredients)].sort();
-            console.log('finalArrayIngredients', finalArrayIngredients);
+            //finalArrayIngredients = [...new Set(arrayIngredients)].sort();
+            //console.log('finalArrayIngredients', finalArrayIngredients);
             for (const ingredient of finalArrayIngredients) {
                 //console.log('ingredient', ingredient);
                 getTagFilterDOM(ingredient)
             }
         }
     }
-}
+}*/
 
 
 

@@ -1,5 +1,14 @@
 .tag__filter {
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0px 0px 0px;
+}
+@media screen and (min-width: 1024px) {
+  .tag__filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 .tag__filter--ingredients {
   /*width: 100%;
@@ -9,9 +18,12 @@
   flex-direction: column;
   padding: 5px;
   @include border-rad;*/
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-right: 0px;
+  margin-left: 0px;
   padding: 5px;
   background-color: #1683FF;
   border-radius: 5px;
@@ -128,12 +140,12 @@
   width: 100%;
 }
 
-.width-650 {
-  max-width: 650px;
+.width-large {
+  max-width: 720px;
 }
 
-.width-350 {
-  max-width: 350px;
+.width-small {
+  max-width: 300px;
 }
 
 * {
