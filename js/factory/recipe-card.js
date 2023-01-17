@@ -8,7 +8,6 @@ class testRecipeCard {
         this.quantity = recipes[0].ingredients[0].quantity
         this.unit = recipes[0].ingredients[0].unit
         this.description = recipes[0].description
-        //console.log('this.ingredient', this.ingredient);
         this.wrapper = document.createElement("article")
     }
 

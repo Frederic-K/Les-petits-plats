@@ -33,53 +33,236 @@
             <h2 class="search__message--recipeNotFound" aria-label="Message de cherche infructueuse">Aucune recette trouvée</h2>
         </section>
 <!-- Zone de stockage des tags sélectiés -->
-        <section class="tag__parking">
+        <section class="tag__parking hidden">
+            <div class="tag__parking--items">
+                <li>fake</li>
+                <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+            </div>
+            <div class="tag__parking--items">
+                <li>fake</li>
+                <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+            </div>
+            <div class="tag__parking--items">
+                <li>fake</li>
+                <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+            </div>
         </section> 
 <!-- Zone de recherche par tag--> 
         <section class="tag__filter">
-            <!-- Filtre ingrédients -->
-            <div class="tag__filter--ingredients width-small" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ingrédients">
-                <div class="tag__filter--header">
-                    <span class="filter__ingredients">Ingredients</span>
-                    <input type="text" role="textbox" class="filter__ingredients--input hidden" placeholder="Rechercher un ingredients">
-                    <div class="filter__ingredients--chevron" role="button" aria-role="button" tabindex="0">
-                        <div class="filter__ingredients--chevronDown">
-                            <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+            <div class="tag__filter--container">
+                <!-- Filtre ingrédients -->
+                <div class="tag__filter--ingredients width-small" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ingrédients">
+                    <div class="tag__filter--header">
+                        <span class="filter__ingredients">Ingredients</span>
+                        <input type="text" role="textbox" class="filter__ingredients--input hidden" placeholder="Rechercher un ingredients">
+                        <div class="filter__ingredients--chevron" role="button" aria-role="button" tabindex="0">
+                            <div class="filter__ingredients--chevronDown">
+                                <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                            </div>
+                            <div class="filter__ingredients--chevronUp hidden">
+                                <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                            </div>
                         </div>
-                        <div class="filter__ingredients--chevronUp hidden">
-                            <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                    </div>
+                    <ul class="filter__ingredients--list hidden" aria-label="Liste de filtre par ingrediants">
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                    </ul>
+                </div>
+                <!-- Filtre appareils -->
+                <div class="tag__filter--appliances width-small" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par appareils">
+                    <div class="tag__filter--header">
+                        <span class="filter__appliances">Appareils</span>
+                        <input type="text" role="textbox" class="filter__appliance--input hidden" placeholder="Rechercher un appareils">
+                        <div class="filter__appliances--chevron" role="button" aria-role="button" tabindex="0">
+                            <div class="filter__appliances--chevronDown">
+                                <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                            </div>
+                            <div class="filter__appliances--chevronUp hidden">
+                                <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                            </div>
                         </div>
                     </div>
+                    <ul class="filter__appliances--list hidden" aria-label="Liste de filtre par appareils">
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                    </ul>
                 </div>
-                <ul class="filter__ingredients--list hidden" aria-label="Liste de filtre par ingrediants">
-                </ul>
-            </div>
-            <!-- Filtre appareils -->
-            <div class="tag__filter--appliances width-small" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par appareils">
-                <div class="tag__filter--header">
-                    <span class="appliances">Appareils</span>
-                    <input type="text" role="textbox" class="filter__appliance--input" placeholder="Rechercher un appareils">
-                    <div class="filter__appliances--chevron">
-                        <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
-                        <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                <!-- Filtre ustenciles -->
+                <div class="tag__filter--ustensils width-small" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par appareils">
+                    <div class="tag__filter--header">
+                        <span class="filter__ustensils">Ustenciles</span>
+                        <input type="text" role="textbox" class="filter__ustensils--input hidden" placeholder="Rechercher un ustensils">
+                        <div class="filter__ustensils--chevron" role="button" aria-role="button" tabindex="0">
+                            <div class="filter__ustensils--chevronDown">
+                                <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
+                            </div>
+                            <div class="filter__ustensils--chevronUp hidden">
+                                <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
+                            </div>
+                        </div>
                     </div>
+                    <ul class="filter__ustensils--list hidden" aria-label="Liste de filtre par ustensils">
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                        <li>huhiuh ohuhiu</li>
+                    </ul>
                 </div>
-                <ul class="filter__appliances--list hidden" aria-label="Liste de filtre par appareils">
-                </ul>
-            </div>
-            <!-- Filtre ustenciles -->
-            <div class="tag__filter--ustensils width-small" role="button" aria-role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre par ustensiles">
-                <div class="tag__filter--header">
-                    <span class="appareils">Ustensiles</span>
-                    <input type="text" role="textbox" class="filter__ustensils--input" placeholder="Rechercher un ustensiles">
-                    <div class="filter__ustensils--chevron">
-                        <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
-                        <span class="fa-solid fa-chevron-up" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <ul class="filter__ustensils--list hidden" aria-label="Liste de filtre par ustensiles">
-
-                </ul>
             </div>
         </section>
 <!-- Zone d'affichage des recettes-->  
@@ -136,9 +319,10 @@
             </article>
         </section>
     </main>
-    <script src="/data/recipes.js"></script>
-    <script src="/scripts/factory/tag-filter.js"></script>
-    <script src="/scripts/factory/recipe-card.js"></script>
-    <!--<script src="/scripts/tag-filter.js"></script>-->
-    <!--<script src="/scripts/recipe.js"></script>-->
+    <!-- <script type="module" src="/js/index.js"></script> -->
+    <!-- <script src="/data/recipes.js"></script> -->
+    <!-- <script src="/scripts/factory/tag-filter.js"></script> -->
+    <!-- <script src="/scripts/factory/recipe-card.js"></script> -->
+    <script src="/js/factory/tag-filter.js"></script>
+    <!-- <script src="/scripts/recipe.js"></script> -->
   </body>

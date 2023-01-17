@@ -1,15 +1,58 @@
-.tag__filter {
+.tag__parking {
     display: flex;
-    flex-direction: column;
-    margin: 15px 0px 30px 0px;
-    z-index: 10;
-    position: relative;
-    @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    gap: 10px;
+    margin: 0px;
+    &--items {
+        width: 150px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        margin-left: 0;
+        margin-right: 0;
+        @include border-rad;
+        background-color: beige;
+        li {
+            justify-self: flex-start;
+            align-self: center;
+            font-size: 20px;
+            padding: 10px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .circleCrossBtn {
+            font-size: 15px;
+            margin-left: 0;
+            margin-right: 10px;
+        }
     }
+}
+
+.tag__filter--container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-right: 15px;
+    @media screen and (min-width: 768px) {
+        position: relative;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: space-between;
+    }
+}
+
+.tag__filter {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    position: absolute;
+}    
+
+.tag__filter{    
     &--ingredients {
+        background-color: #1683FF;
         @include tag-filter-items;        
     }
     &--header {
@@ -18,6 +61,7 @@
             @include tag-filter-title;
         }
         .filter__ingredients--input {
+            background-color: #1683FF;
             @include tag-filter-input;
         }
         .filter__ingredients--chevron {
@@ -31,3 +75,55 @@
         }
     }
 };
+
+.tag__filter {
+    &--appliances {
+        background-color: #2ecc4b;
+        @include tag-filter-items;   
+    }
+    &--header {
+        @include tag-filter-header;
+        .filter__appliances {
+            @include tag-filter-title;
+        }
+        .filter__appliances--input {
+            background-color: #2ecc4b;
+            @include tag-filter-input;
+        }
+        .filter__appliances--chevron {
+            @include tag-filter-chevron;
+        }
+    }
+    .filter__appliances--list {
+        @include display-taglist;
+        .itemsList {
+            @include items-list;
+        }
+    }
+}
+
+.tag__filter {
+    &--ustensils {
+        background-color: #e93336;
+        @include tag-filter-items;   
+    }
+    &--header {
+        @include tag-filter-header;
+        .filter__ustensils {
+            @include tag-filter-title;
+        }
+        .filter__ustensils--input {
+            background-color: #e93336;
+            @include tag-filter-input;
+        }
+        .filter__ustensils--chevron {
+            @include tag-filter-chevron;
+        }
+    }
+    .filter__ustensils--list {
+        @include display-taglist;
+        .itemsList {
+            @include items-list;
+        }
+    }
+}

@@ -33,7 +33,7 @@ function dropdownIngredients() {
         ingredientFilterTag.classList.add("width-large")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
-        tagFilter()
+        displayTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
         ingredientFilterTag.classList.remove("width-large")
@@ -42,38 +42,18 @@ function dropdownIngredients() {
         ingredientfilterList.classList.remove("display-flex")
     }
 }
-///////////////////////////////////////////////////////////////////////////////
-/*
-function tagFilter() {
+
+function displayTagFilter() {
     recipes.forEach((recipe) => {
         const allIngredients = recipe.ingredients
         //console.log('allIngredients', allIngredients)
         allIngredients.forEach((ingredientType) => { 
             const ingredientX = ingredientType.ingredient
-            //console.log('ingredientX', ingredientX);            
-            console.log('this.ingredient', this.ingredient);
+            console.log('ingredientX', ingredientX);
             getTagFilterDOM(ingredientX)
         })
     })
 }
-
-/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
-
-function setUpperCaseFirstChar(string) {
-    return string && string[0].toUpperCase() + string.slice(1);
-}
-
-function getTagFilterDOM(data) {
-    //console.log('data', data);
-    const ingredientfilterListItem = document.createElement("li")
-    ingredientfilterListItem.classList.add("itemsList")
-    ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
-    ingredientfilterList.appendChild(ingredientfilterListItem)
-    return (ingredientfilterList)
-}
-*/
-///////////////////////////////////////////////////////////////////////////////////////
-
 
 /*let arrayIngredients = [];
 let ingredientX = [];
@@ -98,47 +78,24 @@ function displayTagFilter() {
     }
 }*/
 
-let recipe = [];
-let ingredientArray = [];
 
-function recipeFilter() {
-    for (let i = 0; i < recipes.length; i++) {
-        recipe = recipes[i]
-        console.log('recipe', recipe);
-        for (let i = 0; i < recipe.ingredients; i++ ) {
-            const ingredients = recipe.ingredients[i]
-            console.log('test', ingredients);
-        }
-    }
-}
-recipeFilter()
 
-console.log('accesTestRecipePart', recipe.ingredients[0].ingredient);
 
-class TagFilter {
-    constructor(ingredient) {
-        this.ingredient = ingredient
-        this.ingredientfilterList = document.getElementsByClassName("filter__ingredients--list")[0]
-        this.wrapper = document.createElement("li")
-    }
+/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
 
-    get filter() {
-        return this.creatTagFilter()
-    }
-
-    creatTagFilter() {
-        const tagFilter = `${this.ingredient}`
-        this.wrapper.innerHTML = setUpperCaseFirstChar(tagFilter)
-        this.wrapper.classList.add("itemsList")
-        return this.wrapper
-    }
+function setUpperCaseFirstChar(string) {
+    return string && string[0].toUpperCase() + string.slice(1);
 }
 
-function displayTagFilter() {
-    const newTagFilter = new TagFilter(ingredient)
-    const newTag = newTagFilter.creatTagFilter()
-    ingredientfilterList.appendChild(newTag)
+function getTagFilterDOM(data) {
+    //console.log('data', data);
+    const ingredientfilterListItem = document.createElement("li")
+    ingredientfilterListItem.classList.add("itemsList")
+    ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
+    ingredientfilterList.appendChild(ingredientfilterListItem)
+    return (ingredientfilterList)
 }
+
 
 
 

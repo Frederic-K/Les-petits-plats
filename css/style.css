@@ -1,28 +1,65 @@
-.tag__filter {
+.tag__parking {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 0px;
+}
+.tag__parking--items {
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 5px;
+  background-color: beige;
+}
+.tag__parking--items li {
+  justify-self: flex-start;
+  align-self: center;
+  font-size: 20px;
+  padding: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.tag__parking--items .circleCrossBtn {
+  font-size: 15px;
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.tag__filter--container {
   display: flex;
   flex-direction: column;
-  margin: 15px 0px 30px 0px;
-  z-index: 10;
   position: relative;
+  margin-right: 15px;
 }
-@media screen and (min-width: 1024px) {
-  .tag__filter {
-    display: flex;
+@media screen and (min-width: 768px) {
+  .tag__filter--container {
+    position: relative;
     flex-direction: row;
+    gap: 15px;
     justify-content: space-between;
   }
 }
+
+.tag__filter {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  position: absolute;
+}
+
 .tag__filter--ingredients {
+  background-color: #1683FF;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-right: 0px;
-  margin-left: 0px;
   padding: 5px;
-  background-color: #1683FF;
   border-radius: 5px;
-  position: absolute;
 }
 .tag__filter--header {
   width: 100%;
@@ -35,14 +72,14 @@
   font-size: 20px;
 }
 .tag__filter--header .filter__ingredients {
-  margin-left: 10px;
+  margin-left: 0px;
 }
 .tag__filter--header .filter__ingredients--input {
+  background-color: #1683FF;
   width: 100%;
   min-height: 60px;
   margin-left: 5px;
   border-radius: 5px;
-  background-color: #1683FF;
   border: none;
   font-size: 20px;
   color: white;
@@ -55,10 +92,10 @@
 }
 .tag__filter--header .filter__ingredients--chevron {
   width: 50px;
-  min-height: 80px;
+  min-height: 60px;
   display: flex;
   align-items: center;
-  margin-right: 0px;
+  margin: 0px;
   cursor: pointer;
 }
 .tag__filter--header .filter__ingredients--chevron:hover {
@@ -76,7 +113,138 @@
 }
 .tag__filter .filter__ingredients--list .itemsList {
   width: 180px;
-  margin-left: 10px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tag__filter--appliances {
+  background-color: #2ecc4b;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 5px;
+}
+.tag__filter--header {
+  width: 100%;
+  height: 60px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 20px;
+}
+.tag__filter--header .filter__appliances {
+  margin-left: 0px;
+}
+.tag__filter--header .filter__appliances--input {
+  background-color: #2ecc4b;
+  width: 100%;
+  min-height: 60px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+.tag__filter--header .filter__appliances--input::placeholder {
+  color: white;
+}
+.tag__filter--header .filter__appliances--input:focus {
+  outline: none;
+}
+.tag__filter--header .filter__appliances--chevron {
+  width: 50px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  cursor: pointer;
+}
+.tag__filter--header .filter__appliances--chevron:hover {
+  transform: scale(2);
+}
+.tag__filter .filter__appliances--list {
+  width: 100%;
+  margin: 0px;
+  padding: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 15px;
+  column-gap: 15px;
+  list-style: none;
+}
+.tag__filter .filter__appliances--list .itemsList {
+  width: 180px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tag__filter--ustensils {
+  background-color: #e93336;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: 5px;
+}
+.tag__filter--header {
+  width: 100%;
+  height: 60px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 20px;
+}
+.tag__filter--header .filter__ustensils {
+  margin-left: 0px;
+}
+.tag__filter--header .filter__ustensils--input {
+  background-color: #e93336;
+  width: 100%;
+  min-height: 60px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+.tag__filter--header .filter__ustensils--input::placeholder {
+  color: white;
+}
+.tag__filter--header .filter__ustensils--input:focus {
+  outline: none;
+}
+.tag__filter--header .filter__ustensils--chevron {
+  width: 50px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  cursor: pointer;
+}
+.tag__filter--header .filter__ustensils--chevron:hover {
+  transform: scale(2);
+}
+.tag__filter .filter__ustensils--list {
+  width: 100%;
+  margin: 0px;
+  padding: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 15px;
+  column-gap: 15px;
+  list-style: none;
+}
+.tag__filter .filter__ustensils--list .itemsList {
+  width: 180px;
   color: white;
   font-size: 20px;
   cursor: pointer;
@@ -126,7 +294,7 @@
 
 * {
   max-width: 1440px;
-  margin: 5px auto;
+  margin: 10px auto;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -152,7 +320,8 @@
 }
 
 .width-small {
-  max-width: 300px;
+  max-width: 200px;
+  height: 70px;
 }
 
 * {
@@ -178,14 +347,16 @@
   flex-direction: column;
   align-items: center;
   gap: 25px;
+  margin-top: 310px;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .recipes__section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    margin-top: 120px;
   }
 }
 
