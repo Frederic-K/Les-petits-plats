@@ -1,7 +1,7 @@
 
 // Fonction Fetch
 
-async function getData() {
+/* async function getData() {
     fetch("/data/recipes.json")
         .then(response => {
             if (response.ok) {
@@ -16,7 +16,7 @@ async function getData() {
             return recipesData            
         })
         .catch(err => console.log("error"))
-}; 
+}; */
 
 /*async function getData() {
     const recipeData = await fetch("/data/recipes.json")
@@ -31,3 +31,24 @@ async function getData() {
     console.log('recipeData', recipeData);    
     return recipeData    
 }; */
+
+
+async function getRecipesData () {
+    const recipesData = await fetch('/data/recipes.json')
+      .then(function (response) {
+        if (response.ok) {
+          return response.json()
+        } else {
+          console.log('Une erreur est survenue')
+        }
+      })
+      .then(function (recipesData) {
+        console.log('toto', recipesData);
+        return recipesData
+      })
+      .catch(function (error) {
+        console.log("Une erreur est survenue avec l'opération fetch")
+      })
+    return recipesData
+  };
+  
