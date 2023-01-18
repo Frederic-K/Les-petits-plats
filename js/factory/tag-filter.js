@@ -33,7 +33,8 @@ function dropdownIngredients() {
         ingredientFilterTag.classList.add("width-large")
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
-        displayTagFilter()
+        //displayTagFilter()
+        initIngredientTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
         ingredientFilterTag.classList.remove("width-large")
@@ -49,59 +50,39 @@ function setUpperCaseFirstChar(string) {
     return string && string[0].toUpperCase() + string.slice(1);
 };
 
-function getTagFilterDOM(data) {
-    //console.log('data', data);
-    const ingredientfilterListItem = document.createElement("li")
-    ingredientfilterListItem.classList.add("itemsList")
-    ingredientfilterListItem.textContent = setUpperCaseFirstChar(data)
-    ingredientfilterList.appendChild(ingredientfilterListItem)
-    return (ingredientfilterList)
-};
-
-let arrayRecipes = get
-
-function ingredeientTagFilter() {
-
-}
-
-
-/*function displayIngredientsFilter() {
-    recipes.forEach((recipe) => {
-        const allIngredients = recipe.ingredients
-        //console.log('allIngredients', allIngredients)
-        allIngredients.forEach((ingredientType) => { 
-            const ingredientX = ingredientType.ingredient
-            console.log('ingredientX', ingredientX);
-            getTagFilterDOM(ingredientX)
-        })
-    })
-};*/
-
-/*function creatIngredientsTagList(data) {
+function getIngredientTagFilterDOM(data) {
     console.log('data', data);
-    const AllIngredientsArray = [];
-    for (let i = 0; i < data.length; i++) {
-    let ingredients = data[i].ingredients;
-    ingredients.map(({ingredient}) => {
-        AllIngredientsArray.push(ingredient);
-    });
-    };
+    for(const ingredient of data) {
+        const ingredientfilterListItem = document.createElement("li")
+        ingredientfilterListItem.classList.add("itemsList")
+        ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
+        ingredientfilterList.appendChild(ingredientfilterListItem)
+    }
+};
+
+function displayIngredientTagFilter(data) {
+    console.log('data', data);
+    const arrayIngredientsX = [];
+    for (let i=0; i < data.length; i++) {
+        let ingredients = data[i].ingredients
+        console.log('ingredients', ingredients);
+        ingredients.map(({ingredient}) => {
+            arrayIngredientsX.push(ingredient)
+            console.log('arrayIngredients', arrayIngredientsX);
+        })
+    }
+    const arrayIngredients = new Set(arrayIngredientsX.sort());
+    console.log('arrayIngredients', arrayIngredients); 
+    getIngredientTagFilterDOM(arrayIngredients)
 }
 
-async function initTagFilter() {
-    const { recipesData } = await getData()
-    //console.log('recipesData', recipesData)
-    creatIngredientsTagList(recipesData)
+async function initIngredientTagFilter() {
+    const recipes = await getRecipesData()
+    console.log('recipes', recipes);
+    displayIngredientTagFilter(recipes)
 };
-initTagFilter()*/
 
-/*const AllIngredientsArray = [];
-for (let i = 0; i < recipes.length; i++) {
-  let ingredients = recipes[i].ingredients;
-  ingredients.map(({ingredient}) => {
-    AllIngredientsArray.push(ingredient);
-  });
-};*/
+initIngredientTagFilter();
 
 
 
