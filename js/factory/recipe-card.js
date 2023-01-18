@@ -1,5 +1,5 @@
 
-class testRecipeCard {
+export default class testRecipeCard {
     constructor(recipes) {
         this.recipes = recipes
         this.name = recipes[0].name
