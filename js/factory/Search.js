@@ -1,4 +1,6 @@
 
+import { getRecipesData } from "../api/getData.js";
+
 export default class Search {
     constructor() {
         console.log('search');
@@ -8,15 +10,25 @@ export default class Search {
         this.ingredientFilterBtn = document.getElementsByClassName("filter__ingredients--chevron")[0];
         this.applianceFilterBtn = document.getElementsByClassName("filter__appliances--chevron")[0];
         this.ustensilFilterBtn = document.getElementsByClassName("filter__ustensils--chevron")[0];
+        this.ingredientfilterList = document.getElementsByClassName("filter__ingredients--list")[0];
 
         //this.creatTest = (e) => this._creatTest(e);
 
+        this.recipesData = getRecipesData();
+        console.log('recipesData', getRecipesData());
+
         this.dropdownIngredients = (e) => this._dropdownIngredients(e);
         this.keyboardDropdowIngredients = (e) => this._keyboardDropdowIngredients(e);
+
         this.dropdownAppliances = (e) => this._dropdownAppliances(e);
         this.keyboardDropdowAppliances = (e) => this._keyboardDropdowAppliances(e);
+
         this.dropdownUstensils = (e) => this._dropdownUstensils(e);
         this.keyboardDropdowUstensils = (e) => this._keyboardDropdowUstensils(e);
+
+        this.displayIngredientTagFilter = (e) => this._displayIngredientTagFilter(e);
+
+        this.getIngredientTagFilterDOM = (e) => this._getIngredientTagFilterDOM(e)
 
         this.bindEvent();
 
@@ -39,6 +51,11 @@ export default class Search {
     };
 
     _dropdownIngredients() {
+        const ingredientFilterTag = document.getElementsByClassName("tag__filter--ingredients")[0];
+        const ingredientFilterTitle = document.getElementsByClassName("filter__ingredients")[0];
+        const ingredientFilterInput = document.getElementsByClassName("filter__ingredients--input")[0];
+        const ingredientFilterIconChevronDown = document.getElementsByClassName("filter__ingredients--chevronDown")[0];
+        const ingredientFilterIconChevronUp = document.getElementsByClassName("filter__ingredients--chevronUp")[0];
         ingredientFilterTitle.classList.toggle("hidden")
         ingredientFilterInput.classList.toggle("hidden")
         ingredientFilterIconChevronDown.classList.toggle("hidden")
@@ -48,9 +65,11 @@ export default class Search {
             ingredientFilterTag.setAttribute("aria-expanded", "true")
             ingredientFilterTag.classList.remove("width-small")
             ingredientFilterTag.classList.add("width-large")
-            ingredientfilterList.classList.remove("hidden")
-            ingredientfilterList.classList.add("display-flex")
-            initIngredientTagFilter()
+            this.ingredientfilterList.classList.remove("hidden")
+            this.ingredientfilterList.classList.add("display-flex")
+            // initIngredientTagFilter()
+            this.displayIngredientTagFilter(this.recipesData)
+
         } else {
             ingredientFilterTag.setAttribute("aria-expanded", "false")
             ingredientFilterTag.classList.remove("width-large")
@@ -60,36 +79,39 @@ export default class Search {
         }
     };
 
-    getIngredientTagFilterDOM(data) {
-        console.log('data', data);
-        for(const ingredient of data) {
-            const ingredientfilterListItem = document.createElement("li")
-            ingredientfilterListItem.classList.add("itemsList")
-            ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
-            ingredientfilterList.appendChild(ingredientfilterListItem)
-        }
-    };
-    
-    displayIngredientTagFilter(data) {
-        console.log('data', data);
+        
+    _displayIngredientTagFilter(data) {
+        console.log('display2data', data); // promise Array(50)
+        console.log('display2dataLength', data.length); // >>> length = undefined
         const arrayAllIngredients = [];
         for (let i=0; i < data.length; i++) {
             let ingredients = data[i].ingredients
             console.log('ingredients', ingredients);
             ingredients.map(({ingredient}) => {
                 arrayAllIngredients.push(ingredient)
-                console.log('arrayIngredients', arrayAllIngredients);
+                console.log('arrayAllIngredients', arrayAllIngredients);
             })
         }
         const arrayIngredients = new Set(arrayAllIngredients.sort());
         console.log('arrayIngredients', arrayIngredients); 
-        getIngredientTagFilterDOM(arrayIngredients)
-    };
-    
-    async initIngredientTagFilter() {
-        const recipes = await getRecipesData()
-        console.log('recipes', recipes);
-        displayIngredientTagFilter(recipes)
+        this.getIngredientTagFilterDOM(arrayIngredients)
     };
 
+    _getIngredientTagFilterDOM(data) {
+        console.log('get2data', data);
+        for(const ingredient of data) {
+            const ingredientfilterListItem = document.createElement("li")
+            ingredientfilterListItem.classList.add("itemsList")
+            ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
+            this.ingredientfilterList.appendChild(ingredientfilterListItem)
+        }
+    };
+
+    
+    // async initIngredientTagFilter() {
+    //     const recipes = this.recipesData
+    //     console.log('recipes', recipes);
+    //     displayIngredientTagFilter(recipes)
+    //     //this.displayIngredientTagFilter(this.recipesData)
+    // };
 };
