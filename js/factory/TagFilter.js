@@ -34,6 +34,11 @@ const ustensilFilterIconChevronDown = document.getElementsByClassName("filter__u
 const ustensilFilterIconChevronUp = document.getElementsByClassName("filter__ustensils--chevronUp")[0];
 const ustensilFilterList = document.getElementsByClassName("filter__ustensils--list")[0];
 
+/// Array ///
+let arrayAllIngredients = [];
+let arrayAllAppliances = [];
+let arrayAllUstensils = [];
+
 /// Listener ///
 /// Ingredients ///
 ingredientFilterBtn.addEventListener("click", () => dropdownIngredients());
@@ -89,6 +94,7 @@ function dropdownIngredients() {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
         ingredientFilterTag.classList.remove("width-small")
         ingredientFilterTag.classList.add("width-large")
+        ingredientfilterList.textContent = ""
         ingredientfilterList.classList.remove("hidden")
         ingredientfilterList.classList.add("display-flex")
         initIngredientTagFilter()
@@ -113,7 +119,7 @@ function getIngredientTagFilterDOM(data) {
 
 function displayIngredientTagFilter(data) {
     //console.log('data', data);
-    const arrayAllIngredients = [];
+    //const arrayAllIngredients = [];
     for (let i=0; i < data.length; i++) {
         let ingredients = data[i].ingredients
         //console.log('ingredients', ingredients);
@@ -146,6 +152,7 @@ function dropdownAppliances() {
         applianceFilterTag.setAttribute("aria-expanded", "true")
         applianceFilterTag.classList.remove("width-small")
         applianceFilterTag.classList.add("width-large")
+        applianceFilterList.textContent = ""
         applianceFilterList.classList.remove("hidden")
         applianceFilterList.classList.add("display-flex")
         initApplianceTagFilter()
@@ -161,16 +168,18 @@ function dropdownAppliances() {
 function getApplianceTagFilterDOM(data) {
     //console.log('data4DOM', data);
     for(const appliance of data) {
+        //console.log('appliances4DOM', appliance);
         const applianceFilterListItem = document.createElement("li")
         applianceFilterListItem.classList.add("itemsList")
         applianceFilterListItem.textContent = setUpperCaseFirstChar(appliance)
+        //applianceFilterListItem.textContent = appliance
         applianceFilterList.appendChild(applianceFilterListItem)
     }
 };
 
 function displayApplianceTagFilter(data) {
     //console.log('data4display', data);
-    const arrayAllAppliances = [];
+    //const arrayAllAppliances = [];
     for (let i=0; i < data.length; i++) {
         let appliances = data[i].appliance
         //console.log('appliances', appliances);
@@ -200,6 +209,7 @@ function dropdownUstensils() {
         ustensilFilterTag.setAttribute("aria-expanded", "true")
         ustensilFilterTag.classList.remove("width-small")
         ustensilFilterTag.classList.add("width-large")
+        ustensilFilterList.textContent = ""
         ustensilFilterList.classList.remove("hidden")
         ustensilFilterList.classList.add("display-flex")
         initUstensilsTagFilter()
@@ -213,34 +223,33 @@ function dropdownUstensils() {
 };
 
 function getUstensilTagFilterDOM(data) {
-    console.log('data4DOM', data);
+    //console.log('data4DOM', data);
     for(const ustensil of data) {
         const ustensilFilterListItem = document.createElement("li")
         ustensilFilterListItem.classList.add("itemsList")
         ustensilFilterListItem.textContent = setUpperCaseFirstChar(ustensil)
-        //ustensilFilterListItem.textContent = ustensil.toLowerCase()  
         ustensilFilterList.appendChild(ustensilFilterListItem)
     }
 };
 
 function displayUstensilTagFilter(data) {
-    console.log('data4display', data);
-    const arrayAllUstensils = [];
+    //console.log('data4display', data);
+    //const arrayAllUstensils = [];
     for (let i=0; i < data.length; i++) {
         for (let x = 0; x < data[i].ustensils.length; x++) {
         let ustensils = data[i].ustensils[x]
-        console.log('ustensils', ustensils);
+        //console.log('ustensils', ustensils);
         arrayAllUstensils.push(ustensils)
         }
     }
     const arrayUstensils = new Set(arrayAllUstensils.sort());
-    console.log('arrayUstensils', arrayUstensils); 
+    //console.log('arrayUstensils', arrayUstensils); 
     getUstensilTagFilterDOM(arrayUstensils)
 }
 
 async function initUstensilsTagFilter() {
     const recipes = await getRecipesData()
-    console.log('recipes', recipes);
+    //console.log('recipes', recipes);
     displayUstensilTagFilter(recipes)
 };
 

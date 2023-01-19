@@ -1,6 +1,4 @@
 
-import { getRecipesData } from "../api/getData.js";
-
 export default class Search {
     constructor() {
         console.log('search');

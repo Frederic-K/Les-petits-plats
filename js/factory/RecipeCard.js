@@ -42,30 +42,30 @@ class RecipeCard {
     }
 }
 
-async function displayRecipeCard() {
+// async function displayRecipeCard() {
+//     const cardSection = document.getElementsByClassName("recipes__section")[0];
+//     const recipes = await getRecipesData()
+//     for (const recipe of recipes) {
+//         const newRecipeCard = new RecipeCard(recipe)
+//         const recipeCard = newRecipeCard._createCard()
+//         cardSection.appendChild(recipeCard)
+//     }
+// }
+// displayRecipeCard()
+
+function displayRecipeCard(data) {
     const cardSection = document.getElementsByClassName("recipes__section")[0];
-    const recipes = await getRecipesData()
-    for (const recipe of recipes) {
+    //const recipes = await getRecipesData()
+    for (const recipe of data) {
         const newRecipeCard = new RecipeCard(recipe)
         const recipeCard = newRecipeCard._createCard()
         cardSection.appendChild(recipeCard)
     }
-}
+};
 
-displayRecipeCard()
+async function displayAllRecipeCard() {
+    const recipes = await getRecipesData()
+    displayRecipeCard(recipes)
+};
 
-// async function getRecipesData() {
-//     this.recipeData = await fetch("/data/recipes.json")
-//     .then(response => {
-//         if (response.ok) {
-//         return response.json()
-//         } else {
-//             console.log('Une erreur est survenue');
-//         }
-//     })
-//     .catch(err => console.log("error"))
-// //console.log('recipeData', recipeData);       
-// return this.recipeData  
-// }
-
-// getRecipesData()
+displayAllRecipeCard();
