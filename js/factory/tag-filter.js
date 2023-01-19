@@ -1,3 +1,8 @@
+/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
+
+function setUpperCaseFirstChar(string) {
+    return string && string[0].toUpperCase() + string.slice(1);
+};
 
 /// DOM ///
 /// Ingredients ///
@@ -45,14 +50,8 @@ function dropdownIngredients() {
     }
 };
 
-/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
-
-function setUpperCaseFirstChar(string) {
-    return string && string[0].toUpperCase() + string.slice(1);
-};
-
 function getIngredientTagFilterDOM(data) {
-    console.log('data', data);
+    //console.log('data', data);
     for(const ingredient of data) {
         const ingredientfilterListItem = document.createElement("li")
         ingredientfilterListItem.classList.add("itemsList")
@@ -63,16 +62,16 @@ function getIngredientTagFilterDOM(data) {
 
 function displayIngredientTagFilter(data) {
     //console.log('data', data);
-    const arrayIngredientsX = [];
+    const arrayAllIngredients = [];
     for (let i=0; i < data.length; i++) {
         let ingredients = data[i].ingredients
         //console.log('ingredients', ingredients);
         ingredients.map(({ingredient}) => {
-            arrayIngredientsX.push(ingredient)
-            //console.log('arrayIngredients', arrayIngredientsX);
+            arrayAllIngredients.push(ingredient)
+            //console.log('arrayIngredients', arrayAllIngredients);
         })
     }
-    const arrayIngredients = new Set(arrayIngredientsX.sort());
+    const arrayIngredients = new Set(arrayAllIngredients.sort());
     //console.log('arrayIngredients', arrayIngredients); 
     getIngredientTagFilterDOM(arrayIngredients)
 }
@@ -119,7 +118,7 @@ function dropdownAppliances() {
         applianceFilterTag.classList.add("width-large")
         applianceFilterList.classList.remove("hidden")
         applianceFilterList.classList.add("display-flex")
-        //initIngredientTagFilter()
+        initApplianceTagFilter()
     } else {
         applianceFilterTag.setAttribute("aria-expanded", "false")
         applianceFilterTag.classList.remove("width-large")
@@ -127,6 +126,35 @@ function dropdownAppliances() {
         applianceFilterList.classList.add("hidden")
         applianceFilterList.classList.remove("display-flex")
     }
+};
+
+function getApplianceTagFilterDOM(data) {
+    //console.log('data4DOM', data);
+    for(const appliance of data) {
+        const applianceFilterListItem = document.createElement("li")
+        applianceFilterListItem.classList.add("itemsList")
+        applianceFilterListItem.textContent = setUpperCaseFirstChar(appliance)
+        applianceFilterList.appendChild(applianceFilterListItem)
+    }
+};
+
+function displayApplianceTagFilter(data) {
+    //console.log('data4display', data);
+    const arrayAllAppliances = [];
+    for (let i=0; i < data.length; i++) {
+        let appliances = data[i].appliance
+        //console.log('appliances', appliances);
+        arrayAllAppliances.push(appliances)
+    }
+    const arrayAppliances = new Set(arrayAllAppliances.sort());
+    //console.log('arrayAppliances', arrayAppliances); 
+    getApplianceTagFilterDOM(arrayAppliances)
+}
+
+async function initApplianceTagFilter() {
+    const recipes = await getRecipesData()
+    //console.log('recipes', recipes);
+    displayApplianceTagFilter(recipes)
 };
 
 /// DOM ///
@@ -165,7 +193,7 @@ function dropdownUstensils() {
         ustensilFilterTag.classList.add("width-large")
         ustensilFilterList.classList.remove("hidden")
         ustensilFilterList.classList.add("display-flex")
-        //initIngredientTagFilter()
+        initUstensilsTagFilter()
     } else {
         ustensilFilterTag.setAttribute("aria-expanded", "false")
         ustensilFilterTag.classList.remove("width-large")
@@ -174,3 +202,36 @@ function dropdownUstensils() {
         ustensilFilterList.classList.remove("display-flex")
     }
 };
+
+function getUstensilTagFilterDOM(data) {
+    console.log('data4DOM', data);
+    for(const ustensil of data) {
+        const ustensilFilterListItem = document.createElement("li")
+        ustensilFilterListItem.classList.add("itemsList")
+        ustensilFilterListItem.textContent = setUpperCaseFirstChar(ustensil)
+        //ustensilFilterListItem.textContent = ustensil.toLowerCase()  
+        ustensilFilterList.appendChild(ustensilFilterListItem)
+    }
+};
+
+function displayUstensilTagFilter(data) {
+    console.log('data4display', data);
+    const arrayAllUstensils = [];
+    for (let i=0; i < data.length; i++) {
+        for (let x = 0; x < data[i].ustensils.length; x++) {
+        let ustensils = data[i].ustensils[x]
+        console.log('ustensils', ustensils);
+        arrayAllUstensils.push(ustensils)
+        }
+    }
+    const arrayUstensils = new Set(arrayAllUstensils.sort());
+    console.log('arrayUstensils', arrayUstensils); 
+    getUstensilTagFilterDOM(arrayUstensils)
+}
+
+async function initUstensilsTagFilter() {
+    const recipes = await getRecipesData()
+    console.log('recipes', recipes);
+    displayUstensilTagFilter(recipes)
+};
+

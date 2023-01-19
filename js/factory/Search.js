@@ -9,6 +9,7 @@ export default class Search {
 
         this.bindEvent();
         this.getData();
+        console.log('this.getData', this.getData());
     }
 
     bindEvent() {
