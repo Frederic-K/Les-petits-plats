@@ -375,6 +375,11 @@
     margin-right: 0px;
   }
 }
+@media screen and (min-width: 1024px) {
+  .recipes__section {
+    justify-content: space-between;
+  }
+}
 
 .recipe__card {
   width: 280px;
