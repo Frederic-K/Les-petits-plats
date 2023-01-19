@@ -30,26 +30,28 @@
   margin-right: 10px;
 }
 
-.tag__filter--container {
+.tag__filter {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0;
   position: relative;
+}
+
+.tag__filter--container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
   margin-right: 15px;
 }
 @media screen and (min-width: 768px) {
   .tag__filter--container {
-    position: relative;
+    position: absolute;
     flex-direction: row;
     gap: 15px;
     justify-content: space-between;
   }
-}
-
-.tag__filter {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  position: absolute;
 }
 
 .tag__filter--ingredients {
