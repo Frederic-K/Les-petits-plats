@@ -61,28 +61,27 @@ function getIngredientTagFilterDOM(data) {
 };
 
 function displayIngredientTagFilter(data) {
-    console.log('data', data);
+    //console.log('data', data);
     const arrayIngredientsX = [];
     for (let i=0; i < data.length; i++) {
         let ingredients = data[i].ingredients
-        console.log('ingredients', ingredients);
+        //console.log('ingredients', ingredients);
         ingredients.map(({ingredient}) => {
             arrayIngredientsX.push(ingredient)
-            console.log('arrayIngredients', arrayIngredientsX);
+            //console.log('arrayIngredients', arrayIngredientsX);
         })
     }
     const arrayIngredients = new Set(arrayIngredientsX.sort());
-    console.log('arrayIngredients', arrayIngredients); 
+    //console.log('arrayIngredients', arrayIngredients); 
     getIngredientTagFilterDOM(arrayIngredients)
 }
 
 async function initIngredientTagFilter() {
     const recipes = await getRecipesData()
-    console.log('recipes', recipes);
+    //console.log('recipes', recipes);
     displayIngredientTagFilter(recipes)
 };
 
-initIngredientTagFilter();
 
 
 
