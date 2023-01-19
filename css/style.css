@@ -85,6 +85,9 @@
   border: none;
   font-size: 20px;
   color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .tag__filter--header .filter__ingredients--input::placeholder {
   color: white;
@@ -151,6 +154,9 @@
   border: none;
   font-size: 20px;
   color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .tag__filter--header .filter__appliances--input::placeholder {
   color: white;
@@ -217,6 +223,9 @@
   border: none;
   font-size: 20px;
   color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .tag__filter--header .filter__ustensils--input::placeholder {
   color: white;

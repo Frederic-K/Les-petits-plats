@@ -39,6 +39,7 @@
     border: none;
     font-size: 20px;
     color: white;
+    @include text-ellipsis;
     &::placeholder {
         color: white;
     }
@@ -76,6 +77,12 @@
     color: white;
     font-size: 20px;
     cursor: pointer;
+};
+
+@mixin text-ellipsis {
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
 };
 
 @mixin mobile-text-ellipsis {
