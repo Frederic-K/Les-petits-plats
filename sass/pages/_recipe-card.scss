@@ -103,18 +103,13 @@
         width: 49%;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         margin-left: 0;
-        padding: 1px;
+        padding: 9px;
         @include mobile-text-ellipsis;
         @media screen and (min-width: 768px) {
             @include desktop-text-ellipsis;
         }
-    }
-    &--ingredientX {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-left: 0;
     }
     &--cookingDescription {
         width: 49%;
