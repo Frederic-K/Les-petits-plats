@@ -471,6 +471,7 @@
   width: 49%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   margin-left: 0;
   padding: 1px;
   overflow: hidden;
@@ -488,11 +489,12 @@
     white-space: normal;
   }
 }
-.recipe__card--ingredientX {
+.recipe__card--ingredient {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 0;
+  margin: 0;
 }
 .recipe__card--cookingDescription {
   width: 49%;
