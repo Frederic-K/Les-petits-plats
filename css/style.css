@@ -339,6 +339,10 @@
   margin-left: 0px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 * {
   font-family: "Roboto", sans-serif;
 }
@@ -473,7 +477,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin-left: 0;
-  padding: 1px;
+  padding: 9px;
   overflow: hidden;
   display: -webkit-box !important;
   -webkit-line-clamp: 5;
@@ -488,13 +492,6 @@
     -webkit-box-orient: vertical;
     white-space: normal;
   }
-}
-.recipe__card--ingredient {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0;
 }
 .recipe__card--cookingDescription {
   width: 49%;
