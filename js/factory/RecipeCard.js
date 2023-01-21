@@ -62,7 +62,7 @@
 
 // displayAllRecipeCard();
 
-
+import getRecipesData from "../api/getData.js";
 
 export default class RecipeCard {
     constructor(data) {
