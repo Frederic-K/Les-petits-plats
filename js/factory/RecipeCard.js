@@ -32,7 +32,7 @@
 //         for (let i=0; i < this.ingredients.length; i++) {;
 //             this.eachIngredient = this.ingredients[i]
 //                 this.recipeCardContent += `                      
-//                         <div class="recipe__card--ingredient">
+//                         <div class="">
 //                             <div>${this.eachIngredient.ingredient}</div>
 //                             <div>${this.eachIngredient.quantity ? this.eachIngredient.quantity : ""}  ${this.eachIngredient.unit ? this.eachIngredient.unit : ""}</div></br>
 //                         </div>`    
@@ -64,13 +64,13 @@
 
 
 
-class RecipeCard {
+export default class RecipeCard {
     constructor(data) {
-        console.log('dataFromRecipeCard', data);
+        //console.log('dataFromRecipeCard', data);
         this.name = data.name;
         this.time = data.time;
         this.ingredients = data.ingredients;
-        console.log('this.ingredients', this.ingredients);
+        //console.log('this.ingredients', this.ingredients);
         this.description = data.description;
 
         //this.createCard = (e) => this._createCard(e);
@@ -108,19 +108,19 @@ class RecipeCard {
 
 
 function getIngredientRecipeCardDOM(data) {
-    console.log('dataFromGetIngREcipeDArdDom', data);
+    //console.log('dataFromGetIngREcipeDArdDom', data);
     let arrayIngredients = []  
     for (let i = 0; i < data.length; i++) {
-        console.log('data.length', data.length);
+        //console.log('data.length', data.length);
         let ingredients = data[i];
-        console.log('ingredientData(i)', ingredients);
+        //console.log('ingredientData(i)', ingredients);
         let ingredientSection = `
             <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
             </br>
         `
         arrayIngredients.push(ingredientSection);
     } 
-    console.log('arrayIngredients', arrayIngredients);   
+    //console.log('arrayIngredients', arrayIngredients);   
     return (arrayIngredients);
 };
 
@@ -140,3 +140,4 @@ async function displayAllRecipeCard() {
 };
 
 displayAllRecipeCard();
+

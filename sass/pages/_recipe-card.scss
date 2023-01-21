@@ -66,19 +66,22 @@
         align-items: center;
     }
     &--title {
+        width: 180px;
         margin-left: 0;
         font-size: 14px;
         font-weight: normal;
+        @include text-ellipsis;
         @media screen and (min-width: 768px) {
+            width: 300px;
             font-size: 17px;
         }    
     }
     &--time {
-        width: 70px;
+        width: 75px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 2px;
+        gap: 5px;
         margin-right: 0;
         font-weight: bold
         ;
