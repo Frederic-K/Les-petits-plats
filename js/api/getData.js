@@ -1,7 +1,7 @@
 
 // Fonction Fetch
 
-export default async function getRecipesData() {
+async function getRecipesData() {
     const recipeData = await fetch("/data/recipes.json")
         .then(response => {
             if (response.ok) {

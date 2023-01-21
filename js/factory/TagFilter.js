@@ -1,5 +1,6 @@
-/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
+/// Import ///
 
+/// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
 function setUpperCaseFirstChar(string) {
     return string && string[0].toUpperCase() + string.slice(1);
 };
@@ -246,6 +247,8 @@ function displayUstensilTagFilter(data) {
     //console.log('arrayUstensils', arrayUstensils); 
     getUstensilTagFilterDOM(arrayUstensils)
 }
+
+/// Init ///
 
 async function initUstensilsTagFilter() {
     const recipes = await getRecipesData()

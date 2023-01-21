@@ -1,5 +1,5 @@
+/// Import ///
 import RecipeCard from "./RecipeCard.js";
-import getRecipesData from "../api/getData.js";
 
 export default class Search {
     constructor() {

@@ -62,8 +62,6 @@
 
 // displayAllRecipeCard();
 
-import getRecipesData from "../api/getData.js";
-
 export default class RecipeCard {
     constructor(data) {
         //console.log('dataFromRecipeCard', data);
@@ -76,9 +74,7 @@ export default class RecipeCard {
         //this.createCard = (e) => this._createCard(e);
 
         this._createCard();
-    }
-
-
+    };
     _createCard() {
         this.recipeCardContent = `
         <article class="recipe__card" aria-label="${this.name}">
@@ -95,7 +91,7 @@ export default class RecipeCard {
                 </div>
                 <div class="recipe__card--explanation">
                     <p class="recipe__card--ingredients">
-                        ${getIngredientRecipeCardDOM(this.ingredients).join("")}  
+                        ${this._getIngredientRecipeCardDOM(this.ingredients).join("")}  
                     </p>
                     <p class="recipe__card--cookingDescription">${this.description}</p>
                 </div>
@@ -103,27 +99,23 @@ export default class RecipeCard {
         </article>    
         `
     };
+    _getIngredientRecipeCardDOM(data) {
+        //console.log('dataFromGetIngREcipeDArdDom', data);
+        let arrayIngredients = []  
+        for (let i = 0; i < data.length; i++) {
+            //console.log('data.length', data.length);
+            let ingredients = data[i];
+            //console.log('ingredientData(i)', ingredients);
+            let ingredientSection = `
+                <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
+                </br>
+            `
+            arrayIngredients.push(ingredientSection);
+        } 
+        //console.log('arrayIngredients', arrayIngredients);   
+        return (arrayIngredients);
+    };
 };
-
-
-
-function getIngredientRecipeCardDOM(data) {
-    //console.log('dataFromGetIngREcipeDArdDom', data);
-    let arrayIngredients = []  
-    for (let i = 0; i < data.length; i++) {
-        //console.log('data.length', data.length);
-        let ingredients = data[i];
-        //console.log('ingredientData(i)', ingredients);
-        let ingredientSection = `
-            <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
-            </br>
-        `
-        arrayIngredients.push(ingredientSection);
-    } 
-    //console.log('arrayIngredients', arrayIngredients);   
-    return (arrayIngredients);
-};
-
 
 function displayRecipeCard(data) {
     let recipeCard = ""
