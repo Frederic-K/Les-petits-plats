@@ -113,6 +113,7 @@ function getIngredientTagFilterDOM(data) {
         const ingredientfilterListItem = document.createElement("li")
         ingredientfilterListItem.classList.add("itemsList")
         ingredientfilterListItem.setAttribute("tabindex", "0")
+        ingredientfilterListItem.setAttribute("onclick", "displaySelectedFilter(event)")
         ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
         ingredientfilterList.appendChild(ingredientfilterListItem)
     }
@@ -168,11 +169,12 @@ function dropdownAppliances() {
 
 function getApplianceTagFilterDOM(data) {
     //console.log('data4DOM', data);
-    for         (const appliance of data) {
+    for (const appliance of data) {
         //console.log('appliances4DOM', appliance);
         const applianceFilterListItem = document.createElement("li")
         applianceFilterListItem.classList.add("itemsList")
         applianceFilterListItem.setAttribute("tabindex", "0")
+        applianceFilterListItem.setAttribute("onclick", "displaySelectedFilter(event)")
         applianceFilterListItem.textContent = setUpperCaseFirstChar(appliance)
         //applianceFilterListItem.textContent = appliance
         applianceFilterList.appendChild(applianceFilterListItem)
@@ -230,7 +232,7 @@ function getUstensilTagFilterDOM(data) {
         const ustensilFilterListItem = document.createElement("li")
         ustensilFilterListItem.classList.add("itemsList")
         ustensilFilterListItem.setAttribute("tabindex", "0")
-        ustensilFilterListItem.setAttribute("onclick", "testSelectTag(event)")
+        ustensilFilterListItem.setAttribute("onclick", "displaySelectedFilter(event)")
         ustensilFilterListItem.textContent = setUpperCaseFirstChar(ustensil)
         ustensilFilterList.appendChild(ustensilFilterListItem)
     }
@@ -259,29 +261,92 @@ async function initUstensilsTagFilter() {
 
 /// Fonction ///
 /// Selection de filtres ///
-function testSelectTag(_event) {
-    let filterTag = ""
-    const parkingFilter = document.getElementsByClassName("tag__parking")[0];
-    parkingFilter.classList.remove("hidden")
-    filterTag += new TestSelectTag(_event).filterTagContent
-    parkingFilter.innerHTML = filterTag
-    // const test = new TestSelectTag(_event)
-    // parkingFilter.innerHTML = test._createFilter
-}
+
+
+// class TestSelectTag {
+//     constructor(data) {
+//         this.filter = data.target.textContent; 
+//         this._createFilter();
+//     };
+//     _createFilter() {
+//         this.filterTagContent = `
+//         <div class="tag__parking--items"
+//             <li class="selectedFilter">${this.filter}</li>
+//             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+//         </div>    
+//         `
+//     }
+// }
+
+// function displaySelectedFilter(event) {
+//     let filterTag = ""
+//     const parkingFilter = document.getElementsByClassName("tag__parking")[0];
+//     parkingFilter.classList.remove("hidden")
+//     filterTag += new TestSelectTag(event).filterTagContent
+//     parkingFilter.innerHTML = filterTag
+// }
+
+// class TestSelectTag {
+//     constructor(data) {
+//         this.filter = data.target.textContent; 
+//         this._createFilter();
+//     };
+//     _createFilter() {
+//         this.filterTagContent = `
+//             <li class="selectedFilter">${this.filter}</li>
+//             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+//         `
+//     }
+
+// }
+
+// function displaySelectedFilter(event) {
+//     const parkingFilter = document.getElementsByClassName("tag__parking")[0]
+//     parkingFilter.classList.remove("hidden")
+//     const parkingfilterItem = document.createElement("div")
+//     parkingfilterItem.classList.add("tag__parking--items")
+//     const filterTag = new TestSelectTag(event).filterTagContent
+//     parkingfilterItem.innerHTML = filterTag
+//     parkingFilter.appendChild(parkingfilterItem)
+// }
 
 class TestSelectTag {
     constructor(data) {
+        console.log('data', data.target);
+        this.wrapper = document.createElement("div")
+        this.originFilter = data.target.parentElement
+        console.log('color', this.originFilter);
         this.filter = data.target.textContent; 
-        this._createFilter();
+        //this._createFilter();
     };
     _createFilter() {
         this.filterTagContent = `
-        <div class="tag__parking--items">
             <li class="selectedFilter">${this.filter}</li>
             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
-        </div>
         `
-    }
+        this.wrapper.innerHTML = this.filterTagContent
+        this.wrapper.classList.add("tag__parking--items")
+        this.wrapper.setAttribute("tabindex", "0")
+        this.wrapper.setAttribute("aria-label", `${this.filter}`)
+        if (this.originFilter.classList.contains("filter__ustensils--list")) {
+            this.wrapper.classList.add("bckground-red")
+        }
+        else if (this.originFilter.classList.contains("filter__appliances--list")) {
+            this.wrapper.classList.add("bckground-green")
+        }
+        else if (this.originFilter.classList.contains("filter__ingredients--list")) {
+            this.wrapper.classList.add("bckground-blue")
+        }
+        return this.wrapper
+    };
 
-}
+};
+
+function displaySelectedFilter(event) {
+    const tagParking = document.getElementsByClassName("tag__parking")[0];
+    tagParking.classList.remove("hidden");
+    const newSelectedFilter = new TestSelectTag(event);
+    const selectedFilter = newSelectedFilter._createFilter();
+    tagParking.appendChild(selectedFilter);
+};
 

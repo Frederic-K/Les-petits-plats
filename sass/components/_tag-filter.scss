@@ -12,8 +12,9 @@
         list-style: none;
         margin-left: 0;
         margin-right: 0;
+        color: white;
         @include border-rad;
-        background-color: beige;
+        //background-color: beige;
         li {
             justify-self: flex-start;
             align-self: center;
@@ -130,3 +131,15 @@
         }
     }
 }
+
+.bckground-red {
+    background-color: #e93336;
+};
+
+.bckground-green {
+    background-color: #2ecc4b;
+};
+
+.bckground-blue {
+    background-color: #1683FF;
+};

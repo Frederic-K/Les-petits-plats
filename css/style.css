@@ -13,8 +13,8 @@
   list-style: none;
   margin-left: 0;
   margin-right: 0;
+  color: white;
   border-radius: 5px;
-  background-color: beige;
 }
 .tag__parking--items li {
   justify-self: flex-start;
@@ -259,6 +259,18 @@
   color: white;
   font-size: 20px;
   cursor: pointer;
+}
+
+.bckground-red {
+  background-color: #e93336;
+}
+
+.bckground-green {
+  background-color: #2ecc4b;
+}
+
+.bckground-blue {
+  background-color: #1683FF;
 }
 
 .main .search__message {
