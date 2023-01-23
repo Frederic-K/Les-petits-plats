@@ -1,4 +1,3 @@
-/// Import ///
 
 /// https://www.delftstack.com/howto/javascript/how-to-capitalize-the-first-letter-of-a-string-in-javascript/ ///
 function setUpperCaseFirstChar(string) {
@@ -110,9 +109,10 @@ function dropdownIngredients() {
 
 function getIngredientTagFilterDOM(data) {
     //console.log('data', data);
-    for(const ingredient of data) {
+    for (const ingredient of data) {
         const ingredientfilterListItem = document.createElement("li")
         ingredientfilterListItem.classList.add("itemsList")
+        ingredientfilterListItem.setAttribute("tabindex", "0")
         ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
         ingredientfilterList.appendChild(ingredientfilterListItem)
     }
@@ -168,10 +168,11 @@ function dropdownAppliances() {
 
 function getApplianceTagFilterDOM(data) {
     //console.log('data4DOM', data);
-    for(const appliance of data) {
+    for         (const appliance of data) {
         //console.log('appliances4DOM', appliance);
         const applianceFilterListItem = document.createElement("li")
         applianceFilterListItem.classList.add("itemsList")
+        applianceFilterListItem.setAttribute("tabindex", "0")
         applianceFilterListItem.textContent = setUpperCaseFirstChar(appliance)
         //applianceFilterListItem.textContent = appliance
         applianceFilterList.appendChild(applianceFilterListItem)
@@ -225,9 +226,11 @@ function dropdownUstensils() {
 
 function getUstensilTagFilterDOM(data) {
     //console.log('data4DOM', data);
-    for(const ustensil of data) {
+    for (const ustensil of data) {
         const ustensilFilterListItem = document.createElement("li")
         ustensilFilterListItem.classList.add("itemsList")
+        ustensilFilterListItem.setAttribute("tabindex", "0")
+        ustensilFilterListItem.setAttribute("onclick", "testSelectTag(event)")
         ustensilFilterListItem.textContent = setUpperCaseFirstChar(ustensil)
         ustensilFilterList.appendChild(ustensilFilterListItem)
     }
@@ -248,11 +251,37 @@ function displayUstensilTagFilter(data) {
     getUstensilTagFilterDOM(arrayUstensils)
 }
 
-/// Init ///
-
 async function initUstensilsTagFilter() {
     const recipes = await getRecipesData()
     //console.log('recipes', recipes);
     displayUstensilTagFilter(recipes)
 };
+
+/// Fonction ///
+/// Selection de filtres ///
+function testSelectTag(_event) {
+    let filterTag = ""
+    const parkingFilter = document.getElementsByClassName("tag__parking")[0];
+    parkingFilter.classList.remove("hidden")
+    filterTag += new TestSelectTag(_event).filterTagContent
+    parkingFilter.innerHTML = filterTag
+    // const test = new TestSelectTag(_event)
+    // parkingFilter.innerHTML = test._createFilter
+}
+
+class TestSelectTag {
+    constructor(data) {
+        this.filter = data.target.textContent; 
+        this._createFilter();
+    };
+    _createFilter() {
+        this.filterTagContent = `
+        <div class="tag__parking--items">
+            <li class="selectedFilter">${this.filter}</li>
+            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+        </div>
+        `
+    }
+
+}
 
