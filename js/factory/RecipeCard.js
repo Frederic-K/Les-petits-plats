@@ -65,6 +65,7 @@
 export default class RecipeCard {
     constructor(data) {
         //console.log('dataFromRecipeCard', data);
+        this.id = data.id
         this.name = data.name;
         this.time = data.time;
         this.ingredients = data.ingredients;
@@ -77,7 +78,7 @@ export default class RecipeCard {
     };
     _createCard() {
         this.recipeCardContent = `
-        <article class="recipe__card" aria-label="${this.name}">
+        <article class="recipe__card" aria-label="${this.name}" data-index="${this.id}">
             <div class="recipe__card--imgContainer">
             <img src="https://picsum.photos/200/300" alt="${this.name}" class="recipe__card--img" aria-label="${this.name}">
             </div>
