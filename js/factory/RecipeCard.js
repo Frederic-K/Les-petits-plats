@@ -126,6 +126,18 @@ function displayRecipeCard(data) {
     cardSection.innerHTML = recipeCard
 };
 
+// function displayRecipeCard(data) {
+//     const cardSection = document.getElementsByClassName("recipes__section")[0];
+//     for (const recipe of data) {
+//         console.log('recipe', recipe);
+//         const newRecipeCard = new RecipeCard(recipe);
+//         console.log('newRecipe', newRecipeCard);
+//         const recipeCard = newRecipeCard._createCard();
+//         console.log('recipeCard', recipeCard);
+//         cardSection.appendChild(recipeCard);
+//     }
+// };
+
 async function displayAllRecipeCard() {
     const recipes = await getRecipesData()
     displayRecipeCard(recipes)

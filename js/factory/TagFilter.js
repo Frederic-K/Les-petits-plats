@@ -12,7 +12,7 @@ const ingredientFilterInput = document.getElementsByClassName("filter__ingredien
 const ingredientFilterBtn = document.getElementsByClassName("filter__ingredients--chevron")[0];
 const ingredientFilterIconChevronDown = document.getElementsByClassName("filter__ingredients--chevronDown")[0];
 const ingredientFilterIconChevronUp = document.getElementsByClassName("filter__ingredients--chevronUp")[0];
-const ingredientfilterList = document.getElementsByClassName("filter__ingredients--list")[0];
+const ingredientFilterList = document.getElementsByClassName("filter__ingredients--list")[0];
 
 /// DOM ///
 /// Appareils ///
@@ -94,28 +94,42 @@ function dropdownIngredients() {
         ingredientFilterTag.setAttribute("aria-expanded", "true")
         ingredientFilterTag.classList.remove("width-small")
         ingredientFilterTag.classList.add("width-large")
-        ingredientfilterList.textContent = ""
-        ingredientfilterList.classList.remove("hidden")
-        ingredientfilterList.classList.add("display-flex")
+        ingredientFilterList.textContent = ""
+        ingredientFilterList.classList.remove("hidden")
+        ingredientFilterList.classList.add("display-flex")
+
+        applianceFilterList.classList.add("hidden")
+        applianceFilterList.classList.remove("display-flex")
+        applianceFilterTag.classList.remove("width-large")
+        applianceFilterTag.classList.add("width-small")
+        applianceFilterInput.classList.add("hidden")
+        applianceFilterTitle.classList.remove("hidden")
+
+        ustensilFilterList.classList.add("hidden")
+        ustensilFilterList.classList.remove("display-flex")
+        ustensilFilterTag.classList.remove("width-large")
+        ustensilFilterTag.classList.add("width-small")
+        ustensilFilterInput.classList.add("hidden")
+        ustensilFilterTitle.classList.remove("hidden")
         initIngredientTagFilter()
     } else {
         ingredientFilterTag.setAttribute("aria-expanded", "false")
         ingredientFilterTag.classList.remove("width-large")
         ingredientFilterTag.classList.add("width-small")
-        ingredientfilterList.classList.add("hidden")
-        ingredientfilterList.classList.remove("display-flex")
+        ingredientFilterList.classList.add("hidden")
+        ingredientFilterList.classList.remove("display-flex")
     }
 };
 
 function getIngredientTagFilterDOM(data) {
     //console.log('data', data);
     for (const ingredient of data) {
-        const ingredientfilterListItem = document.createElement("li")
-        ingredientfilterListItem.classList.add("itemsList")
-        ingredientfilterListItem.setAttribute("tabindex", "0")
-        ingredientfilterListItem.setAttribute("onclick", "displaySelectedFilter(event)")
-        ingredientfilterListItem.textContent = setUpperCaseFirstChar(ingredient)
-        ingredientfilterList.appendChild(ingredientfilterListItem)
+        const ingredientFilterListItem = document.createElement("li")
+        ingredientFilterListItem.classList.add("itemsList")
+        ingredientFilterListItem.setAttribute("tabindex", "0")
+        ingredientFilterListItem.setAttribute("onclick", "displaySelectedFilter(event)")
+        ingredientFilterListItem.textContent = setUpperCaseFirstChar(ingredient)
+        ingredientFilterList.appendChild(ingredientFilterListItem)
     }
 };
 
@@ -157,6 +171,20 @@ function dropdownAppliances() {
         applianceFilterList.textContent = ""
         applianceFilterList.classList.remove("hidden")
         applianceFilterList.classList.add("display-flex")
+
+        ingredientFilterList.classList.add("hidden")
+        ingredientFilterList.classList.remove("display-flex")
+        ingredientFilterTag.classList.remove("width-large")
+        ingredientFilterTag.classList.add("width-small")
+        ingredientFilterInput.classList.add("hidden")
+        ingredientFilterTitle.classList.remove("hidden")
+        
+        ustensilFilterList.classList.add("hidden")
+        ustensilFilterList.classList.remove("display-flex")
+        ustensilFilterTag.classList.remove("width-large")
+        ustensilFilterTag.classList.add("width-small")
+        ustensilFilterInput.classList.add("hidden")
+        ustensilFilterTitle.classList.remove("hidden")
         initApplianceTagFilter()
     } else {
         applianceFilterTag.setAttribute("aria-expanded", "false")
@@ -216,6 +244,20 @@ function dropdownUstensils() {
         ustensilFilterList.textContent = ""
         ustensilFilterList.classList.remove("hidden")
         ustensilFilterList.classList.add("display-flex")
+
+        applianceFilterList.classList.add("hidden")
+        applianceFilterList.classList.remove("display-flex")
+        applianceFilterTag.classList.remove("width-large")
+        applianceFilterTag.classList.add("width-small")
+        applianceFilterInput.classList.add("hidden")
+        applianceFilterTitle.classList.remove("hidden")
+
+        ingredientFilterList.classList.add("hidden")
+        ingredientFilterList.classList.remove("display-flex")
+        ingredientFilterTag.classList.remove("width-large")
+        ingredientFilterTag.classList.add("width-small")
+        ingredientFilterInput.classList.add("hidden")
+        ingredientFilterTitle.classList.remove("hidden")        
         initUstensilsTagFilter()
     } else {
         ustensilFilterTag.setAttribute("aria-expanded", "false")
