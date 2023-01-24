@@ -301,63 +301,12 @@ async function initUstensilsTagFilter() {
     displayUstensilTagFilter(recipes)
 };
 
-/// Fonction ///
-/// Selection de filtres ///
-
-
-// class TestSelectTag {
-//     constructor(data) {
-//         this.filter = data.target.textContent; 
-//         this._createFilter();
-//     };
-//     _createFilter() {
-//         this.filterTagContent = `
-//         <div class="tag__parking--items"
-//             <li class="selectedFilter">${this.filter}</li>
-//             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
-//         </div>    
-//         `
-//     }
-// }
-
-// function displaySelectedFilter(event) {
-//     let filterTag = ""
-//     const parkingFilter = document.getElementsByClassName("tag__parking")[0];
-//     parkingFilter.classList.remove("hidden")
-//     filterTag += new TestSelectTag(event).filterTagContent
-//     parkingFilter.innerHTML = filterTag
-// }
-
-// class TestSelectTag {
-//     constructor(data) {
-//         this.filter = data.target.textContent; 
-//         this._createFilter();
-//     };
-//     _createFilter() {
-//         this.filterTagContent = `
-//             <li class="selectedFilter">${this.filter}</li>
-//             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
-//         `
-//     }
-
-// }
-
-// function displaySelectedFilter(event) {
-//     const parkingFilter = document.getElementsByClassName("tag__parking")[0]
-//     parkingFilter.classList.remove("hidden")
-//     const parkingfilterItem = document.createElement("div")
-//     parkingfilterItem.classList.add("tag__parking--items")
-//     const filterTag = new TestSelectTag(event).filterTagContent
-//     parkingfilterItem.innerHTML = filterTag
-//     parkingFilter.appendChild(parkingfilterItem)
-// }
-
 class TestSelectTag {
     constructor(data) {
-        console.log('data', data.target);
+        //console.log('data', data.target);
         this.wrapper = document.createElement("div")
         this.originFilter = data.target.parentElement
-        console.log('color', this.originFilter);
+        //console.log('color', this.originFilter);
         this.filter = data.target.textContent; 
         //this._createFilter();
     };
