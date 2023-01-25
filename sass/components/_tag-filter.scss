@@ -57,7 +57,7 @@
 .tag__filter {
     &--listbox {
         @include tag-filter-items;
-        background-color: aqua;
+        //background-color: aqua;
     }
     &--header {
         @include tag-filter-header;
@@ -79,32 +79,6 @@
     }
 };
 
-.tag__filter {    
-    &--ingredients {
-        background-color: #1683FF;
-        @include tag-filter-items;        
-    }
-    &--header {
-        @include tag-filter-header;
-        .filter__ingredients {
-            @include tag-filter-title;
-        }
-        .filter__ingredients--input {
-            background-color: #1683FF;
-            @include tag-filter-input;
-        }
-        .filter__ingredients--chevron {
-            @include tag-filter-chevron;
-        }
-    }
-    .filter__ingredients--list {
-        @include display-taglist;
-        .itemsList {
-            @include items-list;
-        }
-    }
-};
-
 .filter__bckground--red {
     background-color: #e93336;
 };
@@ -117,6 +91,31 @@
     background-color: #1683FF;
 };
 
+// .tag__filter {    
+//     &--ingredients {
+//         background-color: #1683FF;
+//         @include tag-filter-items;        
+//     }
+//     &--header {
+//         @include tag-filter-header;
+//         .filter__ingredients {
+//             @include tag-filter-title;
+//         }
+//         .filter__ingredients--input {
+//             background-color: #1683FF;
+//             @include tag-filter-input;
+//         }
+//         .filter__ingredients--chevron {
+//             @include tag-filter-chevron;
+//         }
+//     }
+//     .filter__ingredients--list {
+//         @include display-taglist;
+//         .itemsList {
+//             @include items-list;
+//         }
+//     }
+// };
 // .tag__filter {
 //     &--appliances {
 //         background-color: #2ecc4b;
