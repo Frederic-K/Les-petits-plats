@@ -1,9 +1,9 @@
 /// Import ///
-// import RecipeCard from "./RecipeCard.js";
+/// import RecipeCard from "./RecipeCard.js";
 
 export default class Search {
-    constructor() {
-        console.log('search');
+    constructor(data) {
+        console.log('search', data);
 
         /// Elements du DOM ///
 

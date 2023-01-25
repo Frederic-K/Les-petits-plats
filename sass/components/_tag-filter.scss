@@ -54,7 +54,32 @@
     }
 }
 
-.tag__filter{    
+.tag__filter {
+    &--listbox {
+        @include tag-filter-items;
+        background-color: aqua;
+    }
+    &--header {
+        @include tag-filter-header;
+        .filter__header--title {
+            @include tag-filter-title;
+        }
+        .filter__header--input {
+            @include tag-filter-input;
+        }
+        .filter__header--chevron {
+            @include tag-filter-chevron;
+        }
+    }
+    &--list {
+        @include display-taglist;
+        .itemsList {
+            @include items-list;
+        }
+    }
+};
+
+.tag__filter {    
     &--ingredients {
         background-color: #1683FF;
         @include tag-filter-items;        
@@ -80,66 +105,67 @@
     }
 };
 
-.tag__filter {
-    &--appliances {
-        background-color: #2ecc4b;
-        @include tag-filter-items;   
-    }
-    &--header {
-        @include tag-filter-header;
-        .filter__appliances {
-            @include tag-filter-title;
-        }
-        .filter__appliances--input {
-            background-color: #2ecc4b;
-            @include tag-filter-input;
-        }
-        .filter__appliances--chevron {
-            @include tag-filter-chevron;
-        }
-    }
-    .filter__appliances--list {
-        @include display-taglist;
-        .itemsList {
-            @include items-list;
-        }
-    }
-}
-
-.tag__filter {
-    &--ustensils {
-        background-color: #e93336;
-        @include tag-filter-items;   
-    }
-    &--header {
-        @include tag-filter-header;
-        .filter__ustensils {
-            @include tag-filter-title;
-        }
-        .filter__ustensils--input {
-            background-color: #e93336;
-            @include tag-filter-input;
-        }
-        .filter__ustensils--chevron {
-            @include tag-filter-chevron;
-        }
-    }
-    .filter__ustensils--list {
-        @include display-taglist;
-        .itemsList {
-            @include items-list;
-        }
-    }
-}
-
-.bckground-red {
+.filter__bckground--red {
     background-color: #e93336;
 };
 
-.bckground-green {
+.filter__bckground--green {
     background-color: #2ecc4b;
 };
 
-.bckground-blue {
+.filter__bckground--blue {
     background-color: #1683FF;
 };
+
+// .tag__filter {
+//     &--appliances {
+//         background-color: #2ecc4b;
+//         @include tag-filter-items;   
+//     }
+//     &--header {
+//         @include tag-filter-header;
+//         .filter__appliances {
+//             @include tag-filter-title;
+//         }
+//         .filter__appliances--input {
+//             background-color: #2ecc4b;
+//             @include tag-filter-input;
+//         }
+//         .filter__appliances--chevron {
+//             @include tag-filter-chevron;
+//         }
+//     }
+//     .filter__appliances--list {
+//         @include display-taglist;
+//         .itemsList {
+//             @include items-list;
+//         }
+//     }
+// }
+
+// .tag__filter {
+//     &--ustensils {
+//         background-color: #e93336;
+//         @include tag-filter-items;   
+//     }
+//     &--header {
+//         @include tag-filter-header;
+//         .filter__ustensils {
+//             @include tag-filter-title;
+//         }
+//         .filter__ustensils--input {
+//             background-color: #e93336;
+//             @include tag-filter-input;
+//         }
+//         .filter__ustensils--chevron {
+//             @include tag-filter-chevron;
+//         }
+//     }
+//     .filter__ustensils--list {
+//         @include display-taglist;
+//         .itemsList {
+//             @include items-list;
+//         }
+//     }
+// }
+

@@ -1,9 +1,8 @@
-//import Search from "./factory/Search.js";
-//import RecipeCard from "./factory/RecipeCard.js";
-import Search from "./factory/Search-1.js";
+import Search from "./factory/Search.js";
 
-function init() {
-    new Search();
-    //new RecipeCard();
-}
+async function init() {
+    const recipes = await getRecipesData()
+    new Search(recipes);
+};
+
 init();
