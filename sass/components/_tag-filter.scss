@@ -91,6 +91,14 @@
     background-color: #1683FF;
 };
 
+.tag__filter--list, .filter__header--input, .filter__header--chevronUp, .active .filter__header--chevronDown, .active .filter__header--title {
+    display: none;
+}
+
+.active .filter__header--chevronUp, .active .tag__filter--list, .active .filter__header--input {
+    display: flex;
+}
+
 // .tag__filter {    
 //     &--ingredients {
 //         background-color: #1683FF;
