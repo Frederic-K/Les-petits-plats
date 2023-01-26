@@ -100,3 +100,16 @@
     -webkit-box-orient: vertical;
     white-space: normal;
 };
+
+@mixin width-L-720 {
+    max-width: 720px;
+    margin-right: 0px;
+    margin-left: 0px;
+};
+
+@mixin width-XS-200 {
+    max-width: 200px;
+    height: 70px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
