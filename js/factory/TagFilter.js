@@ -34,93 +34,95 @@ export default class TestTagFilter {
     //         }
     //     }
     // };
-
-    // _expandDropdowFilter() {
-
-    // }
-
-
 };
 
 
+// function switchListFilter(filter, action) {
+//     let childrenList = null;
+//     switch (filter) {
+//         case "ingredients":
+//             childrenList = document.getElementById("filterIngredients").children;
+//             if (action === "display") {
+//                 document.getElementById("filterIngredients").classList.add("active", "width-large");
+//                 document.getElementById("filterIngredients").classList.remove("width-small");
+//                 document.getElementById("filterAppliances").classList.remove("active");
+//                 document.getElementById("filterAppliances").classList.add("width-small");
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");                 
+//             }else if (action === "hide"){
+//                 document.getElementById("filterIngredients").classList.remove("active", "width-large");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//             }
+//             break;
+//         case "appliances":
+//             childrenList = document.getElementById("filterAppliances").children;
+//             if (action === "display") {
+//                 document.getElementById("filterAppliances").classList.add("active", "width-large");
+//                 document.getElementById("filterAppliances").classList.remove("width-small");
+//                 document.getElementById("filterIngredients").classList.remove("active");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");                 
+//             }else if (action === "hide"){
+//                 document.getElementById("filterAppliances").classList.remove("active", "width-large");
+//                 document.getElementById("filterAppliances").classList.add("width-small");
+//             }
+//             break;
+//         case "ustencils":
+//             childrenList = document.getElementById("filterUstencils").children;
+//             if (action === "display") {
+//                 document.getElementById("filterUstencils").classList.add("active", "width-large");
+//                 document.getElementById("filterUstencils").classList.remove("width-small");
+//                 document.getElementById("filterIngredients").classList.remove("active");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//                 document.getElementById("filterAppliances").classList.remove("active");
+//                 document.getElementById("filterAppliances").classList.add("width-small");                
+//             }else if (action === "hide"){
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");
+//             }
+//             break;
+//     }
+// };
 
-// function tagFilterListener() {
-//     document.getElementById("displayTagFilterListIngredients").addEventListener("click", () => {
-//         const newSelectedFilter = new TestTagFilter(["test", "banane"])
-//         console.log('newSelectedFilter', newSelectedFilter);
-//         const selectedFilter = newSelectedFilter._switchListFilter()
-//         console.log('selectedFilter', selectedFilter);
-//         return selectedFilter
+// function dropdowMenuFilterListener() {
+//     document.getElementById("displayIndgredientsBtn").addEventListener("click", () => {
+//         switchListFilter("ingredients", "display")
 //     })
-// }
+//     document.getElementById("hideIngredientsBtn").addEventListener("click", () => {
+//         switchListFilter("ingredients", "hide")
+//     })
+//     document.getElementById("displayAppliancesBtn").addEventListener("click", () => {
+//         switchListFilter("appliances", "display")
+//     })
+//     document.getElementById("hideAppliancesBtn").addEventListener("click", () => {
+//         switchListFilter("appliances", "hide")
+//     })
+//     document.getElementById("displayUstencilsBtn").addEventListener("click", () => {
+//         switchListFilter("ustencils", "display")
+//     })
+//     document.getElementById("hideUstencilsBtn").addEventListener("click", () => {
+//         switchListFilter("ustencils", "hide")
+//     })
+// };
 
-function switchListFilter(filter, action) {
-    let childrenList = null;
-    switch (filter) {
-        case "ingredients":
-            childrenList = document.getElementById("filterIngredients").children;
-            if (action === "display") {
-                document.getElementById("filterIngredients").classList.add("active", "width-large");
-                document.getElementById("filterIngredients").classList.remove("width-small");
-                document.getElementById("filterAppliances").classList.remove("active");
-                document.getElementById("filterAppliances").classList.add("width-small");
-                document.getElementById("filterUstencils").classList.remove("active");
-                document.getElementById("filterUstencils").classList.add("width-small");                 
-            }else if (action === "hide"){
-                document.getElementById("filterIngredients").classList.remove("active", "width-large");
-                document.getElementById("filterIngredients").classList.add("width-small");
-            }
-            break;
-        case "appliances":
-            childrenList = document.getElementById("filterAppliances").children;
-            if (action === "display") {
-                document.getElementById("filterAppliances").classList.add("active", "width-large");
-                document.getElementById("filterAppliances").classList.remove("width-small");
-                document.getElementById("filterIngredients").classList.remove("active");
-                document.getElementById("filterIngredients").classList.add("width-small");
-                document.getElementById("filterUstencils").classList.remove("active");
-                document.getElementById("filterUstencils").classList.add("width-small");                 
-            }else if (action === "hide"){
-                document.getElementById("filterAppliances").classList.remove("active", "width-large");
-                document.getElementById("filterAppliances").classList.add("width-small");
-            }
-            break;
-        case "ustencils":
-            childrenList = document.getElementById("filterUstencils").children;
-            if (action === "display") {
-                document.getElementById("filterUstencils").classList.add("active", "width-large");
-                document.getElementById("filterUstencils").classList.remove("width-small");
-                document.getElementById("filterIngredients").classList.remove("active");
-                document.getElementById("filterIngredients").classList.add("width-small");
-                document.getElementById("filterAppliances").classList.remove("active");
-                document.getElementById("filterAppliances").classList.add("width-small");                
-            }else if (action === "hide"){
-                document.getElementById("filterUstencils").classList.remove("active");
-                document.getElementById("filterUstencils").classList.add("width-small");
-            }
-            break;
+// dropdowMenuFilterListener();
+
+function dropdownMenuListener() {
+    const displayFilterMenuBtns = document.querySelectorAll(".filter__header--chevronDown");
+    const hideFilterMenuBtns = document.querySelectorAll(".filter__header--chevronUp");
+
+    for (const displayFilterMenuBtn of displayFilterMenuBtns) {
+        displayFilterMenuBtn.addEventListener("click", (e) => {
+            displayDropdownFilterMenu(e)
+        })
     }
+    for (const hideFilterMenuBtn of hideFilterMenuBtns) {
+        hideFilterMenuBtn.addEventListener("click", (e) => {
+            hideDropdownFilterMenu(e)
+        })
+    }
+    
 };
 
-function dropdowMenuFilterListener() {
-    document.getElementById("displayIndgredientsBtn").addEventListener("click", () => {
-        switchListFilter("ingredients", "display")
-    })
-    document.getElementById("hideIngredientsBtn").addEventListener("click", () => {
-        switchListFilter("ingredients", "hide")
-    })
-    document.getElementById("displayAppliancesBtn").addEventListener("click", () => {
-        switchListFilter("appliances", "display")
-    })
-    document.getElementById("hideAppliancesBtn").addEventListener("click", () => {
-        switchListFilter("appliances", "hide")
-    })
-    document.getElementById("displayUstencilsBtn").addEventListener("click", () => {
-        switchListFilter("ustencils", "display")
-    })
-    document.getElementById("hideUstencilsBtn").addEventListener("click", () => {
-        switchListFilter("ustencils", "hide")
-    })
-};
-
-dropdowMenuFilterListener();
+dropdownMenuListener();
