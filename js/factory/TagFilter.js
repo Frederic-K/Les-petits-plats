@@ -36,7 +36,6 @@ export default class TestTagFilter {
     // };
 };
 
-
 // function switchListFilter(filter, action) {
 //     let childrenList = null;
 //     switch (filter) {
@@ -103,10 +102,7 @@ export default class TestTagFilter {
 //     })
 //     document.getElementById("hideUstencilsBtn").addEventListener("click", () => {
 //         switchListFilter("ustencils", "hide")
-//     })
-// };
 
-// dropdowMenuFilterListener();
 
 function dropdownMenuListener() {
     const displayFilterMenuBtns = document.querySelectorAll(".filter__header--chevronDown");
