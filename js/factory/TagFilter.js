@@ -148,6 +148,15 @@ function displayDropdownFilterMenu(e) {
         document.getElementById("filterIngredients").classList.add("width-small");
         document.getElementById("filterUstencils").classList.remove("active");
         document.getElementById("filterUstencils").classList.add("width-small"); 
+
+    } else if (displayMenuBtn === "displayUstencilsBtn") {
+        childrenList = document.getElementById("filterUstencils").children;
+        document.getElementById("filterUstencils").classList.add("active", "width-large");
+        document.getElementById("filterUstencils").classList.remove("width-small");
+        document.getElementById("filterIngredients").classList.remove("active");
+        document.getElementById("filterIngredients").classList.add("width-small");
+        document.getElementById("filterAppliances").classList.remove("active");
+        document.getElementById("filterAppliances").classList.add("width-small"); 
     }
 };
 
@@ -162,5 +171,10 @@ function hideDropdownFilterMenu(e) {
         childrenList = document.getElementById("filterAppliances").children;
         document.getElementById("filterAppliances").classList.remove("active", "width-large");
         document.getElementById("filterAppliances").classList.add("width-small")
+
+    } else if (hideMenuBtn === "hideUstencilsBtn") {
+        childrenList = document.getElementById("filterUstencils").children;
+        document.getElementById("filterUstencils").classList.remove("active", "width-large");
+        document.getElementById("filterUstencils").classList.add("width-small")
     }
 };
