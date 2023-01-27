@@ -16,10 +16,15 @@ export default class TestTagFilter {
 
         this.tagFilterParking = document.getElementsByClassName("tag__parking")[0];
         this.itemFilters = document.querySelectorAll(".itemFilter");
-        //console.log('itemFilters', this.itemFilters);
+        // this.selectedFilters = document.querySelectorAll(".tag__parking--items");
+        // console.log('tag__parking--items', this.selectedFilters);
         
         /// Data ///
         this.filterList = "";
+        this.arraySelectedFilters = [];
+        this.arrayIngredients = []; 
+        this.arrayAppliances = [];
+        this.arrayUstencils = [];
 
         /// Functions ///
         // this._colorDropdownMenu();
@@ -31,28 +36,29 @@ export default class TestTagFilter {
 
     bindEvent() {
         if (this.displayFilterMenuBtns.length > 0) {
-            for (const displayFilterMenuBtn of this.displayFilterMenuBtns) {
-                displayFilterMenuBtn.addEventListener("click", (e) => {
+            for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
+                this.displayFilterMenuBtn.addEventListener("click", (e) => {
                     this._displayDropdownFilterMenu(e)
                 })
             }
         }
         if (this.hideFilterMenuBtns.length > 0) {
-            for (const hideFilterMenuBtn of this.hideFilterMenuBtns) {
-                hideFilterMenuBtn.addEventListener("click", (e) => {
+            for (this.hideFilterMenuBtn of this.hideFilterMenuBtns) {
+                this.hideFilterMenuBtn.addEventListener("click", (e) => {
                     this._hideDropdownFilterMenu(e)
                 })
             }
         }
         if (this.itemFilters.length > 0) {
-            for (const itemFilter of this.itemFilters) {
+            for (this.itemFilter of this.itemFilters) {
                 //console.log('itemFilter', itemFilter);
-                itemFilter.addEventListener("click", (e) => {
+                this.itemFilter.addEventListener("click", (e) => {
                     //console.log('e', e);
                     this._displaySelectedFilter(e)
                 })
             }
         }
+
     //     if (this.filterBtn) {
     //         this.filterBtn.addEventListener("click", _expandDropdowFilter())
     //     };
@@ -71,18 +77,19 @@ export default class TestTagFilter {
     // };
 
     _displaySelectedFilter(e) {
-        this.filterTitle = e.target.textContent;
-        console.log('thisFilterTitle', e.target.textContent);
+        this.filterName = e.target.textContent;
         this.filterType = e.target.dataset.filtertype;
         this.selectedTagContainer = document.createElement("div");
         this.selectedFilterContent = `
-            <li class="selectedFilter">${this.filterTitle}</li>
+            <li class="selectedFilter">${this.filterName}</li>
             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
         `
         this.selectedTagContainer.innerHTML = this.selectedFilterContent
         this.selectedTagContainer.classList.add("tag__parking--items")
-        this.selectedTagContainer.setAttribute("tabindex", "0")
-        this.selectedTagContainer.setAttribute("aria-label", `${this.filterTitle}`)
+        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
+        this.selectedTagContainer.addEventListener("click", (e) => {
+            this._deleteSelectedFilter(e)
+        })
 
         if (this.filterType === "filterIngredient") {
             this.selectedTagContainer.classList.add("filter__bckground--blue")
@@ -94,7 +101,17 @@ export default class TestTagFilter {
             this.selectedTagContainer.classList.add("filter__bckground--red")
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
+        this.arraySelectedFilters.push(this.filterName)
+        console.log('arraySelectedFilters', this.arraySelectedFilters);
     };
+
+    _deleteSelectedFilter(e) {
+        console.log('delete.E', e.target.textContent);
+        this.indexSelectedfilter = this.arraySelectedFilters.indexOf(e.target.textContent)
+        console.log('indexSelectedfilter', this.indexSelectedfilter);
+        this.arraySelectedFilters.splice(this.indexSelectedfilter, 1)
+        console.log('new arraySelectedFilters', this.arraySelectedFilters);
+    }
 
     //let childrenList = "";
 
