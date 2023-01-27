@@ -106,14 +106,13 @@ export default class TestTagFilter {
     };
 
     _deleteSelectedFilter(e) {
-        console.log('delete.E', e.target.textContent);
+        console.log('delete.E', e.target.parentElement);
         this.indexSelectedfilter = this.arraySelectedFilters.indexOf(e.target.textContent)
         console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arraySelectedFilters.splice(this.indexSelectedfilter, 1)
         console.log('new arraySelectedFilters', this.arraySelectedFilters);
+        e.target.parentElement.remove();
     }
-
-    //let childrenList = "";
 
     _displayDropdownFilterMenu(e) {
         // console.log('e', e.target.parentElement.id);
@@ -121,7 +120,6 @@ export default class TestTagFilter {
 
         this.displayMenuBtn = e.target.parentElement.id;
         if (this.displayMenuBtn === "displayIndgredientsBtn") {
-            this.childrenList = document.getElementById("filterIngredients").children;
             this.filterIngredients.classList.add("active", "width-large");
             this.filterIngredients.classList.remove("width-small");
             this.filterIngredients.setAttribute("aria-expanded", "true");
@@ -133,7 +131,6 @@ export default class TestTagFilter {
             this.filterUstencils.setAttribute("aria-expanded", "false"); 
 
         } else if (this.displayMenuBtn === "displayAppliancesBtn") {
-            this.childrenList = document.getElementById("filterAppliances").children;
             this.filterAppliances.classList.add("active", "width-large");
             this.filterAppliances.classList.remove("width-small");
             this.filterAppliances.setAttribute("aria-expanded", "true");
@@ -145,7 +142,6 @@ export default class TestTagFilter {
             this.filterUstencils.setAttribute("aria-expanded", "false"); 
 
         } else if (this.displayMenuBtn === "displayUstencilsBtn") {
-            this.childrenList = document.getElementById("filterUstencils").children;
             this.filterUstencils.classList.add("active", "width-large");
             this.filterUstencils.classList.remove("width-small");
             this.filterUstencils.setAttribute("aria-expanded", "true");
@@ -161,19 +157,16 @@ export default class TestTagFilter {
     _hideDropdownFilterMenu(e) {
         this.hideMenuBtn = e.target.parentElement.id;
         if (this.hideMenuBtn === "hideIngredientsBtn") {
-            this.childrenList = document.getElementById("filterIngredients").children;
             this.filterIngredients.classList.remove("active", "width-large");
             this.filterIngredients.classList.add("width-small");
             this.filterIngredients.setAttribute("aria-expand", "false");
 
         } else if (this.hideMenuBtn === "hideAppliancesBtn") {
-            this.childrenList = document.getElementById("filterAppliances").children;
             this.filterAppliances.classList.remove("active", "width-large");
             this.filterAppliances.classList.add("width-small")
             this.filterAppliances.setAttribute("aria-expand", "false");
 
         } else if (this.hideMenuBtn === "hideUstencilsBtn") {
-            this.childrenList = document.getElementById("filterUstencils").children;
             this.filterUstencils.classList.remove("active", "width-large");
             this.filterUstencils.classList.add("width-small")
             this.filterUstencils.setAttribute("aria-expand", "false");
@@ -201,7 +194,6 @@ export default class TestTagFilter {
 // dropdownMenuListener();
 
 
-// let childrenList = "";
 
 // function displayDropdownFilterMenu(e) {
 //     console.log('e', e.target.parentElement.id);
