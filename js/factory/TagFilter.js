@@ -1,3 +1,5 @@
+// import TestSelectTag from "./tagFilter-1.js";
+
 export default class TestTagFilter {
     constructor(data) {
         console.log('TestTagFilter', data);
@@ -11,36 +13,49 @@ export default class TestTagFilter {
         this.filterUstencils = document.getElementById("filterUstencils");
         this.displayFilterMenuBtns = document.querySelectorAll(".filter__header--chevronDown");
         this.hideFilterMenuBtns = document.querySelectorAll(".filter__header--chevronUp");
-        this.filterList = "";
 
+        this.tagFilterParking = document.getElementsByClassName("tag__parking")[0];
+        this.itemFilters = document.querySelectorAll(".itemFilter");
+        //console.log('itemFilters', this.itemFilters);
+        
         /// Data ///
+        this.filterList = "";
 
         /// Functions ///
         // this._colorDropdownMenu();
-        // this._displayDropdownFilterMenu();
-        // this._hideDropdownFilterMenu();
+
 
         /// Listener /// 
         this.bindEvent();
     };
 
     bindEvent() {
-    //     if (this.filterBtn) {
-    //         this.filterBtn.addEventListener("click", _expandDropdowFilter())
-    //     }
         if (this.displayFilterMenuBtns.length > 0) {
             for (const displayFilterMenuBtn of this.displayFilterMenuBtns) {
                 displayFilterMenuBtn.addEventListener("click", (e) => {
                     this._displayDropdownFilterMenu(e)
                 })
             }
+        }
+        if (this.hideFilterMenuBtns.length > 0) {
             for (const hideFilterMenuBtn of this.hideFilterMenuBtns) {
                 hideFilterMenuBtn.addEventListener("click", (e) => {
                     this._hideDropdownFilterMenu(e)
                 })
             }
-
         }
+        if (this.itemFilters.length > 0) {
+            for (const itemFilter of this.itemFilters) {
+                //console.log('itemFilter', itemFilter);
+                itemFilter.addEventListener("click", (e) => {
+                    //console.log('e', e);
+                    this._displaySelectedFilter(e)
+                })
+            }
+        }
+    //     if (this.filterBtn) {
+    //         this.filterBtn.addEventListener("click", _expandDropdowFilter())
+    //     };
     };
 
     // _colorDropdownMenu() {
@@ -55,11 +70,37 @@ export default class TestTagFilter {
     //     }
     // };
 
+    _displaySelectedFilter(e) {
+        this.filterTitle = e.target.textContent;
+        console.log('thisFilterTitle', e.target.textContent);
+        this.filterType = e.target.dataset.filtertype;
+        this.selectedTagContainer = document.createElement("div");
+        this.selectedFilterContent = `
+            <li class="selectedFilter">${this.filterTitle}</li>
+            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
+        `
+        this.selectedTagContainer.innerHTML = this.selectedFilterContent
+        this.selectedTagContainer.classList.add("tag__parking--items")
+        this.selectedTagContainer.setAttribute("tabindex", "0")
+        this.selectedTagContainer.setAttribute("aria-label", `${this.filterTitle}`)
+
+        if (this.filterType === "filterIngredient") {
+            this.selectedTagContainer.classList.add("filter__bckground--blue")
+        }
+        else if (this.filterType === "filterAppliance") {
+            this.selectedTagContainer.classList.add("filter__bckground--green")
+        }
+        else if (this.filterType === "filterUstencil") {
+            this.selectedTagContainer.classList.add("filter__bckground--red")
+        }
+        this.tagFilterParking.appendChild(this.selectedTagContainer)
+    };
+
     //let childrenList = "";
 
     _displayDropdownFilterMenu(e) {
-        console.log('e', e.target.parentElement.id);
-        console.log('e-test-data-type', e.target.parentElement.dataset.filtertype);
+        // console.log('e', e.target.parentElement.id);
+        // console.log('e-test-data-type', e.target.parentElement.dataset.filtertype);
 
         this.displayMenuBtn = e.target.parentElement.id;
         if (this.displayMenuBtn === "displayIndgredientsBtn") {
