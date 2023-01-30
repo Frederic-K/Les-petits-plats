@@ -2,7 +2,8 @@
 
 export default class TestTagFilter {
     constructor(data) {
-        console.log('TestTagFilter', data);
+        //console.log('TestTagFilter', data);
+
         /// DOM ///
         // this.filterListbox = document.querySelectorAll(".tag__filter--listbox");
         // console.log('filterListbox', this.filterListbox);
@@ -10,24 +11,34 @@ export default class TestTagFilter {
         // console.log('this.filterTitle', this.filterTitle);
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
-        this.filterUstencils = document.getElementById("filterUstencils");
+        this.filterUstensils = document.getElementById("filterUstensils");
         this.displayFilterMenuBtns = document.querySelectorAll(".filter__header--chevronDown");
         this.hideFilterMenuBtns = document.querySelectorAll(".filter__header--chevronUp");
 
         this.tagFilterParking = document.getElementsByClassName("tag__parking")[0];
-        this.itemFilters = document.querySelectorAll(".itemFilter");
+        this.ingredientsFilterList = document.getElementsByClassName("tag__filter--list")[0];
+        this.appliancesFilterList = document.getElementsByClassName("tag__filter--list")[1];
+        this.ustensilsFilterList = document.getElementsByClassName("tag__filter--list")[2];
+        //this.ingredientsFilterList = document.getElementById("ingredientFilterList");
+        //this.itemFilters = document.querySelectorAll(".itemFilter");
         // this.selectedFilters = document.querySelectorAll(".tag__parking--items");
         // console.log('tag__parking--items', this.selectedFilters);
         
         /// Data ///
+        this.recipes = data;
         this.filterList = "";
         this.arraySelectedFilters = [];
-        this.arrayIngredients = []; 
+        this.arrayIngredients = [];
+        this.arrayAllIngredients = []; 
         this.arrayAppliances = [];
-        this.arrayUstencils = [];
+        this.arrayAllAppliances = [];
+        this.arrayUstensils = [];
+        this.arrayAllUstensils = [];
+
 
         /// Functions ///
         // this._colorDropdownMenu();
+        this._setUpperCaseFirstChar();
 
 
         /// Listener /// 
@@ -49,15 +60,15 @@ export default class TestTagFilter {
                 })
             }
         }
-        if (this.itemFilters.length > 0) {
-            for (this.itemFilter of this.itemFilters) {
-                //console.log('itemFilter', itemFilter);
-                this.itemFilter.addEventListener("click", (e) => {
-                    //console.log('e', e);
-                    this._displaySelectedFilter(e)
-                })
-            }
-        }
+        // if (this.itemFilters.length > 0) {
+        //     for (this.itemFilter of this.itemFilters) {
+        //         //console.log('itemFilter', itemFilter);
+        //         this.itemFilter.addEventListener("click", (e) => {
+        //             //console.log('e', e);
+        //             this._displaySelectedFilter(e)
+        //         })
+        //     }
+        // }
 
     //     if (this.filterBtn) {
     //         this.filterBtn.addEventListener("click", _expandDropdowFilter())
@@ -75,6 +86,10 @@ export default class TestTagFilter {
     //         }
     //     }
     // };
+
+    _setUpperCaseFirstChar(string) {
+        return string && string[0].toUpperCase() + string.slice(1);
+    };
 
     _displaySelectedFilter(e) {
         this.filterName = e.target.textContent;
@@ -97,7 +112,7 @@ export default class TestTagFilter {
         else if (this.filterType === "filterAppliance") {
             this.selectedTagContainer.classList.add("filter__bckground--green")
         }
-        else if (this.filterType === "filterUstencil") {
+        else if (this.filterType === "filterUstensil") {
             this.selectedTagContainer.classList.add("filter__bckground--red")
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
@@ -106,7 +121,10 @@ export default class TestTagFilter {
     };
 
     _deleteSelectedFilter(e) {
+        console.log('e.target', e.target);
         console.log('delete.E', e.target.parentElement);
+        e.preventDefault()
+        e.stopPropagation()
         this.indexSelectedfilter = this.arraySelectedFilters.indexOf(e.target.textContent)
         console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arraySelectedFilters.splice(this.indexSelectedfilter, 1)
@@ -126,9 +144,10 @@ export default class TestTagFilter {
             this.filterAppliances.classList.remove("active");
             this.filterAppliances.classList.add("width-small");
             this.filterAppliances.setAttribute("aria-expanded", "false");
-            this.filterUstencils.classList.remove("active");
-            this.filterUstencils.classList.add("width-small");
-            this.filterUstencils.setAttribute("aria-expanded", "false"); 
+            this.filterUstensils.classList.remove("active");
+            this.filterUstensils.classList.add("width-small");
+            this.filterUstensils.setAttribute("aria-expanded", "false"); 
+            this._displayIngredientsFilterList(this.recipes);
 
         } else if (this.displayMenuBtn === "displayAppliancesBtn") {
             this.filterAppliances.classList.add("active", "width-large");
@@ -137,20 +156,22 @@ export default class TestTagFilter {
             this.filterIngredients.classList.remove("active");
             this.filterIngredients.classList.add("width-small");
             this.filterIngredients.setAttribute("aria-expanded", "false");
-            this.filterUstencils.classList.remove("active");
-            this.filterUstencils.classList.add("width-small");
-            this.filterUstencils.setAttribute("aria-expanded", "false"); 
+            this.filterUstensils.classList.remove("active");
+            this.filterUstensils.classList.add("width-small");
+            this.filterUstensils.setAttribute("aria-expanded", "false");
+            this._displayAppliancesFilterList(this.recipes);
 
-        } else if (this.displayMenuBtn === "displayUstencilsBtn") {
-            this.filterUstencils.classList.add("active", "width-large");
-            this.filterUstencils.classList.remove("width-small");
-            this.filterUstencils.setAttribute("aria-expanded", "true");
+        } else if (this.displayMenuBtn === "displayUstensilsBtn") {
+            this.filterUstensils.classList.add("active", "width-large");
+            this.filterUstensils.classList.remove("width-small");
+            this.filterUstensils.setAttribute("aria-expanded", "true");
             this.filterIngredients.classList.remove("active");
             this.filterIngredients.classList.add("width-small");
             this.filterIngredients.setAttribute("aria-expanded", "false");
             this.filterAppliances.classList.remove("active");
             this.filterAppliances.classList.add("width-small");
             this.filterAppliances.setAttribute("aria-expanded", "false"); 
+            this._displayUstensilsFilterList(this.recipes);
         }
     };
 
@@ -166,12 +187,88 @@ export default class TestTagFilter {
             this.filterAppliances.classList.add("width-small")
             this.filterAppliances.setAttribute("aria-expand", "false");
 
-        } else if (this.hideMenuBtn === "hideUstencilsBtn") {
-            this.filterUstencils.classList.remove("active", "width-large");
-            this.filterUstencils.classList.add("width-small")
-            this.filterUstencils.setAttribute("aria-expand", "false");
+        } else if (this.hideMenuBtn === "hideUstensilsBtn") {
+            this.filterUstensils.classList.remove("active", "width-large");
+            this.filterUstensils.classList.add("width-small")
+            this.filterUstensils.setAttribute("aria-expand", "false");
         }
     };
+
+    _displayIngredientsFilterList(data) {
+        //console.log('displayIngredientsFilterList-data', data);
+        for (let i=0; i < data.length; i++) {
+            this.ingredients = data[i].ingredients
+            this.ingredients.map(({ingredient}) => {
+                this.arrayAllIngredients.push(ingredient)
+            })
+        }
+        this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
+        this._getFilterDOM(this.arrayIngredients)
+    };
+
+    _displayAppliancesFilterList(data) {
+        for (let i=0; i < data.length; i++) {
+            this.appliance = data[i].appliance
+            this.arrayAllAppliances.push(this.appliance)
+        }
+        this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
+        this._getFilterDOM(this.arrayAppliances)
+    };
+
+    _displayUstensilsFilterList(data) {
+        for (let i=0; i < data.length; i++) {
+            for (let x=0; x < data[i].ustensils.length; x++) {
+                this.ustensil = data[i].ustensils[x]
+                this.arrayAllUstensils.push(this.ustensil)
+            }
+        }
+        this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
+        this._getFilterDOM(this.arrayUstensils)
+    };
+
+    _getFilterDOM(data) {
+        console.log('getfilterDOM-data', data);
+        if (data === this.arrayIngredients) {
+            console.log('toto');
+            for (let ingredient of data) {
+                this.ingredientFilterListItem = document.createElement("li")
+                this.ingredientFilterListItem.classList.add("itemFilter")
+                this.ingredientFilterListItem.setAttribute("tabindex", "0")
+                this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
+                this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
+                this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
+                this.ingredientFilterListItem.addEventListener("click", (e) => {
+                    this._displaySelectedFilter(e)
+                })
+            }
+        } else if (data === this.arrayAppliances) {
+            console.log('tata');
+            for (let appliance of data) {
+                this.applianceFilterListitem = document.createElement("li")
+                this.applianceFilterListitem.classList.add("itemFiltet")
+                this.applianceFilterListitem.setAttribute("tabindex", "0")
+                this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
+                this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
+                this.appliancesFilterList.appendChild(this.applianceFilterListitem)
+                this.applianceFilterListitem.addEventListener("click", (e) => {
+                    this._displaySelectedFilter(e)
+                })
+            }
+        } else if (data === this.arrayUstensils) {
+            for (let ustensil of data) {
+                this.ustensilFilterListItem = document.createElement("li")
+                this.ustensilFilterListItem.classList.add("itemFilter")
+                this.ustensilFilterListItem.setAttribute("tabindex", "0")
+                this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
+                this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
+                this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
+                this.ustensilFilterListItem.addEventListener("click", (e) => {
+                    this._displaySelectedFilter(e)
+                })
+            }
+        }
+    };
+
 };
 
 // function dropdownMenuListener() {
@@ -201,7 +298,6 @@ export default class TestTagFilter {
 
 //     const displayMenuBtn = e.target.parentElement.id;
 //     if (displayMenuBtn === "displayIndgredientsBtn") {
-//         childrenList = document.getElementById("filterIngredients").children;
 //         document.getElementById("filterIngredients").classList.add("active", "width-large");
 //         document.getElementById("filterIngredients").classList.remove("width-small");
 //         document.getElementById("filterIngredients").setAttribute("aria-expanded", "true");
@@ -213,7 +309,6 @@ export default class TestTagFilter {
 //         document.getElementById("filterUstencils").setAttribute("aria-expanded", "false"); 
 
 //     } else if (displayMenuBtn === "displayAppliancesBtn") {
-//         childrenList = document.getElementById("filterAppliances").children;
 //         document.getElementById("filterAppliances").classList.add("active", "width-large");
 //         document.getElementById("filterAppliances").classList.remove("width-small");
 //         document.getElementById("filterAppliances").setAttribute("aria-expanded", "true");
@@ -225,7 +320,6 @@ export default class TestTagFilter {
 //         document.getElementById("filterUstencils").setAttribute("aria-expanded", "false"); 
 
 //     } else if (displayMenuBtn === "displayUstencilsBtn") {
-//         childrenList = document.getElementById("filterUstencils").children;
 //         document.getElementById("filterUstencils").classList.add("active", "width-large");
 //         document.getElementById("filterUstencils").classList.remove("width-small");
 //         document.getElementById("filterUstencils").setAttribute("aria-expanded", "true");
@@ -241,19 +335,16 @@ export default class TestTagFilter {
 // function hideDropdownFilterMenu(e) {
 //     const hideMenuBtn = e.target.parentElement.id;
 //     if (hideMenuBtn === "hideIngredientsBtn") {
-//         childrenList = document.getElementById("filterIngredients").children;
 //         document.getElementById("filterIngredients").classList.remove("active", "width-large");
 //         document.getElementById("filterIngredients").classList.add("width-small");
 //         document.getElementById("filterIngredients").setAttribute("aria-expand", "false");
 
 //     } else if (hideMenuBtn === "hideAppliancesBtn") {
-//         childrenList = document.getElementById("filterAppliances").children;
 //         document.getElementById("filterAppliances").classList.remove("active", "width-large");
 //         document.getElementById("filterAppliances").classList.add("width-small")
 //         document.getElementById("filterAppliances").setAttribute("aria-expand", "false");
 
 //     } else if (hideMenuBtn === "hideUstencilsBtn") {
-//         childrenList = document.getElementById("filterUstencils").children;
 //         document.getElementById("filterUstencils").classList.remove("active", "width-large");
 //         document.getElementById("filterUstencils").classList.add("width-small")
 //         document.getElementById("filterUstencils").setAttribute("aria-expand", "false");
@@ -261,12 +352,10 @@ export default class TestTagFilter {
 // };
 
 
-// function switchListFilter(filter, action) {
-//     let childrenList = null;
+// function switchListFilter(filter, task) {
 //     switch (filter) {
 //         case "ingredients":
-//             childrenList = document.getElementById("filterIngredients").children;
-//             if (action === "display") {
+//             if (task === "display") {
 //                 document.getElementById("filterIngredients").classList.add("active", "width-large");
 //                 document.getElementById("filterIngredients").classList.remove("width-small");
 //                 document.getElementById("filterAppliances").classList.remove("active");
@@ -279,29 +368,27 @@ export default class TestTagFilter {
 //             }
 //             break;
 //         case "appliances":
-//             childrenList = document.getElementById("filterAppliances").children;
-//             if (action === "display") {
+//             if (task === "display") {
 //                 document.getElementById("filterAppliances").classList.add("active", "width-large");
 //                 document.getElementById("filterAppliances").classList.remove("width-small");
 //                 document.getElementById("filterIngredients").classList.remove("active");
 //                 document.getElementById("filterIngredients").classList.add("width-small");
 //                 document.getElementById("filterUstencils").classList.remove("active");
 //                 document.getElementById("filterUstencils").classList.add("width-small");                 
-//             }else if (action === "hide"){
+//             }else if (task === "hide"){
 //                 document.getElementById("filterAppliances").classList.remove("active", "width-large");
 //                 document.getElementById("filterAppliances").classList.add("width-small");
 //             }
 //             break;
 //         case "ustencils":
-//             childrenList = document.getElementById("filterUstencils").children;
-//             if (action === "display") {
+//             if (task === "display") {
 //                 document.getElementById("filterUstencils").classList.add("active", "width-large");
 //                 document.getElementById("filterUstencils").classList.remove("width-small");
 //                 document.getElementById("filterIngredients").classList.remove("active");
 //                 document.getElementById("filterIngredients").classList.add("width-small");
 //                 document.getElementById("filterAppliances").classList.remove("active");
 //                 document.getElementById("filterAppliances").classList.add("width-small");                
-//             }else if (action === "hide"){
+//             }else if (task === "hide"){
 //                 document.getElementById("filterUstencils").classList.remove("active");
 //                 document.getElementById("filterUstencils").classList.add("width-small");
 //             }
