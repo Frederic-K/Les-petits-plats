@@ -1,11 +1,11 @@
 .tag__parking {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     gap: 10px;
     margin: 0px;
     &--items {
         width: 150px;
-        display: flex;
+        //display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -73,7 +73,7 @@
     }
     &--list {
         @include display-taglist;
-        .itemsList {
+        .itemFilter {
             @include items-list;
         }
     }

@@ -1,12 +1,11 @@
 .tag__parking {
-  display: flex;
+  display: flex !important;
   flex-direction: row;
   gap: 10px;
   margin: 0px;
 }
 .tag__parking--items {
   width: 150px;
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -114,7 +113,7 @@
   column-gap: 15px;
   list-style: none;
 }
-.tag__filter--list .itemsList {
+.tag__filter--list .itemFilter {
   width: 180px;
   color: white;
   font-size: 20px;
