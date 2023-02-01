@@ -159,6 +159,7 @@ export default class TestTagFilter {
         }
     };
 
+
     _displayFilterList(data) {
         //console.log('getfilterDOM-data', data);
         if (data === this.arrayIngredients) {
