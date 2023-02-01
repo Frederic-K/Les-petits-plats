@@ -24,6 +24,8 @@ export default class TestTagFilter {
         this.recipes = data;
         this.filterList = "";
         this.arraySelectedFilters = [];
+        this.arrayAllSelecetdFilter = [];
+        this.arrayActiveFilters = [];
         this.arrayIngredients = [];
         this.arrayAllIngredients = []; 
         this.arrayAppliances = [];
