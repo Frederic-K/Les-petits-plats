@@ -234,16 +234,16 @@ export default class TestTagFilter {
     };
     
     _deleteSelectedFilter(e) {
-        //console.log('e.target', e.target);
+        console.log('e.target', e.target);
         //console.log('Parent.E', e.target.parentElement);
         this.selectedFilter = e.target.parentElement
         //console.log('this.selectedFilter', this.selectedFilter);
-        this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent)
-        //console.log('indexSelectedfilter', this.indexSelectedfilter);
+        this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
+        console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
         console.log('new arrayActiveFilters', this.arrayActiveFilters);
-        this.selectedFilter.remove();
-        //this.selectedTagContainer.remove("display-flex")
+        //this.selectedFilter.remove();
+        this.selectedFilter.remove("display-flex")
         //this.selectedTagContainer.add("hidden")
         //e.preventDefault()
         //e.stopPropagation()
