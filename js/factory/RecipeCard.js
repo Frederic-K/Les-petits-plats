@@ -1,5 +1,5 @@
 
-/*export default*/ class RecipeCard {
+export default class RecipeCard {
     constructor(data) {
         //console.log('dataFromRecipeCard', data);
         this.id = data.id

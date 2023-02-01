@@ -1,4 +1,4 @@
-import TestTagFilter from "./TagFilter.js";
+import TagFilterCopy from "./TagFilter-copy.js";
 
 export default class SelectedTagFilter {
     constructor(data) {
@@ -31,8 +31,6 @@ export default class SelectedTagFilter {
         else if (this.filterType === "filterUstensil") {
             this.wrapper.classList.add("filter__bckground--red")
         }
-        this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        console.log('arrayActiveFilters', this.arrayActiveFilters);
         return this.wrapper
     };
 

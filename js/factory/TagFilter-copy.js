@@ -1,6 +1,6 @@
-//import SelectedTagFilter from "./SelectedTagFilter.js";
+import SelectedTagFilter from "./SelectedTagFilter.js";
 
-export default class TagFilter {
+export default class TagFilterCopy {
     constructor(data) {
         //console.log('TestTagFilter', data);
 
@@ -203,36 +203,17 @@ export default class TagFilter {
     };
 
     _displaySelectedFilter(e) {
-        this.filterName = e.target.textContent;
-        this.filterType = e.target.dataset.filtertype;
-        this.selectedTagContainer = document.createElement("div");
-        this.selectedFilterContent = `
-            <li class="selectedFilter">${this.filterName}</li>
-            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
-        `
-        this.selectedTagContainer.innerHTML = this.selectedFilterContent
-        this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
-        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
-        this.selectedTagContainer.setAttribute("tabindex", "0")
-        this.selectedTagContainer.setAttribute("data-status", "selected")
-        this.selectedTagContainer.addEventListener("click", (e) => {
-            this._deleteSelectedFilter(e)
-        })
-
-        if (this.filterType === "filterIngredient") {
-            this.selectedTagContainer.classList.add("filter__bckground--blue")
-        }
-        else if (this.filterType === "filterAppliance") {
-            this.selectedTagContainer.classList.add("filter__bckground--green")
-        }
-        else if (this.filterType === "filterUstensil") {
-            this.selectedTagContainer.classList.add("filter__bckground--red")
-        }
-        this.tagFilterParking.appendChild(this.selectedTagContainer)
-        this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        console.log('arrayActiveFilters', this.arrayActiveFilters);
+    this.filterName = e.target.textContent;
+    this.filterType = e.target.dataset.filtertype;
+    const tagParking = document.getElementsByClassName("tag__parking")[0];
+    tagParking.classList.remove("hidden");
+    const newSelectedFilter = new SelectedTagFilter(e);
+    const selectedFilter = newSelectedFilter._createFilter();
+    tagParking.appendChild(selectedFilter);
+    this.arrayActiveFilters.push(this.filterName.toLowerCase())
+    console.log('arrayActiveFilters', this.arrayActiveFilters);
     };
-    
+
     _deleteSelectedFilter(e) {
         console.log('e.target', e.target);
         //console.log('Parent.E', e.target.parentElement);
@@ -247,7 +228,54 @@ export default class TagFilter {
         //this.selectedTagContainer.add("hidden")
         //e.preventDefault()
         //e.stopPropagation()
-    }
+    }   
+
+    // _displaySelectedFilter(e) {
+    //     this.filterName = e.target.textContent;
+    //     this.filterType = e.target.dataset.filtertype;
+    //     this.selectedTagContainer = document.createElement("div");
+    //     this.selectedFilterContent = `
+    //         <li class="selectedFilter">${this.filterName}</li>
+    //         <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
+    //     `
+    //     this.selectedTagContainer.innerHTML = this.selectedFilterContent
+    //     this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
+    //     this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
+    //     this.selectedTagContainer.setAttribute("tabindex", "0")
+    //     this.selectedTagContainer.setAttribute("data-status", "selected")
+    //     this.selectedTagContainer.addEventListener("click", (e) => {
+    //         this._deleteSelectedFilter(e)
+    //     })
+
+    //     if (this.filterType === "filterIngredient") {
+    //         this.selectedTagContainer.classList.add("filter__bckground--blue")
+    //     }
+    //     else if (this.filterType === "filterAppliance") {
+    //         this.selectedTagContainer.classList.add("filter__bckground--green")
+    //     }
+    //     else if (this.filterType === "filterUstensil") {
+    //         this.selectedTagContainer.classList.add("filter__bckground--red")
+    //     }
+    //     this.tagFilterParking.appendChild(this.selectedTagContainer)
+    //     this.arrayActiveFilters.push(this.filterName.toLowerCase())
+    //     console.log('arrayActiveFilters', this.arrayActiveFilters);
+    // };
+    
+    // _deleteSelectedFilter(e) {
+    //     console.log('e.target', e.target);
+    //     //console.log('Parent.E', e.target.parentElement);
+    //     this.selectedFilter = e.target.parentElement
+    //     console.log('this.selectedFilter', this.selectedFilter);
+    //     this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
+    //     console.log('indexSelectedfilter', this.indexSelectedfilter);
+    //     this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
+    //     console.log('new arrayActiveFilters', this.arrayActiveFilters);
+    //     //this.selectedFilter.remove();
+    //     this.selectedFilter.remove("display-flex")
+    //     //this.selectedTagContainer.add("hidden")
+    //     //e.preventDefault()
+    //     //e.stopPropagation()
+    // }
 };
 
 // function switchListFilter(filter, task) {

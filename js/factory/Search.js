@@ -1,5 +1,6 @@
 /// Import ///
-/// import RecipeCard from "./RecipeCard.js";
+import RecipeCard from "./RecipeCard.js";
+import TagFilter from "./TagFilter.js";
 
 export default class Search {
     constructor(data) {
@@ -21,6 +22,7 @@ export default class Search {
   
         /// Lancement de mes listener ///
         //this.bindEvent();
+
 
     };
 

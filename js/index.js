@@ -1,10 +1,12 @@
 import Search from "./factory/Search.js";
-import TestTagFilter from "./factory/TagFilter.js";
+import TagFilterCopy from "./factory/TagFilter-copy.js";
+import TagFilter from "./factory/TagFilter.js";
 
 async function init() {
     const recipes = await getRecipesData()
     new Search(recipes);
-    new TestTagFilter(recipes);
+    //new TagFilter(recipes);
+    new TagFilterCopy(recipes);
 };
 
 init();
