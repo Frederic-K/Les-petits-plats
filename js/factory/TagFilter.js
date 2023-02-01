@@ -233,7 +233,7 @@ export default class TestTagFilter {
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
         console.log('arrayActiveFilters', this.arrayActiveFilters);
     };
-
+    
     _deleteSelectedFilter(e) {
         console.log('e.target', e.target);
         console.log('Parent.E', e.target.parentElement);
@@ -250,4 +250,49 @@ export default class TestTagFilter {
         e.stopPropagation()
     }
 };
+
+// function switchListFilter(filter, task) {
+//     switch (filter) {
+//         case "ingredients":
+//             if (task === "display") {
+//                 document.getElementById("filterIngredients").classList.add("active", "width-large");
+//                 document.getElementById("filterIngredients").classList.remove("width-small");
+//                 document.getElementById("filterAppliances").classList.remove("active");
+//                 document.getElementById("filterAppliances").classList.add("width-small");
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");                 
+//             }else if (action === "hide"){
+//                 document.getElementById("filterIngredients").classList.remove("active", "width-large");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//             }
+//             break;
+//         case "appliances":
+//             if (task === "display") {
+//                 document.getElementById("filterAppliances").classList.add("active", "width-large");
+//                 document.getElementById("filterAppliances").classList.remove("width-small");
+//                 document.getElementById("filterIngredients").classList.remove("active");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");                 
+//             }else if (task === "hide"){
+//                 document.getElementById("filterAppliances").classList.remove("active", "width-large");
+//                 document.getElementById("filterAppliances").classList.add("width-small");
+//             }
+//             break;
+//         case "ustencils":
+//             if (task === "display") {
+//                 document.getElementById("filterUstencils").classList.add("active", "width-large");
+//                 document.getElementById("filterUstencils").classList.remove("width-small");
+//                 document.getElementById("filterIngredients").classList.remove("active");
+//                 document.getElementById("filterIngredients").classList.add("width-small");
+//                 document.getElementById("filterAppliances").classList.remove("active");
+//                 document.getElementById("filterAppliances").classList.add("width-small");                
+//             }else if (task === "hide"){
+//                 document.getElementById("filterUstencils").classList.remove("active");
+//                 document.getElementById("filterUstencils").classList.add("width-small");
+//             }
+//             break;
+//     }
+// };
+
 
