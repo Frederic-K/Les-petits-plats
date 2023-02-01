@@ -1,32 +1,38 @@
+import TestTagFilter from "./TagFilter.js";
+
 export default class SelectedTagFilter {
     constructor(data) {
-        //console.log('data', data.target);
+        console.log('data', data.target);
         this.wrapper = document.createElement("div")
-        this.originFilter = data.target.parentElement
         //console.log('color', this.originFilter);
         this.filterName = data.target.textContent;
         this.filterType = data.target.dataset.filtertype; 
-        //this._createFilter();
+        this.arrayActiveFilters = [];
+        this._createFilter();
     };
     _createFilter() {
         this.filterTagContent = `
-            <li class="selectedFilter">${this.filter}</li>
+            <li class="selectedFilter">${this.filterName}</li>
             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
         `
         this.wrapper.innerHTML = this.filterTagContent
         this.wrapper.classList.add("tag__parking--items", "display-flex")
         this.wrapper.setAttribute("tabindex", "0")
         this.wrapper.setAttribute("aria-label", `${this.filterName}`)
-        if (this.filterType.classList.contains("filter__ustensils--list")) {
-            this.wrapper.classList.add("filter__bckground--red")
-        }
-        else if (this.filterType.classList.contains("filter__appliances--list")) {
-            this.wrapper.classList.add("filter__bckground--green")
-        }
-        else if (this.filterType.classList.contains("filter__ingredients--list")) {
+        this.wrapper.addEventListener("click", (e) => {
+            this._deleteSelectedFilter(e)
+        })
+        if (this.filterType === "filterIngredient") {
             this.wrapper.classList.add("filter__bckground--blue")
         }
-
+        else if (this.filterType === "filterAppliance") {
+            this.wrapper.classList.add("filter__bckground--green")
+        }
+        else if (this.filterType === "filterUstensil") {
+            this.wrapper.classList.add("filter__bckground--red")
+        }
+        this.arrayActiveFilters.push(this.filterName.toLowerCase())
+        console.log('arrayActiveFilters', this.arrayActiveFilters);
         return this.wrapper
     };
 

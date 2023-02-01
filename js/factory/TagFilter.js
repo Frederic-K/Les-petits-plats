@@ -1,4 +1,4 @@
-// import TestSelectTag from "./tagFilter-1.js";
+//import SelectedTagFilter from "./SelectedTagFilter.js";
 
 export default class TestTagFilter {
     constructor(data) {
@@ -15,10 +15,6 @@ export default class TestTagFilter {
         this.ingredientsFilterList = document.getElementsByClassName("tag__filter--list")[0];
         this.appliancesFilterList = document.getElementsByClassName("tag__filter--list")[1];
         this.ustensilsFilterList = document.getElementsByClassName("tag__filter--list")[2];
-        //this.ingredientsFilterList = document.getElementById("ingredientFilterList");
-        //this.itemFilters = document.querySelectorAll(".itemFilter");
-        // this.selectedFilters = document.querySelectorAll(".tag__parking--items");
-        // console.log('tag__parking--items', this.selectedFilters);
         
         /// Data ///
         this.recipes = data;
@@ -245,7 +241,7 @@ export default class TestTagFilter {
         this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent)
         //console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-        //console.log('new arrayActiveFilters', this.arrayActiveFilters);
+        console.log('new arrayActiveFilters', this.arrayActiveFilters);
         this.selectedFilter.remove();
         //this.selectedTagContainer.remove("display-flex")
         //this.selectedTagContainer.add("hidden")
