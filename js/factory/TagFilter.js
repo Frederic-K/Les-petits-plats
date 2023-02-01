@@ -1,6 +1,6 @@
 //import SelectedTagFilter from "./SelectedTagFilter.js";
 
-export default class TestTagFilter {
+export default class TagFilter {
     constructor(data) {
         //console.log('TestTagFilter', data);
 
