@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*export default*/ class SelectedTagFilter {
+=======
+/*export default*/ class TestSelectTag {
+>>>>>>> main
     constructor(data) {
         //console.log('data', data.target);
         this.wrapper = document.createElement("div")
