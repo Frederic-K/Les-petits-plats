@@ -31,6 +31,7 @@ export default class Search {
         this.arrayUstensils = [];
         this.arrayAllUstensils = [];
         this.arrayFilteredRecipes = [];
+        this.historySearch = [];
 
         /// Mes function ///
         this._setUpperCaseFirstChar();
@@ -60,11 +61,6 @@ export default class Search {
             }
         }
     };
-
-    // _initDisplayTagFilter(data) {
-    //     console.log('tata');
-    //     new MenuTagFilter(data)
-    // };
 
     _initDisplayRecipeCard(data) {
         this._displayRecipeCard(data)
@@ -224,6 +220,64 @@ export default class Search {
         }
     };
 
+    /// Afficher les filtres sélectionnés ///
+    _displaySelectedFilter(e) {
+        this.filterName = e.target.textContent;
+        this.filterType = e.target.dataset.filtertype;
+        this.selectedTagContainer = document.createElement("div");
+        this.selectedFilterContent = `
+            <span class="selectedFilter">${this.filterName}</span>
+            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
+        `
+        this.selectedTagContainer.innerHTML = this.selectedFilterContent
+        this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
+        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
+        this.selectedTagContainer.setAttribute("tabindex", "0")
+        this.selectedTagContainer.setAttribute("data-filtertype", `${this.filterType}`)
+
+        if (this.filterType === "filterIngredient") {
+            this.selectedTagContainer.classList.add("filter__bckground--blue")
+        }
+        else if (this.filterType === "filterAppliance") {
+            this.selectedTagContainer.classList.add("filter__bckground--green")
+        }
+        else if (this.filterType === "filterUstensil") {
+            this.selectedTagContainer.classList.add("filter__bckground--red")
+        }
+        this.tagFilterParking.appendChild(this.selectedTagContainer)
+        this.arrayActiveFilters.push(this.filterName.toLowerCase())
+        // console.log('arrayActiveFilters', this.arrayActiveFilters);
+
+        this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
+        for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
+            this.filterCloseBtn.addEventListener("click", (e) => {
+                this._deleteSelectedFilter(e)
+        })};
+    };    
+    
+    /// Supprimer les filtres sélectionnés ///
+    // _deleteSelectedFilter(e) {
+    //     //console.log('e.target', e.target);
+    //     this.selectedFilter = e.target.parentElement
+    //     console.log('this.selectedFilter', this.selectedTFilter);
+    //     this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.previousElementSibling.textContent.toLowerCase())
+    //     console.log('this.indexSelectedfilter', this.indexSelectedfilter);
+    //     this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
+    //     console.log('new arrayActiveFilters', this.arrayActiveFilters);
+    //     this.selectedFilter.remove("display-flex")
+    // }
+
+    /// Supprimer les filtres sélectionnés ///
+    _deleteSelectedFilter(e) {
+        // console.log('e.target', e.target);
+        this.selectedFilter = e.target.parentElement;
+        // console.log('this.selectedFilter', this.selectedFilter);
+        this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
+        this.arrayActiveFilters = this.arrayActiveFilters.filter(tagFilter => tagFilter != this.selectedfilterItem);
+        // console.log('test', this.arrayActiveFilters);
+        this.selectedFilter.remove("display-flex")        
+    };
+   
     // _displaySelectedFilter(e) {
     //     this.filterName = e.target.textContent;
     //     this.tagFilterParking.classList.remove("hidden");
@@ -250,47 +304,4 @@ export default class Search {
     //     selectedFilter.remove("display-flex")
     //     //this.selectedTagContainer.add("hidden")
     // };   
-
-    /// Afficher les filtres sélectionnés ///
-    _displaySelectedFilter(e) {
-        this.filterName = e.target.textContent;
-        this.filterType = e.target.dataset.filtertype;
-        this.selectedTagContainer = document.createElement("div");
-        this.selectedFilterContent = `
-            <li class="selectedFilter">${this.filterName}</li>
-            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
-        `
-        this.selectedTagContainer.innerHTML = this.selectedFilterContent
-        this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
-        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
-        this.selectedTagContainer.setAttribute("tabindex", "0")
-        this.selectedTagContainer.setAttribute("data-status", "selected")
-        this.selectedTagContainer.addEventListener("click", (e) => {
-            this._deleteSelectedFilter(e)
-        })
-
-        if (this.filterType === "filterIngredient") {
-            this.selectedTagContainer.classList.add("filter__bckground--blue")
-        }
-        else if (this.filterType === "filterAppliance") {
-            this.selectedTagContainer.classList.add("filter__bckground--green")
-        }
-        else if (this.filterType === "filterUstensil") {
-            this.selectedTagContainer.classList.add("filter__bckground--red")
-        }
-        this.tagFilterParking.appendChild(this.selectedTagContainer)
-        this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        console.log('arrayActiveFilters', this.arrayActiveFilters);
-    };
-    
-    /// Supprimer les filtres sélectionnés
-    _deleteSelectedFilter(e) {
-        console.log('e.target', e.target);
-        this.selectedFilter = e.target.parentElement
-        console.log('this.selectedFilter', this.selectedFilter);
-        this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
-        this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-        console.log('new arrayActiveFilters', this.arrayActiveFilters);
-        this.selectedFilter.remove("display-flex")
-    }
 };

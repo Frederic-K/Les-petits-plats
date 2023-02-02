@@ -1,5 +1,5 @@
 /// Import ///
-import MenuTagFilter from "./Old/MenuTagFilter.js";
+import MenuTagFilter from "./MenuTagFilter.js";
 
 /// Class ///
 export default class SelectedTagFilter {

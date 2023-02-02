@@ -27,6 +27,7 @@
   font-size: 15px;
   margin-left: 0;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .tag__filter {
@@ -118,6 +119,10 @@
   color: white;
   font-size: 20px;
   cursor: pointer;
+}
+.tag__filter--list .itemFilter:hover {
+  font-size: 25px;
+  border-bottom: 2px solid white;
 }
 
 .filter__bckground--red {
