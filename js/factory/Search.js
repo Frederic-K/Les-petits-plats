@@ -1,15 +1,22 @@
 /// Import ///
 import RecipeCard from "./RecipeCard.js";
-import TagFilter from "./TagFilter.js";
+import MenuTagFilter from "./MenuTagFilter.js";
 
+/// Class ///
 export default class Search {
     constructor(data) {
         console.log('search', data);
 
-        /// Elements du DOM ///
+        /// DOM ///
 
         //this.button = document.getElementsByClassName("toto")[0];
         //this.button2 = document.getElementsByClassName("toto");
+
+        this.cardSection = document.getElementsByClassName("recipes__section")[0];
+
+        /// Data ///
+        this.arrayAllRecipes = data;
+        this.arrayFilteredRecipes = [];
 
         /// Mes function ///
 
@@ -18,9 +25,10 @@ export default class Search {
         //console.log('displayAllRecipeCard', this._displayAllRecipeCard());
         //this.displayRecipeCard = (e) => this._displayRecipeCard(e);
 
-        //this._displayAllRecipeCard();
+        this._initDisplayRecipeCard(this.arrayAllRecipes);
+        this._initDisplayTagFilter(this.arrayAllRecipes);
   
-        /// Lancement de mes listener ///
+        /// Listener ///
         //this.bindEvent();
 
 
@@ -42,5 +50,23 @@ export default class Search {
     //     // }
 
     // };
+
+    _initDisplayTagFilter(data) {
+        new MenuTagFilter(data)
+    };
+
+    _initDisplayRecipeCard(data) {
+        this._displayRecipeCard(data)
+    };
+    
+    _displayRecipeCard(data) {
+        // console.log('recipeCardData', data);
+        let recipeCard = ""
+        for (const recipe of data) {
+            recipeCard += new RecipeCard(recipe).recipeCardContent
+        }
+        this.cardSection.innerHTML = recipeCard
+    };
+
 
 };

@@ -1,6 +1,8 @@
+/// Import ///
 import SelectedTagFilter from "./SelectedTagFilter.js";
 
-export default class TagFilterCopy {
+///Class ///
+export default class MenuTagFilter {
     constructor(data) {
         //console.log('TestTagFilter', data);
 
@@ -18,9 +20,6 @@ export default class TagFilterCopy {
         
         /// Data ///
         this.recipes = data;
-        this.filterList = "";
-        this.arraySelectedFilters = [];
-        this.arrayAllSelecetdFilter = [];
         this.arrayActiveFilters = [];
         this.arrayIngredients = [];
         this.arrayAllIngredients = []; 
@@ -33,9 +32,9 @@ export default class TagFilterCopy {
         /// Functions ///
         // this._colorDropdownMenu();
         this._setUpperCaseFirstChar();
-        this._initIngredientsFilterList(data);
-        this._initAppliancesFilterList(data);
-        this._initUstensilsFilterList(data);
+        this._initIngredientsFilterList(this.recipes);
+        this._initAppliancesFilterList(this.recipes);
+        this._initUstensilsFilterList(this.recipes);
 
 
         /// Listener /// 
@@ -204,22 +203,21 @@ export default class TagFilterCopy {
 
     _displaySelectedFilter(e) {
     this.filterName = e.target.textContent;
-    this.filterType = e.target.dataset.filtertype;
-    const tagParking = document.getElementsByClassName("tag__parking")[0];
-    tagParking.classList.remove("hidden");
-    const newSelectedFilter = new SelectedTagFilter(e);
-    const selectedFilter = newSelectedFilter._createFilter();
-    tagParking.appendChild(selectedFilter);
+    this.tagFilterParking.classList.remove("hidden");
+    const selectedFilter = new SelectedTagFilter(e)._createFilter();
+    this.tagFilterParking.appendChild(selectedFilter);
     this.arrayActiveFilters.push(this.filterName.toLowerCase())
-    console.log('arrayActiveFilters', this.arrayActiveFilters);
+    console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
     };
 
     _deleteSelectedFilter(e) {
         console.log('e.target', e.target);
+        console.log('arrayActiveFilters-afterremove', this.arrayActiveFilters);
         //console.log('Parent.E', e.target.parentElement);
         this.selectedFilter = e.target.parentElement
         console.log('this.selectedFilter', this.selectedFilter);
         this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
+        console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
         console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
         console.log('new arrayActiveFilters', this.arrayActiveFilters);
@@ -228,7 +226,7 @@ export default class TagFilterCopy {
         //this.selectedTagContainer.add("hidden")
         //e.preventDefault()
         //e.stopPropagation()
-    }   
+    };   
 
     // _displaySelectedFilter(e) {
     //     this.filterName = e.target.textContent;

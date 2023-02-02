@@ -1,5 +1,7 @@
-import TagFilterCopy from "./TagFilter-copy.js";
+/// Import ///
+import MenuTagFilter from "./MenuTagFilter.js";
 
+/// Class ///
 export default class SelectedTagFilter {
     constructor(data) {
         console.log('data', data.target);
@@ -7,8 +9,7 @@ export default class SelectedTagFilter {
         //console.log('color', this.originFilter);
         this.filterName = data.target.textContent;
         this.filterType = data.target.dataset.filtertype; 
-        this.arrayActiveFilters = [];
-        this._createFilter();
+        //this._createFilter(data);
     };
     _createFilter() {
         this.filterTagContent = `
@@ -20,7 +21,7 @@ export default class SelectedTagFilter {
         this.wrapper.setAttribute("tabindex", "0")
         this.wrapper.setAttribute("aria-label", `${this.filterName}`)
         this.wrapper.addEventListener("click", (e) => {
-            this._deleteSelectedFilter(e)
+            this.deleteSelectedFilter = new MenuTagFilter(e)._deleteSelectedFilter(e)
         })
         if (this.filterType === "filterIngredient") {
             this.wrapper.classList.add("filter__bckground--blue")
@@ -33,7 +34,6 @@ export default class SelectedTagFilter {
         }
         return this.wrapper
     };
-
 };
 
 // function displaySelectedFilter(e) {
