@@ -1,5 +1,5 @@
 /// Import ///
-import MenuTagFilter from "./MenuTagFilter.js";
+import MenuTagFilter from "./Old/MenuTagFilter.js";
 
 /// Class ///
 export default class SelectedTagFilter {
@@ -8,11 +8,10 @@ export default class SelectedTagFilter {
         this.wrapper = document.createElement("div")
         //console.log('color', this.originFilter);
         this.filterName = data.target.textContent;
-        this.filterType = data.target.dataset.filtertype; 
-        this.data = data;
-        this._createFilter(this.data);
+        this.filterType = data.target.dataset.filtertype;
+        this.menuTagFilter = new MenuTagFilter(data);
     };
-    _createFilter(data) {
+    _createFilter() {
         this.filterTagContent = `
             <li class="selectedFilter">${this.filterName}</li>
             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>
@@ -22,7 +21,7 @@ export default class SelectedTagFilter {
         this.wrapper.setAttribute("tabindex", "0")
         this.wrapper.setAttribute("aria-label", `${this.filterName}`)
         this.wrapper.addEventListener("click", (e) => {
-            this.deleteSelectedFilter = new MenuTagFilter(e)._deleteSelectedFilter(e)
+            this.deleteSelectedFilter = this.menuTagFilter._deleteSelectedFilter(e)
         })
         if (this.filterType === "filterIngredient") {
             this.wrapper.classList.add("filter__bckground--blue")

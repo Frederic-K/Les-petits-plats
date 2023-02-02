@@ -1,5 +1,5 @@
 /// Import ///
-import SelectedTagFilter from "./SelectedTagFilter.js";
+import SelectedTagFilter from "../SelectedTagFilter.js";
 
 ///Class ///
 export default class MenuTagFilter {
@@ -201,80 +201,79 @@ export default class MenuTagFilter {
         }
     };
 
-    _displaySelectedFilter(e) {
-        this.filterName = e.target.textContent;
-        this.tagFilterParking.classList.remove("hidden");
-        let selectedFilter = new SelectedTagFilter(e)._createFilter(e);
-        console.log('selectedFilterFromDisplay', this.selectedFilter);
-        this.tagFilterParking.appendChild(selectedFilter);
-        this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
-    };
-
-    _deleteSelectedFilter(e) {
-        //console.log('e.target', e.target);
-        console.log('arrayActiveFilters-afterremove', this.arrayActiveFilters);
-        //console.log('Parent.E', e.target.parentElement);
-        e.preventDefault()
-        e.stopPropagation()
-        let selectedFilter = e.target.parentElement
-        console.log('selectedFilterFromDelete', selectedFilter);
-        this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
-        //console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
-        //console.log('indexSelectedfilter', this.indexSelectedfilter);
-        this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-        //console.log('new arrayActiveFilters', this.arrayActiveFilters);
-        //this.selectedFilter.remove();
-        selectedFilter.remove("display-flex")
-        //this.selectedTagContainer.add("hidden")
-    };   
-
     // _displaySelectedFilter(e) {
     //     this.filterName = e.target.textContent;
-    //     this.filterType = e.target.dataset.filtertype;
-    //     this.selectedTagContainer = document.createElement("div");
-    //     this.selectedFilterContent = `
-    //         <li class="selectedFilter">${this.filterName}</li>
-    //         <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
-    //     `
-    //     this.selectedTagContainer.innerHTML = this.selectedFilterContent
-    //     this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
-    //     this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
-    //     this.selectedTagContainer.setAttribute("tabindex", "0")
-    //     this.selectedTagContainer.setAttribute("data-status", "selected")
-    //     this.selectedTagContainer.addEventListener("click", (e) => {
-    //         this._deleteSelectedFilter(e)
-    //     })
-
-    //     if (this.filterType === "filterIngredient") {
-    //         this.selectedTagContainer.classList.add("filter__bckground--blue")
-    //     }
-    //     else if (this.filterType === "filterAppliance") {
-    //         this.selectedTagContainer.classList.add("filter__bckground--green")
-    //     }
-    //     else if (this.filterType === "filterUstensil") {
-    //         this.selectedTagContainer.classList.add("filter__bckground--red")
-    //     }
-    //     this.tagFilterParking.appendChild(this.selectedTagContainer)
+    //     this.tagFilterParking.classList.remove("hidden");
+    //     let selectedFilter = new SelectedTagFilter(e)._createFilter(e);
+    //     console.log('selectedFilterFromDisplay', this.selectedFilter);
+    //     this.tagFilterParking.appendChild(selectedFilter);
     //     this.arrayActiveFilters.push(this.filterName.toLowerCase())
-    //     console.log('arrayActiveFilters', this.arrayActiveFilters);
+    //     console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
     // };
-    
+
     // _deleteSelectedFilter(e) {
-    //     console.log('e.target', e.target);
+    //     //console.log('e.target', e.target);
+    //     console.log('arrayActiveFilters-afterremove', this.arrayActiveFilters);
     //     //console.log('Parent.E', e.target.parentElement);
-    //     this.selectedFilter = e.target.parentElement
-    //     console.log('this.selectedFilter', this.selectedFilter);
+    //     e.preventDefault()
+    //     let selectedFilter = e.target.parentElement
+    //     console.log('selectedFilterFromDelete', selectedFilter);
     //     this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
-    //     console.log('indexSelectedfilter', this.indexSelectedfilter);
+    //     //console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
+    //     //console.log('indexSelectedfilter', this.indexSelectedfilter);
     //     this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-    //     console.log('new arrayActiveFilters', this.arrayActiveFilters);
+    //     //console.log('new arrayActiveFilters', this.arrayActiveFilters);
     //     //this.selectedFilter.remove();
-    //     this.selectedFilter.remove("display-flex")
+    //     selectedFilter.remove("display-flex")
     //     //this.selectedTagContainer.add("hidden")
-    //     //e.preventDefault()
-    //     //e.stopPropagation()
-    // }
+    // };   
+
+    _displaySelectedFilter(e) {
+        this.filterName = e.target.textContent;
+        this.filterType = e.target.dataset.filtertype;
+        this.selectedTagContainer = document.createElement("div");
+        this.selectedFilterContent = `
+            <li class="selectedFilter">${this.filterName}</li>
+            <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>   
+        `
+        this.selectedTagContainer.innerHTML = this.selectedFilterContent
+        this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
+        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
+        this.selectedTagContainer.setAttribute("tabindex", "0")
+        this.selectedTagContainer.setAttribute("data-status", "selected")
+        this.selectedTagContainer.addEventListener("click", (e) => {
+            this._deleteSelectedFilter(e)
+        })
+
+        if (this.filterType === "filterIngredient") {
+            this.selectedTagContainer.classList.add("filter__bckground--blue")
+        }
+        else if (this.filterType === "filterAppliance") {
+            this.selectedTagContainer.classList.add("filter__bckground--green")
+        }
+        else if (this.filterType === "filterUstensil") {
+            this.selectedTagContainer.classList.add("filter__bckground--red")
+        }
+        this.tagFilterParking.appendChild(this.selectedTagContainer)
+        this.arrayActiveFilters.push(this.filterName.toLowerCase())
+        console.log('arrayActiveFilters', this.arrayActiveFilters);
+    };
+    
+    _deleteSelectedFilter(e) {
+        console.log('e.target', e.target);
+        //console.log('Parent.E', e.target.parentElement);
+        this.selectedFilter = e.target.parentElement
+        console.log('this.selectedFilter', this.selectedFilter);
+        this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
+        console.log('indexSelectedfilter', this.indexSelectedfilter);
+        this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
+        console.log('new arrayActiveFilters', this.arrayActiveFilters);
+        //this.selectedFilter.remove();
+        this.selectedFilter.remove("display-flex")
+        //this.selectedTagContainer.add("hidden")
+        //e.preventDefault()
+        //e.stopPropagation()
+    }
 };
 
 // function switchListFilter(filter, task) {
