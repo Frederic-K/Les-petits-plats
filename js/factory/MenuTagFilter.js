@@ -202,30 +202,31 @@ export default class MenuTagFilter {
     };
 
     _displaySelectedFilter(e) {
-    this.filterName = e.target.textContent;
-    this.tagFilterParking.classList.remove("hidden");
-    const selectedFilter = new SelectedTagFilter(e)._createFilter();
-    this.tagFilterParking.appendChild(selectedFilter);
-    this.arrayActiveFilters.push(this.filterName.toLowerCase())
-    console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
+        this.filterName = e.target.textContent;
+        this.tagFilterParking.classList.remove("hidden");
+        let selectedFilter = new SelectedTagFilter(e)._createFilter(e);
+        console.log('selectedFilterFromDisplay', this.selectedFilter);
+        this.tagFilterParking.appendChild(selectedFilter);
+        this.arrayActiveFilters.push(this.filterName.toLowerCase())
+        console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
     };
 
     _deleteSelectedFilter(e) {
-        console.log('e.target', e.target);
+        //console.log('e.target', e.target);
         console.log('arrayActiveFilters-afterremove', this.arrayActiveFilters);
         //console.log('Parent.E', e.target.parentElement);
-        this.selectedFilter = e.target.parentElement
-        console.log('this.selectedFilter', this.selectedFilter);
+        e.preventDefault()
+        e.stopPropagation()
+        let selectedFilter = e.target.parentElement
+        console.log('selectedFilterFromDelete', selectedFilter);
         this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
-        console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
-        console.log('indexSelectedfilter', this.indexSelectedfilter);
+        //console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
+        //console.log('indexSelectedfilter', this.indexSelectedfilter);
         this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-        console.log('new arrayActiveFilters', this.arrayActiveFilters);
+        //console.log('new arrayActiveFilters', this.arrayActiveFilters);
         //this.selectedFilter.remove();
-        this.selectedFilter.remove("display-flex")
+        selectedFilter.remove("display-flex")
         //this.selectedTagContainer.add("hidden")
-        //e.preventDefault()
-        //e.stopPropagation()
     };   
 
     // _displaySelectedFilter(e) {

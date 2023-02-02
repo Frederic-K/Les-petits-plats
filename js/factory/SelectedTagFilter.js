@@ -4,14 +4,15 @@ import MenuTagFilter from "./MenuTagFilter.js";
 /// Class ///
 export default class SelectedTagFilter {
     constructor(data) {
-        console.log('data', data.target);
+        //console.log('data', data.target);
         this.wrapper = document.createElement("div")
         //console.log('color', this.originFilter);
         this.filterName = data.target.textContent;
         this.filterType = data.target.dataset.filtertype; 
-        //this._createFilter(data);
+        this.data = data;
+        this._createFilter(this.data);
     };
-    _createFilter() {
+    _createFilter(data) {
         this.filterTagContent = `
             <li class="selectedFilter">${this.filterName}</li>
             <span class="fa-regular fa-circle-xmark circleCrossBtn"></span>

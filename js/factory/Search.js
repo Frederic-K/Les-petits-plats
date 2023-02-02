@@ -5,7 +5,7 @@ import MenuTagFilter from "./MenuTagFilter.js";
 /// Class ///
 export default class Search {
     constructor(data) {
-        console.log('search', data);
+        //console.log('search', data);
 
         /// DOM ///
 
