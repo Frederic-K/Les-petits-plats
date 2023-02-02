@@ -2,16 +2,11 @@
 /// Class ///
 export default class RecipeCard {
     constructor(data) {
-        //console.log('dataFromRecipeCard', data);
         this.id = data.id
         this.name = data.name;
         this.time = data.time;
         this.ingredients = data.ingredients;
-        //console.log('this.ingredients', this.ingredients);
         this.description = data.description;
-
-        //this.createCard = (e) => this._createCard(e);
-
         this._createCard();
     };
     _createCard() {
@@ -55,20 +50,4 @@ export default class RecipeCard {
         return (arrayIngredients);
     };
 };
-
-// function displayRecipeCard(data) {
-//     let recipeCard = ""
-//     const cardSection = document.getElementsByClassName("recipes__section")[0];
-//     for (const recipe of data) {        
-//         recipeCard += new RecipeCard(recipe).recipeCardContent
-//     }
-//     cardSection.innerHTML = recipeCard
-// };
-
-// async function displayAllRecipeCard() {
-//     const recipes = await getRecipesData()
-//     displayRecipeCard(recipes)
-// };
-
-//displayAllRecipeCard();
 
