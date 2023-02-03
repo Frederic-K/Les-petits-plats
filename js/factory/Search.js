@@ -284,7 +284,7 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         // console.log('this.selectedFilter', this.selectedFilter);
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-        this.arrayActiveFilters = this.arrayActiveFilters.filter(tagFilter => tagFilter != this.selectedfilterItem);
+        this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         console.log('new array active filtre after delete tag', this.arrayActiveFilters);
         this.selectedFilter.remove("display-flex")        
     };
@@ -318,7 +318,7 @@ export default class Search {
     
     /// Recherche ///
     /// Js Debounce ///
-    _debounce(func, timeout = 3000){
+    _debounce(func, timeout = 2000){
         let timer;
         return (...args) => {
         clearTimeout(timer);
@@ -327,16 +327,21 @@ export default class Search {
     }
         
     _saveInput(){
-        console.log('Saving data');
-        this.mainSearchBarFilterInput = this.mainSearchBarFilter.value
+        //console.log('Saving data');
+        this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
         console.log('test input', this.mainSearchBarFilterInput);
-        this.arrayActiveFilters.push(this.mainSearchBarFilterInput.toLowerCase())
-        console.log('test push array Active Filter', this.arrayActiveFilters);
-        this.historySearch.push(this.mainSearchBarFilterInput)
-        console.log('thisHistorySearch', this.historySearch);
-        if (this.mainSearchBarFilterInput === "") {
-            this.arrayActiveFilters = this.arrayActiveFilters.filter(tagFilter => tagFilter != this.historySearch);
+        // this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
+        // console.log('test push array Active Filter', this.arrayActiveFilters);
+        if (this.mainSearchBarFilterInput !== null && this.mainSearchBarFilterInput !== "" && this.mainSearchBarFilterInput !== this.historySearch[0]) {
+            console.log('reretest');
+            this.historySearch.shift()
+            this.historySearch.push(this.mainSearchBarFilterInput)
+            this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
+        } else if (this.mainSearchBarFilterInput === null || this.mainSearchBarFilterInput === "") {
+            this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.historySearch[0]);
         }
+        console.log('thisHistorySearch', this.historySearch);
+        console.log('test push array Active Filter', this.arrayActiveFilters);
     }
 };
  /// Js Debounce ///
