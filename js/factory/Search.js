@@ -9,6 +9,7 @@ export default class Search {
 
         /// DOM ///
         this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
+        this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
 
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
@@ -48,6 +49,11 @@ export default class Search {
     };
 
     bindEvent() {
+        if (this.mainSearchBarFilter.length > 0 && this.mainSearchBarFilterBtn.length > 0) {
+            this.mainSearchBarFilter.addEventListener("keyup", (e) => {
+                this._recipesFiltering(e)
+            })
+        }
         if (this.displayFilterMenuBtns.length > 0) {
             for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
                 this.displayFilterMenuBtn.addEventListener("click", (e) => {
