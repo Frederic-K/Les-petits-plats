@@ -8,6 +8,8 @@ export default class Search {
         // console.log('search', data);
 
         /// DOM ///
+        this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
+
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
         this.filterUstensils = document.getElementById("filterUstensils");
@@ -303,5 +305,9 @@ export default class Search {
     //     //this.selectedFilter.remove();
     //     selectedFilter.remove("display-flex")
     //     //this.selectedTagContainer.add("hidden")
-    // };   
+    // }; 
+    
+    /// Recherche ///
+
+
 };
