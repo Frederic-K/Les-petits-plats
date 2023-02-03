@@ -43,17 +43,20 @@ export default class Search {
         this._initUstensilsFilterList(this.arrayAllRecipes);
         this._initDisplayRecipeCard(this.arrayAllRecipes);
         // this._initDisplayTagFilter(this.arrayAllRecipes);
+        
+        this.processChanges = this._debounce(() => this._saveInput());
   
         /// Listener ///
         this.bindEvent();
     };
 
     bindEvent() {
-        if (this.mainSearchBarFilter.length > 0 && this.mainSearchBarFilterBtn.length > 0) {
-            this.mainSearchBarFilter.addEventListener("keyup", (e) => {
-                this._recipesFiltering(e)
-            })
-        }
+        this.mainSearchBarFilter.addEventListener("keyup", this.processChanges)
+
+        this.mainSearchBarFilterBtn.addEventListener("click", () => {
+            //this._recipesFiltering()
+            console.log('test loupe recherche');
+        })
         if (this.displayFilterMenuBtns.length > 0) {
             for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
                 this.displayFilterMenuBtn.addEventListener("click", (e) => {
@@ -254,7 +257,7 @@ export default class Search {
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        // console.log('arrayActiveFilters', this.arrayActiveFilters);
+        console.log('push from tag filter arrayActiveFilters', this.arrayActiveFilters);
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
@@ -282,7 +285,7 @@ export default class Search {
         // console.log('this.selectedFilter', this.selectedFilter);
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.arrayActiveFilters = this.arrayActiveFilters.filter(tagFilter => tagFilter != this.selectedfilterItem);
-        // console.log('test', this.arrayActiveFilters);
+        console.log('new array active filtre after delete tag', this.arrayActiveFilters);
         this.selectedFilter.remove("display-flex")        
     };
    
@@ -314,6 +317,43 @@ export default class Search {
     // }; 
     
     /// Recherche ///
-
-
+    /// Js Debounce ///
+    _debounce(func, timeout = 3000){
+        let timer;
+        return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+        };
+    }
+        
+    _saveInput(){
+        console.log('Saving data');
+        this.mainSearchBarFilterInput = this.mainSearchBarFilter.value
+        console.log('test input', this.mainSearchBarFilterInput);
+        this.arrayActiveFilters.push(this.mainSearchBarFilterInput.toLowerCase())
+        console.log('test push array Active Filter', this.arrayActiveFilters);
+        this.historySearch.push(this.mainSearchBarFilterInput)
+        console.log('thisHistorySearch', this.historySearch);
+        if (this.mainSearchBarFilterInput === "") {
+            this.arrayActiveFilters = this.arrayActiveFilters.filter(tagFilter => tagFilter != this.historySearch);
+        }
+    }
 };
+ /// Js Debounce ///
+// const mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
+
+// function debounce(func, timeout = 5000){
+//     let timer;
+//     return (...args) => {
+//       clearTimeout(timer);
+//       timer = setTimeout(() => { func.apply(this, args); }, timeout);
+//     };
+//   }
+    
+//   function saveInput(){
+//     console.log('Saving data');
+//   }
+  
+//   const processChanges = debounce(() => saveInput());
+
+//   mainSearchBarFilter.addEventListener("keyup", processChanges)
