@@ -257,7 +257,7 @@ export default class Search {
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        console.log('push from tag filter arrayActiveFilters', this.arrayActiveFilters);
+        // console.log('push from tag filter arrayActiveFilters', this.arrayActiveFilters)
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
@@ -329,19 +329,27 @@ export default class Search {
     _saveInput(){
         //console.log('Saving data');
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
-        console.log('test input', this.mainSearchBarFilterInput);
+        //console.log('test input', this.mainSearchBarFilterInput);
         // this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
         // console.log('test push array Active Filter', this.arrayActiveFilters);
-        if (this.mainSearchBarFilterInput !== null && this.mainSearchBarFilterInput !== "" && this.mainSearchBarFilterInput !== this.historySearch[0]) {
-            console.log('reretest');
+        if (this.mainSearchBarFilterInput.length > 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
+            //console.log('reretest');
             this.historySearch.shift()
             this.historySearch.push(this.mainSearchBarFilterInput)
             this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
+            this._filterRecipes(this.arrayActiveFilters)
         } else if (this.mainSearchBarFilterInput === null || this.mainSearchBarFilterInput === "") {
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.historySearch[0]);
+            this._filterRecipes(this.arrayActiveFilters)
+        } else {
+            console.log("Simon says : Don't move !");
         }
         console.log('thisHistorySearch', this.historySearch);
         console.log('test push array Active Filter', this.arrayActiveFilters);
+    }
+
+    _filterRecipes(data) {
+        console.log('test lancement fct de filtre des recettes');
     }
 };
  /// Js Debounce ///
