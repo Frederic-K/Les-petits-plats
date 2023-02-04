@@ -44,7 +44,7 @@ export default class Search {
         this._initDisplayRecipeCard(this.arrayAllRecipes);
         // this._initDisplayTagFilter(this.arrayAllRecipes);
         
-        this.processChanges = this._debounce(() => this._saveInput());
+        this.processChanges = this._debounce(() => this._saveMainSearchBarrInput());
   
         /// Listener ///
         this.bindEvent();
@@ -258,6 +258,7 @@ export default class Search {
         this.tagFilterParking.appendChild(this.selectedTagContainer)
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
         // console.log('push from tag filter arrayActiveFilters', this.arrayActiveFilters)
+        this._filterRecipes(this.arrayActiveFilters)
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
@@ -286,7 +287,12 @@ export default class Search {
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         console.log('new array active filtre after delete tag', this.arrayActiveFilters);
-        this.selectedFilter.remove("display-flex")        
+        this.selectedFilter.remove("display-flex")
+        if (this.arrayActiveFilters !== "" || this.arrayActiveFilters !== null) {
+            this._filterRecipes(this.arrayActiveFilters)  
+        } else {
+            this._initDisplayRecipeCard()
+        }
     };
    
     // _displaySelectedFilter(e) {
@@ -326,13 +332,13 @@ export default class Search {
         };
     }
         
-    _saveInput(){
+    _saveMainSearchBarrInput(){
         //console.log('Saving data');
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
         //console.log('test input', this.mainSearchBarFilterInput);
         // this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
         // console.log('test push array Active Filter', this.arrayActiveFilters);
-        if (this.mainSearchBarFilterInput.length > 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
+        if (this.mainSearchBarFilterInput.length > 2 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
             //console.log('reretest');
             this.historySearch.shift()
             this.historySearch.push(this.mainSearchBarFilterInput)
@@ -344,12 +350,22 @@ export default class Search {
         } else {
             console.log("Simon says : Don't move !");
         }
-        console.log('thisHistorySearch', this.historySearch);
-        console.log('test push array Active Filter', this.arrayActiveFilters);
+        //console.log('thisHistorySearch', this.historySearch);
+        //console.log('test push array Active Filter', this.arrayActiveFilters);
     }
 
     _filterRecipes(data) {
         console.log('test lancement fct de filtre des recettes');
+        console.log('data', data);
+        this.arrayAllRecipes.forEach(recipe => {
+            if (recipe.name.toLowerCase().includes(data)) {
+                console.log('recipe.name', recipe.name);
+                this.arrayFilteredRecipes.push(recipe)
+                this._displayRecipeCard(this.arrayFilteredRecipes)
+            }
+        })
+        
+        console.log('test filtre recette', this.arrayFilteredRecipes);
     }
 };
  /// Js Debounce ///
