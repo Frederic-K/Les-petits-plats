@@ -39,7 +39,10 @@ export default class Search {
         this.historySearch = [];
 
         /// Mes function ///
-        this._initDisplay(this.arrayAllRecipes);
+        this._initDisplay()
+
+        //this._mainSearch();
+
         this.processChanges = this._debounce(() => this._mainSearch());
   
         /// Listener ///
@@ -93,21 +96,25 @@ export default class Search {
         // }
     };
 
-    _initDisplay(data) {
-        if (this.arrayActiveFilters.length !== 0) {
-            console.log('Follow the light');
-        } else {
-            this._displayRecipeCard(data)
-            //this._initIngredientsFilterList(data)
-            //this._initAppliancesFilterList(data)
-            //this._initUstensilsFilterList(data)
+    _initDisplay() {
+        console.log('titi', this.arrayFilteredRecipes);
+        if (this.arrayFilteredRecipes.length === 0){
+            //console.log('toto');
+            this.arrayFilteredRecipes = this.arrayAllRecipes
+            console.log('tutu', this.arrayFilteredRecipes);
+            this._displayRecipeCard()
+            this._setIngredientsFilterList();
+            this._setAppliancesFilterList();
+            this._setUstensilsFilterList();
+            // this.arrayFilteredRecipes = [];
+            // console.log('banana', this.arrayFilteredRecipes);
         }
-    };
-    
-    _displayRecipeCard(data) {
-        // console.log('recipeCardData', data);
+    }    
+   
+    _displayRecipeCard() {
+        console.log('recipeCardData', this.arrayFilteredRecipes);
         let recipeCard = ""
-        for (const recipe of data) {
+        for (const recipe of this.arrayFilteredRecipes) {
             recipeCard += new RecipeCard(recipe).recipeCardContent
         }
         this.cardSection.innerHTML = recipeCard
@@ -117,9 +124,9 @@ export default class Search {
         return string && string[0].toUpperCase() + string.slice(1);
     };
 
-    _initIngredientsFilterList(data) {
-        for (let i=0; i < data.length; i++) {
-            this.ingredients = data[i].ingredients
+    _setIngredientsFilterList() {
+        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+            this.ingredients = this.arrayFilteredRecipes[i].ingredients
             this.ingredients.map(({ingredient}) => {
                 this.arrayAllIngredients.push(ingredient)
             })
@@ -127,23 +134,57 @@ export default class Search {
         this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
     };
 
-    _initAppliancesFilterList(data) {
-        for (let i=0; i < data.length; i++) {
-            this.appliance = data[i].appliance
+    _setAppliancesFilterList() {
+        console.log('arrayFilteredRecipe4SetAppliancesFilterList', this.arrayFilteredRecipes);
+        this.arrayAppliances = []
+        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+            this.appliance = this.arrayFilteredRecipes[i].appliance
             this.arrayAllAppliances.push(this.appliance)
         }
         this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
+        console.log('this.arrayAppliances4fterSetApplianceFilterList', this.arrayAppliances);
     };
 
-    _initUstensilsFilterList(data) {
-        for (let i=0; i < data.length; i++) {
-            for (let x=0; x < data[i].ustensils.length; x++) {
-                this.ustensil = data[i].ustensils[x]
+    _setUstensilsFilterList() {
+        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+            for (let x=0; x < this.arrayFilteredRecipes[i].ustensils.length; x++) {
+                this.ustensil = this.arrayFilteredRecipes[i].ustensils[x]
                 this.arrayAllUstensils.push(this.ustensil)
             }
         }
         this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
     };
+
+    // _initIngredientsFilterList() {
+    //     if (this.arrayFilteredRecipes.length === 0) {
+    //         this.arrayFilteredRecipes = this.arrayAllRecipes
+    //     }
+    //     for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+    //         this.ingredients = this.arrayFilteredRecipes[i].ingredients
+    //         this.ingredients.map(({ingredient}) => {
+    //             this.arrayAllIngredients.push(ingredient)
+    //         })
+    //     }
+    //     this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
+    // };
+
+    // _initAppliancesFilterList(data) {
+    //     for (let i=0; i < data.length; i++) {
+    //         this.appliance = data[i].appliance
+    //         this.arrayAllAppliances.push(this.appliance)
+    //     }
+    //     this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
+    // };
+
+    // _initUstensilsFilterList(data) {
+    //     for (let i=0; i < data.length; i++) {
+    //         for (let x=0; x < data[i].ustensils.length; x++) {
+    //             this.ustensil = data[i].ustensils[x]
+    //             this.arrayAllUstensils.push(this.ustensil)
+    //         }
+    //     }
+    //     this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
+    // };
 
     // // Menu déroulant des filtres ///
     // // Afficher les menus ///
@@ -221,7 +262,7 @@ export default class Search {
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
                     this.filterUstensils.setAttribute("aria-expanded", "false"); 
-                    this._displayFilterList(this.arrayIngredients);                 
+                    this._displayFilterList(this.arrayIngredients);                
                 }else if (task === "hide"){
                     this.filterIngredients.classList.remove("active", "width-large");
                     this.filterIngredients.classList.add("width-small");
@@ -239,6 +280,7 @@ export default class Search {
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
                     this.filterUstensils.setAttribute("aria-expanded", "false");
+                    console.log('arrayAppliance4romSwitchFiltertFct', this.arrayAppliances);
                     this._displayFilterList(this.arrayAppliances)                
                 }else if (task === "hide") {
                     this.filterAppliances.classList.remove("active", "width-large");
@@ -269,9 +311,9 @@ export default class Search {
 
     /// Afficher la liste des filtres ///
     _displayFilterList(data) {
-        //console.log('getfilterDOM-data >>> OK', data);
         if (data === this.arrayIngredients) {
-            //console.log('toto');
+            console.log('toto', this.arrayIngredients);
+            this.ingredientsFilterList.innerHTML = ""
             for (let ingredient of data) {
                 this.ingredientFilterListItem = document.createElement("li")
                 this.ingredientFilterListItem.classList.add("itemFilter")
@@ -285,7 +327,8 @@ export default class Search {
                 })
             }
         } else if (data === this.arrayAppliances) {
-            //console.log('tata');
+            this.appliancesFilterList.innerHTML = ""
+            console.log('tutu', this.arrayAppliances);
             for (let appliance of data) {
                 this.applianceFilterListitem = document.createElement("li")
                 this.applianceFilterListitem.classList.add("itemFilter")
@@ -299,7 +342,8 @@ export default class Search {
                 })
             }
         } else if (data === this.arrayUstensils) {
-            //console.log('titi');
+            this.ustensilsFilterList.innerHTML = ""
+            console.log('tntn', this.arrayUstensils);
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter")
@@ -410,44 +454,52 @@ export default class Search {
         
     _mainSearch() {
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
-        //console.log('array activ filter', this.arrayActiveFilters);
         if (this.mainSearchBarFilterInput.length >= 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
             //console.log('Guily');
             this.historySearch.shift()
             this.historySearch.push(this.mainSearchBarFilterInput)
             this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
-            this._filterRecipes(this.arrayActiveFilters) 
-            //this._mainFilterRecipes(this.arrayActiveFilters)   
+            this._filterRecipes()    
         } else {
             console.log("Simon says : Don't move !");
         }
         //console.log('historySearch', this.historySearch);
-        //console.log('Active Filter', this.arrayActiveFilters);
+        console.log('Active Filter', this.arrayActiveFilters);
     }
 
-    // _mainFilterRecipes(data) {
-    //     //console.log('data filter recipes', data);
-    //     data.forEach(filter => {
-    //         this._filterRecipes(filter)
-    //     })        
-    // }
-    
-
-    _filterRecipes(data) {
-        //console.log('data filter recipes', data);
+    _filterRecipes() {
+        console.log('si filterRecipe se lance');
+        console.log('activeFilter', this.arrayActiveFilters);
+        this.arrayFilteredRecipes = []
         this.arrayAllRecipes.forEach(recipe => {
-            if (recipe.name.toLowerCase().includes(data)
-                || recipe.description.toLowerCase().includes(data)
-                || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(data))) {
+            if (recipe.name.toLowerCase().includes(this.arrayActiveFilters)
+                || recipe.description.toLowerCase().includes(this.arrayActiveFilters)
+                || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(this.arrayActiveFilters))) {   
                 this.arrayFilteredRecipes.push(recipe)
             }
         })
+        this._displayRecipeCard()
+        this._setIngredientsFilterList();
+        this._setAppliancesFilterList();
+        this._setUstensilsFilterList();
         console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
-        this._displayRecipeCard(this.arrayFilteredRecipes)
-        this._initIngredientsFilterList(this.arrayFilteredRecipes)
-        this._initAppliancesFilterList(this.arrayFilteredRecipes)
-        this._initUstensilsFilterList(this.arrayFilteredRecipes)
     }
+
+    // _filterRecipes(data) {
+    //     //console.log('data filter recipes', data);
+    //     this.arrayAllRecipes.forEach(recipe => {
+    //         if (recipe.name.toLowerCase().includes(data)
+    //             || recipe.description.toLowerCase().includes(data)
+    //             || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(data))) {
+    //             this.arrayFilteredRecipes.push(recipe)
+    //         }
+    //     })
+    //     console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
+    //     this._displayRecipeCard(this.arrayFilteredRecipes)
+    //     this._initIngredientsFilterList(this.arrayFilteredRecipes)
+    //     this._initAppliancesFilterList(this.arrayFilteredRecipes)
+    //     this._initUstensilsFilterList(this.arrayFilteredRecipes)
+    // }
 };
  /// Js Debounce ///
 // const mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
