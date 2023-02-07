@@ -39,14 +39,8 @@ export default class Search {
         this.historySearch = [];
 
         /// Mes function ///
-        // this._setUpperCaseFirstChar();
-        // this._initIngredientsFilterList();
-        // this._initAppliancesFilterList();
-        // this._initUstensilsFilterList();
-        this._initDisplayRecipeCard(this.arrayAllRecipes);
-        // this._initDisplayTagFilter(this.arrayAllRecipes);
-        
-        this.processChanges = this._debounce(() => this._saveMainSearchBarrInput());
+        this._initDisplay(this.arrayAllRecipes);
+        this.processChanges = this._debounce(() => this._mainSearch());
   
         /// Listener ///
         this.bindEvent();
@@ -59,7 +53,6 @@ export default class Search {
             for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
                 this.displayFilterMenuBtn.addEventListener("click", (e) => {
                     this.displayMenuBtn = e.target.parentElement.id;
-                    this.hideMenuBtn = e.target.parentElement.id;
                     if (this.displayMenuBtn === "displayIndgredientsBtn") {
                         this._switchListFilter("ingredients", "display")
                     } else if (this.displayMenuBtn === "displayAppliancesBtn") {
@@ -84,10 +77,6 @@ export default class Search {
                 })
             }
         } 
-                // this.mainSearchBarFilterBtn.addEventListener("click", () => {
-        //     //this._recipesFiltering()
-        //     console.log('test loupe recherche');
-        // })
         // if (this.displayFilterMenuBtns.length > 0) {
         //     for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
         //         this.displayFilterMenuBtn.addEventListener("click", (e) => {
@@ -104,15 +93,14 @@ export default class Search {
         // }
     };
 
-    _initDisplayRecipeCard(data) {
-        console.log('initthis.arrayActiveFilters', this.arrayActiveFilters);
-        if (this.arrayActiveFilters.length > 0) {
-            console.log('application des filtres');
+    _initDisplay(data) {
+        if (this.arrayActiveFilters.length !== 0) {
+            console.log('Follow the light');
         } else {
             this._displayRecipeCard(data)
-            this._initIngredientsFilterList(data)
-            this._initAppliancesFilterList(data)
-            this._initUstensilsFilterList(data)
+            //this._initIngredientsFilterList(data)
+            //this._initAppliancesFilterList(data)
+            //this._initUstensilsFilterList(data)
         }
     };
     
@@ -130,7 +118,6 @@ export default class Search {
     };
 
     _initIngredientsFilterList(data) {
-        console.log('displayIngredientsFilterList-data', data);
         for (let i=0; i < data.length; i++) {
             this.ingredients = data[i].ingredients
             this.ingredients.map(({ingredient}) => {
@@ -138,7 +125,6 @@ export default class Search {
             })
         }
         this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
-        //this._getFilterDOM(this.arrayIngredients)
     };
 
     _initAppliancesFilterList(data) {
@@ -147,7 +133,6 @@ export default class Search {
             this.arrayAllAppliances.push(this.appliance)
         }
         this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
-        //this._getFilterDOM(this.arrayAppliances)
     };
 
     _initUstensilsFilterList(data) {
@@ -158,11 +143,10 @@ export default class Search {
             }
         }
         this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
-        //this._getFilterDOM(this.arrayUstensils)
     };
 
-    /// Menu déroulant des filtres ///
-    /// Afficher les menus ///
+    // // Menu déroulant des filtres ///
+    // // Afficher les menus ///
     // _displayDropdownFilterMenu(e) {
     //     // console.log('e', e.target.parentElement.id);
     //     // console.log('e-test-data-type', e.target.parentElement.dataset.filtertype);
@@ -225,68 +209,67 @@ export default class Search {
     //     }
     // };
     _switchListFilter(filter, task) {
-        console.log('toto');
-            switch (filter) {
-                case "ingredients":
-                    if (task === "display") {
-                        this.filterIngredients.classList.add("active", "width-large");
-                        this.filterIngredients.classList.remove("width-small");
-                        this.filterIngredients.setAttribute("aria-expanded", "true");
-                        this.filterAppliances.classList.remove("active");
-                        this.filterAppliances.classList.add("width-small");
-                        this.filterAppliances.setAttribute("aria-expanded", "false");
-                        this.filterUstensils.classList.remove("active");
-                        this.filterUstensils.classList.add("width-small");
-                        this.filterUstensils.setAttribute("aria-expanded", "false"); 
-                        this._displayFilterList(this.arrayIngredients);                 
-                    }else if (task === "hide"){
-                        this.filterIngredients.classList.remove("active", "width-large");
-                        this.filterIngredients.classList.add("width-small");
-                        this.filterIngredients.setAttribute("aria-expand", "false");
-                    }
-                    break;
-                case "appliances":
-                    if (task === "display") {
-                        this.filterAppliances.classList.add("active", "width-large");
-                        this.filterAppliances.classList.remove("width-small");
-                        this.filterAppliances.setAttribute("aria-expanded", "true");
-                        this.filterIngredients.classList.remove("active");
-                        this.filterIngredients.classList.add("width-small");
-                        this.filterIngredients.setAttribute("aria-expanded", "false");
-                        this.filterUstensils.classList.remove("active");
-                        this.filterUstensils.classList.add("width-small");
-                        this.filterUstensils.setAttribute("aria-expanded", "false");
-                        this._displayFilterList(this.arrayAppliances)                
-                    }else if (task === "hide") {
-                        this.filterAppliances.classList.remove("active", "width-large");
-                        this.filterAppliances.classList.add("width-small")
-                        this.filterAppliances.setAttribute("aria-expand", "false");
-                    }
-                    break;
-                case "ustensils":
-                    if (task === "display") {
-                        this.filterUstensils.classList.add("active", "width-large");
-                        this.filterUstensils.classList.remove("width-small");
-                        this.filterUstensils.setAttribute("aria-expanded", "true");
-                        this.filterIngredients.classList.remove("active");
-                        this.filterIngredients.classList.add("width-small");
-                        this.filterIngredients.setAttribute("aria-expanded", "false");
-                        this.filterAppliances.classList.remove("active");
-                        this.filterAppliances.classList.add("width-small");
-                        this.filterAppliances.setAttribute("aria-expanded", "false"); 
-                        this._displayFilterList(this.arrayUstensils);               
-                    }else if (task === "hide"){
-                        this.filterUstensils.classList.remove("active", "width-large");
-                        this.filterUstensils.classList.add("width-small")
-                        this.filterUstensils.setAttribute("aria-expand", "false");
-                    }
-                    break;
-            }
-        };
+        switch (filter) {
+            case "ingredients":
+                if (task === "display") {
+                    this.filterIngredients.classList.add("active", "width-large");
+                    this.filterIngredients.classList.remove("width-small");
+                    this.filterIngredients.setAttribute("aria-expanded", "true");
+                    this.filterAppliances.classList.remove("active");
+                    this.filterAppliances.classList.add("width-small");
+                    this.filterAppliances.setAttribute("aria-expanded", "false");
+                    this.filterUstensils.classList.remove("active");
+                    this.filterUstensils.classList.add("width-small");
+                    this.filterUstensils.setAttribute("aria-expanded", "false"); 
+                    this._displayFilterList(this.arrayIngredients);                 
+                }else if (task === "hide"){
+                    this.filterIngredients.classList.remove("active", "width-large");
+                    this.filterIngredients.classList.add("width-small");
+                    this.filterIngredients.setAttribute("aria-expand", "false");
+                }
+                break;
+            case "appliances":
+                if (task === "display") {
+                    this.filterAppliances.classList.add("active", "width-large");
+                    this.filterAppliances.classList.remove("width-small");
+                    this.filterAppliances.setAttribute("aria-expanded", "true");
+                    this.filterIngredients.classList.remove("active");
+                    this.filterIngredients.classList.add("width-small");
+                    this.filterIngredients.setAttribute("aria-expanded", "false");
+                    this.filterUstensils.classList.remove("active");
+                    this.filterUstensils.classList.add("width-small");
+                    this.filterUstensils.setAttribute("aria-expanded", "false");
+                    this._displayFilterList(this.arrayAppliances)                
+                }else if (task === "hide") {
+                    this.filterAppliances.classList.remove("active", "width-large");
+                    this.filterAppliances.classList.add("width-small")
+                    this.filterAppliances.setAttribute("aria-expand", "false");
+                }
+                break;
+            case "ustensils":
+                if (task === "display") {
+                    this.filterUstensils.classList.add("active", "width-large");
+                    this.filterUstensils.classList.remove("width-small");
+                    this.filterUstensils.setAttribute("aria-expanded", "true");
+                    this.filterIngredients.classList.remove("active");
+                    this.filterIngredients.classList.add("width-small");
+                    this.filterIngredients.setAttribute("aria-expanded", "false");
+                    this.filterAppliances.classList.remove("active");
+                    this.filterAppliances.classList.add("width-small");
+                    this.filterAppliances.setAttribute("aria-expanded", "false"); 
+                    this._displayFilterList(this.arrayUstensils);               
+                }else if (task === "hide"){
+                    this.filterUstensils.classList.remove("active", "width-large");
+                    this.filterUstensils.classList.add("width-small")
+                    this.filterUstensils.setAttribute("aria-expand", "false");
+                }
+                break;
+        }
+    };
 
     /// Afficher la liste des filtres ///
     _displayFilterList(data) {
-        console.log('getfilterDOM-data >>> OK', data);
+        //console.log('getfilterDOM-data >>> OK', data);
         if (data === this.arrayIngredients) {
             //console.log('toto');
             for (let ingredient of data) {
@@ -297,6 +280,7 @@ export default class Search {
                 this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
                 this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
                 this.ingredientFilterListItem.addEventListener("click", (e) => {
+                    this._switchListFilter("ingredients", "hide")
                     this._displaySelectedFilter(e)
                 })
             }
@@ -310,11 +294,12 @@ export default class Search {
                 this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
                 this.appliancesFilterList.appendChild(this.applianceFilterListitem)
                 this.applianceFilterListitem.addEventListener("click", (e) => {
+                    this._switchListFilter("appliances", "hide")
                     this._displaySelectedFilter(e)
                 })
             }
         } else if (data === this.arrayUstensils) {
-            //console.log('this.arrayUstencils', this.arrayUstensils);
+            //console.log('titi');
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter")
@@ -323,6 +308,7 @@ export default class Search {
                 this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
                 this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
                 this.ustensilFilterListItem.addEventListener("click", (e) => {
+                    this._switchListFilter("ustensils", "hide")
                     this._displaySelectedFilter(e)
                 })
             }
@@ -355,7 +341,6 @@ export default class Search {
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        // console.log('push from tag filter arrayActiveFilters', this.arrayActiveFilters)
         //this._filterRecipes(this.arrayActiveFilters)
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
@@ -379,18 +364,11 @@ export default class Search {
 
     /// Supprimer les filtres sélectionnés ///
     _deleteSelectedFilter(e) {
-        // console.log('e.target', e.target);
         this.selectedFilter = e.target.parentElement;
-        // console.log('this.selectedFilter', this.selectedFilter);
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         console.log('new array active filtre after delete tag', this.arrayActiveFilters);
         this.selectedFilter.remove("display-flex")
-        // if (this.arrayActiveFilters !== "" || this.arrayActiveFilters !== null) {
-        //     this._filterRecipes(this.arrayActiveFilters)  
-        // } else {
-        //     this._initDisplayRecipeCard()
-        // }
     };
    
     // _displaySelectedFilter(e) {
@@ -430,47 +408,45 @@ export default class Search {
         };
     }
         
-    _saveMainSearchBarrInput(){
-        //console.log('Saving data');
+    _mainSearch() {
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
-        //console.log('test input', this.mainSearchBarFilterInput);
-        // this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
-        // console.log('test push array Active Filter', this.arrayActiveFilters);
+        //console.log('array activ filter', this.arrayActiveFilters);
         if (this.mainSearchBarFilterInput.length >= 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
-            //console.log('reretest');
+            //console.log('Guily');
             this.historySearch.shift()
             this.historySearch.push(this.mainSearchBarFilterInput)
             this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
-            this._filterRecipes(this.arrayActiveFilters)
-        // } else if (this.mainSearchBarFilterInput === null || this.mainSearchBarFilterInput === "") {
-        //     this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.historySearch[0]);
-        //     console.log('arrayActive filter', this.arrayActiveFilters);
-        //     this._filterRecipes(this.arrayActiveFilters)
+            this._filterRecipes(this.arrayActiveFilters) 
+            //this._mainFilterRecipes(this.arrayActiveFilters)   
         } else {
             console.log("Simon says : Don't move !");
         }
-        console.log('thisHistorySearch', this.historySearch);
-        console.log('test push array Active Filter', this.arrayActiveFilters);
+        //console.log('historySearch', this.historySearch);
+        //console.log('Active Filter', this.arrayActiveFilters);
     }
 
+    // _mainFilterRecipes(data) {
+    //     //console.log('data filter recipes', data);
+    //     data.forEach(filter => {
+    //         this._filterRecipes(filter)
+    //     })        
+    // }
+    
+
     _filterRecipes(data) {
-        console.log('test lancement fct de filtre des recettes');
-        console.log('data filter recipes', data);
+        //console.log('data filter recipes', data);
         this.arrayAllRecipes.forEach(recipe => {
             if (recipe.name.toLowerCase().includes(data)
                 || recipe.description.toLowerCase().includes(data)
                 || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(data))) {
-                //console.log('recipe.name', recipe.name);
                 this.arrayFilteredRecipes.push(recipe)
-                //this.arrayFilteredRecipes = [...new Set(this.arrayFilteredRecipes)]
-                this._displayRecipeCard(this.arrayFilteredRecipes)
-                this._initIngredientsFilterList(this.arrayFilteredRecipes)
-                this._initAppliancesFilterList(this.arrayFilteredRecipes)
-                this._initUstensilsFilterList(this.arrayFilteredRecipes)
             }
         })
-        
-        console.log('test filtre recette', this.arrayFilteredRecipes);
+        console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
+        this._displayRecipeCard(this.arrayFilteredRecipes)
+        this._initIngredientsFilterList(this.arrayFilteredRecipes)
+        this._initAppliancesFilterList(this.arrayFilteredRecipes)
+        this._initUstensilsFilterList(this.arrayFilteredRecipes)
     }
 };
  /// Js Debounce ///
