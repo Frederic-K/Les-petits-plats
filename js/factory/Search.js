@@ -108,6 +108,8 @@ export default class Search {
             this._setUstensilsFilterList();
             // this.arrayFilteredRecipes = [];
             // console.log('banana', this.arrayFilteredRecipes);
+        } else {
+            this.arrayFilteredRecipes = this.arrayFilteredRecipes
         }
     }    
    
@@ -125,6 +127,7 @@ export default class Search {
     };
 
     _setIngredientsFilterList() {
+        this.arrayAllIngredients = []
         for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
             this.ingredients = this.arrayFilteredRecipes[i].ingredients
             this.ingredients.map(({ingredient}) => {
@@ -135,17 +138,18 @@ export default class Search {
     };
 
     _setAppliancesFilterList() {
-        console.log('arrayFilteredRecipe4SetAppliancesFilterList', this.arrayFilteredRecipes);
-        this.arrayAppliances = []
+        //console.log('arrayFilteredRecipe4SetAppliancesFilterList', this.arrayFilteredRecipes);
+        this.arrayAllAppliances = []
         for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
             this.appliance = this.arrayFilteredRecipes[i].appliance
             this.arrayAllAppliances.push(this.appliance)
         }
         this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
-        console.log('this.arrayAppliances4fterSetApplianceFilterList', this.arrayAppliances);
+        //console.log('this.arrayAppliances4fterSetApplianceFilterList', this.arrayAppliances);
     };
 
     _setUstensilsFilterList() {
+        this.arrayAllUstensils = []
         for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
             for (let x=0; x < this.arrayFilteredRecipes[i].ustensils.length; x++) {
                 this.ustensil = this.arrayFilteredRecipes[i].ustensils[x]
@@ -468,8 +472,6 @@ export default class Search {
     }
 
     _filterRecipes() {
-        console.log('si filterRecipe se lance');
-        console.log('activeFilter', this.arrayActiveFilters);
         this.arrayFilteredRecipes = []
         this.arrayAllRecipes.forEach(recipe => {
             if (recipe.name.toLowerCase().includes(this.arrayActiveFilters)
@@ -479,10 +481,10 @@ export default class Search {
             }
         })
         this._displayRecipeCard()
-        this._setIngredientsFilterList();
-        this._setAppliancesFilterList();
-        this._setUstensilsFilterList();
-        console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
+        this._setIngredientsFilterList(this.arrayFilteredRecipes);
+        this._setAppliancesFilterList(this.arrayFilteredRecipes);
+        this._setUstensilsFilterList(this.arrayFilteredRecipes);
+        //console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
     }
 
     // _filterRecipes(data) {
