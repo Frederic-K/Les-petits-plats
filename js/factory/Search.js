@@ -96,22 +96,33 @@ export default class Search {
         // }
     };
 
+    // _initDisplay() {
+    //     console.log('titi', this.arrayFilteredRecipes);
+    //     if (this.arrayFilteredRecipes.length === 0){
+    //         //console.log('toto');
+    //         this.arrayFilteredRecipes = this.arrayAllRecipes
+    //         console.log('tutu', this.arrayFilteredRecipes);
+    //         this._displayRecipeCard()
+    //         this._setIngredientsFilterList();
+    //         this._setAppliancesFilterList();
+    //         this._setUstensilsFilterList();
+    //         // this.arrayFilteredRecipes = [];
+    //         // console.log('banana', this.arrayFilteredRecipes);
+    //     } else {
+    //         this.arrayFilteredRecipes = this.arrayFilteredRecipes
+    //     }
+    // }   
+    
     _initDisplay() {
-        console.log('titi', this.arrayFilteredRecipes);
-        if (this.arrayFilteredRecipes.length === 0){
-            //console.log('toto');
             this.arrayFilteredRecipes = this.arrayAllRecipes
-            console.log('tutu', this.arrayFilteredRecipes);
+            //console.log('tutu', this.arrayFilteredRecipes);
             this._displayRecipeCard()
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
             // this.arrayFilteredRecipes = [];
             // console.log('banana', this.arrayFilteredRecipes);
-        } else {
-            this.arrayFilteredRecipes = this.arrayFilteredRecipes
-        }
-    }    
+    }  
    
     _displayRecipeCard() {
         console.log('recipeCardData', this.arrayFilteredRecipes);
@@ -284,7 +295,7 @@ export default class Search {
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
                     this.filterUstensils.setAttribute("aria-expanded", "false");
-                    console.log('arrayAppliance4romSwitchFiltertFct', this.arrayAppliances);
+                    //console.log('arrayAppliance4romSwitchFiltertFct', this.arrayAppliances);
                     this._displayFilterList(this.arrayAppliances)                
                 }else if (task === "hide") {
                     this.filterAppliances.classList.remove("active", "width-large");
@@ -316,7 +327,7 @@ export default class Search {
     /// Afficher la liste des filtres ///
     _displayFilterList(data) {
         if (data === this.arrayIngredients) {
-            console.log('toto', this.arrayIngredients);
+            //console.log('toto', this.arrayIngredients);
             this.ingredientsFilterList.innerHTML = ""
             for (let ingredient of data) {
                 this.ingredientFilterListItem = document.createElement("li")
@@ -332,7 +343,7 @@ export default class Search {
             }
         } else if (data === this.arrayAppliances) {
             this.appliancesFilterList.innerHTML = ""
-            console.log('tutu', this.arrayAppliances);
+            //console.log('tutu', this.arrayAppliances);
             for (let appliance of data) {
                 this.applianceFilterListitem = document.createElement("li")
                 this.applianceFilterListitem.classList.add("itemFilter")
@@ -347,7 +358,7 @@ export default class Search {
             }
         } else if (data === this.arrayUstensils) {
             this.ustensilsFilterList.innerHTML = ""
-            console.log('tntn', this.arrayUstensils);
+            //console.log('tntn', this.arrayUstensils);
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter")
@@ -389,11 +400,14 @@ export default class Search {
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        //this._filterRecipes(this.arrayActiveFilters)
+        this.historySearch.push(this.filterName.toLowerCase())
+        this._filterRecipes()
+        //console.log('arrayFilterList4fter selecte dropdowqnmenu filter', this.arrayActiveFilters);
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
             this.filterCloseBtn.addEventListener("click", (e) => {
+                this._filterRecipes()
                 this._deleteSelectedFilter(e)
         })};
     };    
@@ -415,7 +429,9 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
+        this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
         console.log('new array active filtre after delete tag', this.arrayActiveFilters);
+        this._filterRecipes(this.arrayActiveFilters)
         this.selectedFilter.remove("display-flex")
     };
    
@@ -454,12 +470,12 @@ export default class Search {
         clearTimeout(timer);
         timer = setTimeout(() => { func.apply(this, args); }, timeout);
         };
-    }
+    };
         
     _mainSearch() {
+        this.arrayFilteredRecipes = []
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
         if (this.mainSearchBarFilterInput.length >= 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
-            //console.log('Guily');
             this.historySearch.shift()
             this.historySearch.push(this.mainSearchBarFilterInput)
             this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
@@ -469,39 +485,57 @@ export default class Search {
         }
         //console.log('historySearch', this.historySearch);
         console.log('Active Filter', this.arrayActiveFilters);
-    }
+    };
 
     _filterRecipes() {
         this.arrayFilteredRecipes = []
-        this.arrayAllRecipes.forEach(recipe => {
-            if (recipe.name.toLowerCase().includes(this.arrayActiveFilters)
-                || recipe.description.toLowerCase().includes(this.arrayActiveFilters)
-                || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(this.arrayActiveFilters))) {   
-                this.arrayFilteredRecipes.push(recipe)
-            }
+        this.arrayActiveFilters.forEach(filter => {
+            console.log('check if new arrayAllRecipe is ok', this.arrayAllRecipes);
+            this.arrayAllRecipes.forEach(recipe => {
+                if (recipe.name.toLowerCase().includes(filter)
+                    || recipe.description.toLowerCase().includes(filter)
+                    || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) {   
+                    this.arrayFilteredRecipes.push(recipe)
+                    console.log('check filter recipe array after push', this.arrayFilteredRecipes);
+                }
+                //console.log('Working working working !');
+            })
+            console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
+            //console.log('Work in progress');
+            console.log('array activ filter', this.arrayActiveFilters); 
+            //this.arrayActiveFilters.shift()
+            this.arrayAllRecipes = []
+            this.arrayAllRecipes = this.arrayFilteredRecipes // fonctionne pour passer le tableau filtré
+            //this.arrayActiveFilters.filter(filter => filter !== this.historySearch)
         })
-        this._displayRecipeCard()
+        // this.arrayAllRecipes = []
+        // this.arrayAllRecipes = this.arrayFilteredRecipes
+        console.log('new arrayAllrecipe', this.arrayAllRecipes);
+        //console.log('Oh my GOD ! We did it !');
+        console.log('array filtered recipe', this.arrayFilteredRecipes);
+        //console.log('activ filter', this.arrayActiveFilters);
+        this._displayRecipeCard(this.arrayFilteredRecipes)
         this._setIngredientsFilterList(this.arrayFilteredRecipes);
         this._setAppliancesFilterList(this.arrayFilteredRecipes);
         this._setUstensilsFilterList(this.arrayFilteredRecipes);
-        //console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
-    }
+    };
 
-    // _filterRecipes(data) {
-    //     //console.log('data filter recipes', data);
+    // _filterRecipes() {
+    //     this.arrayFilteredRecipes = []
     //     this.arrayAllRecipes.forEach(recipe => {
-    //         if (recipe.name.toLowerCase().includes(data)
-    //             || recipe.description.toLowerCase().includes(data)
-    //             || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(data))) {
+    //         if (recipe.name.toLowerCase().includes(this.arrayActiveFilters)
+    //             || recipe.description.toLowerCase().includes(this.arrayActiveFilters)
+    //             || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(this.arrayActiveFilters))) {   
     //             this.arrayFilteredRecipes.push(recipe)
     //         }
     //     })
-    //     console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
-    //     this._displayRecipeCard(this.arrayFilteredRecipes)
-    //     this._initIngredientsFilterList(this.arrayFilteredRecipes)
-    //     this._initAppliancesFilterList(this.arrayFilteredRecipes)
-    //     this._initUstensilsFilterList(this.arrayFilteredRecipes)
+    //     this._displayRecipeCard()
+    //     this._setIngredientsFilterList(this.arrayFilteredRecipes);
+    //     this._setAppliancesFilterList(this.arrayFilteredRecipes);
+    //     this._setUstensilsFilterList(this.arrayFilteredRecipes);
+    //     //console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
     // }
+
 };
  /// Js Debounce ///
 // const mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
