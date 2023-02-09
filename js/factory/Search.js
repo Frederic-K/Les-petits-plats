@@ -38,6 +38,7 @@ export default class Search {
         this.arrayAllUstensils = [];
         this.arrayFilteredRecipes = [];
         this.historySearch = [];
+        this.lastMainSearchInput = [];
 
         /// Mes function ///
         this._initDisplay()
@@ -399,17 +400,19 @@ export default class Search {
             this.selectedTagContainer.classList.add("filter__bckground--red")
         }
         this.tagFilterParking.appendChild(this.selectedTagContainer)
-        this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        this.historySearch.push(this.filterName.toLowerCase())
-        this._filterRecipes()
-        // console.log('arrayFilterList4fter selecte dropdowqnmenu filter', this.arrayActiveFilters);
-        // console.log('array history after displayselected filter', this.historySearch);
-
+        
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
             this.filterCloseBtn.addEventListener("click", (e) => {
                 this._deleteSelectedFilter(e)
-        })};
+        })}
+
+        this.arrayActiveFilters.push(this.filterName.toLowerCase())
+        this.historySearch.push(this.filterName.toLowerCase())
+        this._filterRecipes()
+
+        console.log('array activ filter after selected tag', this.arrayActiveFilters);
+        console.log('history search after selected tag filter', this.historySearch);
     };    
     
     /// Supprimer les filtres sélectionnés ///
@@ -430,10 +433,10 @@ export default class Search {
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
+        console.log('history after delete a selected filter', this.historySearch);
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
-        console.log('activ filter after delete tag', this.arrayActiveFilters);
+        console.log('activ filter after delete a selected filter', this.arrayActiveFilters);
         this._filterRecipes()
-        console.log('this.filterRecipe', this._filterRecipes());
     };
     
     /// Main searchbar management ///
@@ -450,33 +453,51 @@ export default class Search {
     _mainSearch() {
         this.arrayFilteredRecipes = []
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
-        if (this.mainSearchBarFilterInput.length >= 3 && this.mainSearchBarFilterInput !== this.historySearch[0]) {
-            this.historySearch.shift()
+
+        // if (this.mainSearchBarFilterInput.length <= 0 && this.arrayActiveFilters.length <= 0) {
+        //     console.log('test mainsearch barr');
+        //     console.log('test array activ filter main search bar', this.arrayActiveFilters);
+        //     this._initDisplay()
+        // }
+
+        if (this.mainSearchBarFilterInput.length >= 3 && this.mainSearchBarFilterInput !== this.lastMainSearchInput) {
+            this.lastMainSearchInput.shift()
+            this.lastMainSearchInput.push(this.mainSearchBarFilterInput)
+            console.log('1 lastmainsearch input', this.lastMainSearchInput);
             this.historySearch.push(this.mainSearchBarFilterInput)
             this.arrayActiveFilters.push(this.mainSearchBarFilterInput)
             this._filterRecipes()    
-        } else {
-            console.log("Simon says : Don't move !");
+        } else if (this.mainSearchBarFilterInput.length === 0 && this.arrayActiveFilters.length > 0) {
+            console.log('length de la searchbar filter', this.mainSearchBarFilterInput.length);
+            console.log('length array activ filter', this.arrayActiveFilters.length);
+            console.log('1 last main input', this.lastMainSearchInput);
+            this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.lastMainSearchInput[0]);
+            console.log('test activ filter after blank search', this.arrayActiveFilters);
         }
+        
+        else {
+            console.log("Simon says : Don't move !");
+            console.log('test 2 array activ filter main search bar', this.arrayActiveFilters);
+        }
+        // console.log('2 lastMainSearchInput', this.lastMainSearchInput);
         // console.log('historySearch', this.historySearch);
-        // console.log('Active Filter', this.arrayActiveFilters);
+        // console.log('Main search barr after Active Filter', this.arrayActiveFilters);
     };
 
 
     /// Affichage des recettes filtrées ///
     _filterRecipes() {
-        //console.log('test to see if acti after delete tag filter');
-        if (this.arrayActiveFilters.length !== 0) {
-            console.log('test to see activ filter after delte tag filter', this.arrayActiveFilters.length);
+        if (this.arrayActiveFilters.length > 0) {
+            //console.log('test to see activ filter after delte tag filter', this.arrayActiveFilters.length);
             this.arrayActiveFilters.forEach(filter => {
-                console.log('test si for each arrayfilteredRecipe se lance');
+                //console.log('test si for each arrayfilteredRecipe se lance');
                 this.arrayFilteredRecipes = []
                 this.arrayRecipes.forEach(recipe => {
                     if (recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
                         || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) {   
                         this.arrayFilteredRecipes.push(recipe)
-                        console.log('test array filtered recipe after delete a tag filter', this.arrayFilteredRecipes);
+                        //console.log('test array filtered recipe after delete a tag filter', this.arrayFilteredRecipes);
                     }
                 })
                 this.arrayRecipes = []
