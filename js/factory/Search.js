@@ -115,17 +115,15 @@ export default class Search {
     
     _initDisplay() {
             this.arrayFilteredRecipes = this.arrayAllRecipes
-            //console.log('tutu', this.arrayFilteredRecipes);
+            console.log('array alla recipe from initDisplay', this.arrayAllRecipes);
             this._displayRecipeCard()
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
-            // this.arrayFilteredRecipes = [];
-            // console.log('banana', this.arrayFilteredRecipes);
     }  
    
     _displayRecipeCard() {
-        console.log('recipeCardData', this.arrayFilteredRecipes);
+        // console.log('recipeCardData', this.arrayFilteredRecipes);
         let recipeCard = ""
         for (const recipe of this.arrayFilteredRecipes) {
             recipeCard += new RecipeCard(recipe).recipeCardContent
@@ -374,6 +372,7 @@ export default class Search {
         }
     };
 
+    /// Filtre par tag ///
     /// Afficher les filtres sélectionnés ///
     _displaySelectedFilter(e) {
         this.filterName = e.target.textContent;
@@ -402,12 +401,12 @@ export default class Search {
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
         this.historySearch.push(this.filterName.toLowerCase())
         this._filterRecipes()
-        //console.log('arrayFilterList4fter selecte dropdowqnmenu filter', this.arrayActiveFilters);
+        console.log('arrayFilterList4fter selecte dropdowqnmenu filter', this.arrayActiveFilters);
+        console.log('array history after displayselected filter', this.historySearch);
 
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
             this.filterCloseBtn.addEventListener("click", (e) => {
-                this._filterRecipes()
                 this._deleteSelectedFilter(e)
         })};
     };    
@@ -427,43 +426,17 @@ export default class Search {
     /// Supprimer les filtres sélectionnés ///
     _deleteSelectedFilter(e) {
         this.selectedFilter = e.target.parentElement;
+        this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
         console.log('new array active filtre after delete tag', this.arrayActiveFilters);
-        this._filterRecipes(this.arrayActiveFilters)
-        this.selectedFilter.remove("display-flex")
+        console.log('history after delete tag filter', this.historySearch);
+        this._filterRecipes()
     };
-   
-    // _displaySelectedFilter(e) {
-    //     this.filterName = e.target.textContent;
-    //     this.tagFilterParking.classList.remove("hidden");
-    //     let selectedFilter = new SelectedTagFilter(e)._createFilter(e);
-    //     console.log('selectedFilterFromDisplay', this.selectedFilter);
-    //     this.tagFilterParking.appendChild(selectedFilter);
-    //     this.arrayActiveFilters.push(this.filterName.toLowerCase())
-    //     console.log('arrayActiveFilters-afterdisplay', this.arrayActiveFilters);
-    // };
-
-    // _deleteSelectedFilter(e) {
-    //     //console.log('e.target', e.target);
-    //     console.log('arrayActiveFilters-afterremove', this.arrayActiveFilters);
-    //     //console.log('Parent.E', e.target.parentElement);
-    //     e.preventDefault()
-    //     let selectedFilter = e.target.parentElement
-    //     console.log('selectedFilterFromDelete', selectedFilter);
-    //     this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.textContent.toLowerCase())
-    //     //console.log('e.target.textContent.toLowerCase()', e.target.textContent.toLowerCase());
-    //     //console.log('indexSelectedfilter', this.indexSelectedfilter);
-    //     this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-    //     //console.log('new arrayActiveFilters', this.arrayActiveFilters);
-    //     //this.selectedFilter.remove();
-    //     selectedFilter.remove("display-flex")
-    //     //this.selectedTagContainer.add("hidden")
-    // }; 
     
-    /// Recherche ///
-    /// Js Debounce ///
+    /// Main searchbar management ///
+    /// JS Debounce ///
     _debounce(func, timeout = 2000){
         let timer;
         return (...args) => {
@@ -471,7 +444,8 @@ export default class Search {
         timer = setTimeout(() => { func.apply(this, args); }, timeout);
         };
     };
-        
+    
+    /// Searchbar ///
     _mainSearch() {
         this.arrayFilteredRecipes = []
         this.mainSearchBarFilterInput = this.mainSearchBarFilter.value.toLowerCase()
@@ -483,42 +457,36 @@ export default class Search {
         } else {
             console.log("Simon says : Don't move !");
         }
-        //console.log('historySearch', this.historySearch);
-        console.log('Active Filter', this.arrayActiveFilters);
+        // console.log('historySearch', this.historySearch);
+        // console.log('Active Filter', this.arrayActiveFilters);
     };
 
+
+    /// Affichage des recette filtrées ///
     _filterRecipes() {
-        this.arrayFilteredRecipes = []
-        this.arrayActiveFilters.forEach(filter => {
-            console.log('check if new arrayAllRecipe is ok', this.arrayAllRecipes);
-            this.arrayAllRecipes.forEach(recipe => {
-                if (recipe.name.toLowerCase().includes(filter)
-                    || recipe.description.toLowerCase().includes(filter)
-                    || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) {   
-                    this.arrayFilteredRecipes.push(recipe)
-                    console.log('check filter recipe array after push', this.arrayFilteredRecipes);
-                }
-                //console.log('Working working working !');
+        if (this.arrayActiveFilters.length !== 0) {
+            this.arrayActiveFilters.forEach(filter => {
+                this.arrayFilteredRecipes = []
+                this.arrayAllRecipes.forEach(recipe => {
+                    if (recipe.name.toLowerCase().includes(filter)
+                        || recipe.description.toLowerCase().includes(filter)
+                        || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) {   
+                        this.arrayFilteredRecipes.push(recipe)
+                    }
+                })
+                console.log('array activ filter from filter recipe', this.arrayActiveFilters); 
+                this.arrayAllRecipes = []
+                this.arrayAllRecipes = this.arrayFilteredRecipes
             })
-            console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
-            //console.log('Work in progress');
-            console.log('array activ filter', this.arrayActiveFilters); 
-            //this.arrayActiveFilters.shift()
-            this.arrayAllRecipes = []
-            this.arrayAllRecipes = this.arrayFilteredRecipes // fonctionne pour passer le tableau filtré
-            //this.arrayActiveFilters.filter(filter => filter !== this.historySearch)
-        })
-        // this.arrayAllRecipes = []
-        // this.arrayAllRecipes = this.arrayFilteredRecipes
-        console.log('new arrayAllrecipe', this.arrayAllRecipes);
-        //console.log('Oh my GOD ! We did it !');
-        console.log('array filtered recipe', this.arrayFilteredRecipes);
-        //console.log('activ filter', this.arrayActiveFilters);
-        this._displayRecipeCard(this.arrayFilteredRecipes)
-        this._setIngredientsFilterList(this.arrayFilteredRecipes);
-        this._setAppliancesFilterList(this.arrayFilteredRecipes);
-        this._setUstensilsFilterList(this.arrayFilteredRecipes);
-    };
+            this._displayRecipeCard()
+            this._setIngredientsFilterList();
+            this._setAppliancesFilterList();
+            this._setUstensilsFilterList();
+        } else {
+            this._initDisplay()
+            console.log('tom');
+        }
+    };    
 
     // _filterRecipes() {
     //     this.arrayFilteredRecipes = []
