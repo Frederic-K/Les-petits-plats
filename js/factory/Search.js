@@ -39,7 +39,7 @@ export default class Search {
         this.arrayFilteredRecipes = [];
         this.mainSearchInput = [];
         this.arrayMainSearchInput = [];
-        this.historySearch = [];
+        this.historySelectedTag = [];
         this.lastMainSearchInput = [];
 
         /// Mes function ///
@@ -411,11 +411,11 @@ export default class Search {
         })}
 
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        this.historySearch.push(this.filterName.toLowerCase())
+        this.historySelectedTag.push(this.filterName.toLowerCase())
         this._filterRecipes()
 
         console.log('array activ filter after selected tag', this.arrayActiveFilters);
-        console.log('history search after selected tag filter', this.historySearch);
+        console.log('history search after selected tag filter', this.historySelectedTag);
     };    
     
     /// Supprimer les filtres sélectionnés ///
@@ -435,10 +435,8 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-        this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
-        // console.log('history after delete a selected filter', this.historySearch);
+        this.historySelectedTag = this.historySelectedTag.filter(filter => filter !== this.selectedfilterItem)
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
-        // console.log('activ filter after delete a selected filter', this.arrayActiveFilters);
         this._filterRecipes()
     };
     
