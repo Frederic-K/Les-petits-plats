@@ -379,7 +379,7 @@ export default class Search {
     /// Filtre par tag ///
     /// Afficher les filtres sélectionnés ///
     _displaySelectedFilter(e) {
-        this.filterName = e.target.textContent;
+        this.filterName = e.target.textContent
         this.filterType = e.target.dataset.filtertype;
         this.selectedTagContainer = document.createElement("div");
         this.selectedFilterContent = `
@@ -522,35 +522,43 @@ export default class Search {
     
 
     _filterRecipes() {
-        console.log('A1 - launch test filter recipes');
-        console.log('A1 - array recipes', this.arrayRecipes);
+        // console.log('A1 - launch test filter recipes');
+        // console.log('A1 - array recipes', this.arrayRecipes);
+        this.arrayRecipes = this.arrayAllRecipes
         if (this.arrayActiveFilters.length > 0) {
-            console.log('A2 - array activ filter', this.arrayActiveFilters);
-            console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
+            // console.log('A2 - array activ filter', this.arrayActiveFilters);
+            // console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
             this.arrayActiveFilters.forEach(filter => {
-                console.log('A3 - launch test for each activ filter');
-                console.log('A3 - display filter', filter);
+                // console.log('A3 - launch test for each activ filter');
+                // console.log('A3 - display filter', filter);
                 this.arrayFilteredRecipes = []
-                console.log('A3 - array recipes', this.arrayRecipes);
+                // console.log('A3 - array recipes', this.arrayRecipes);
                 this.arrayRecipes.forEach(recipe => {
                     if (
                         recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
                         || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) 
-                        {   
+                        { 
+                        // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
                         this.arrayFilteredRecipes.push(recipe)
+                        // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
                     }
                 })
+                // console.log('A5 - array recipes', this.arrayRecipes);
+                // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
                 this.arrayRecipes = []
                 this.arrayRecipes = this.arrayFilteredRecipes
+                // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
+                // console.log('A5 - array recipes', this.arrayRecipes);
             })
             this._displayRecipeCard()
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
+            // console.log('A5 - array recipes', this.arrayRecipes);
         } else {
             this._initDisplay()
-            console.log('display all');
+            // console.log('display all');
         }
     };    
 

@@ -111,6 +111,7 @@
         padding: 9px;
         @include mobile-text-ellipsis;
         @media screen and (min-width: 768px) {
+            margin-bottom: 0;
             @include desktop-text-ellipsis;
         }
     }
