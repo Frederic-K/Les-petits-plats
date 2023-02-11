@@ -39,8 +39,7 @@ export default class Search {
         this.arrayFilteredRecipes = [];
         this.mainSearchInput = [];
         this.arrayMainSearchInput = [];
-        this.historySelectedTag = [];
-        this.lastMainSearchInput = [];
+        this.historySearch = [];
 
         /// Mes function ///
         this._initDisplay();
@@ -411,11 +410,11 @@ export default class Search {
         })}
 
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        this.historySelectedTag.push(this.filterName.toLowerCase())
+        this.historySearch.push(this.filterName.toLowerCase())
         this._filterRecipes()
 
         console.log('array activ filter after selected tag', this.arrayActiveFilters);
-        console.log('history search after selected tag filter', this.historySelectedTag);
+        console.log('history search after selected tag filter', this.historySearch);
     };    
     
     /// Supprimer les filtres sélectionnés ///
@@ -435,8 +434,9 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-        this.historySelectedTag = this.historySelectedTag.filter(filter => filter !== this.selectedfilterItem)
+        this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
+        console.log('00 - array activ filter', this.arrayActiveFilters);
         this._filterRecipes()
     };
     
@@ -460,18 +460,18 @@ export default class Search {
             this.arrayMainSearchInput.push(this.mainSearchInput)
             console.log('1 - array main search input', this.arrayMainSearchInput);
             console.log('1- launch test main search');
-            console.log('1 - last main search input', this.lastMainSearchInput);
+            console.log('1 - last main search input', this.historySearch);
             console.log('1 - main search input value', this.mainSearchInput);
-            if (this.arrayMainSearchInput.includes(this.lastMainSearchInput)) {
+            if (this.arrayMainSearchInput.includes(this.historySearch)) {
                 console.log("First Simon says : Don't move !");
            } else {
                 if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
                     console.log("Seconde Simon says : Don't move!");
                 } else {
-                    this.lastMainSearchInput.shift()
-                    console.log('2 - shift last main search input', this.lastMainSearchInput);
-                    this.lastMainSearchInput.push(this.mainSearchInput)
-                    console.log('2 - push last main seach input', this.lastMainSearchInput);
+                    this.historySearch.shift()
+                    console.log('2 - shift last main search input', this.historySearch);
+                    this.historySearch.push(this.mainSearchInput)
+                    console.log('2 - push last main seach input', this.historySearch);
                     console.log('2 - array activ filter',this.arrayActiveFilters);
                     this.arrayActiveFilters.push(this.mainSearchInput)
                     console.log('2 - after push array activ filter', this.arrayActiveFilters);
@@ -483,11 +483,11 @@ export default class Search {
             console.log('3 - array activ filter', this.arrayActiveFilters);
             console.log('3 - array activ filter length', this.arrayActiveFilters.length);
             if (this.arrayActiveFilters.length > 0) {
-                console.log('4 - last main saerch input', this.lastMainSearchInput);
-                this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.lastMainSearchInput)
+                console.log('4 - last main saerch input', this.historySearch);
+                this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
                 console.log('4 - array activ filter exclude last input', this.arrayActiveFilters);
-                this.lastMainSearchInput.shift()
-                console.log('4 - last input after blanck', this.lastMainSearchInput);
+                this.historySearch.shift()
+                console.log('4 - last input after blanck', this.historySearch);
                 this._filterRecipes()
             }
         } 
