@@ -335,6 +335,7 @@ export default class Search {
                 this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
                 this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
                 this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
+                this._removeDropdownFilter("ingredients")
                 this.ingredientFilterListItem.addEventListener("click", (e) => {
                     this._switchListFilter("ingredients", "hide")
                     this._displaySelectedFilter(e)
@@ -349,6 +350,7 @@ export default class Search {
                 this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
                 this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
                 this.appliancesFilterList.appendChild(this.applianceFilterListitem)
+                this._removeDropdownFilter("appliances")
                 this.applianceFilterListitem.addEventListener("click", (e) => {
                     this._switchListFilter("appliances", "hide")
                     this._displaySelectedFilter(e)
@@ -356,7 +358,6 @@ export default class Search {
             }
         } else if (data === this.arrayUstensils) {
             this.ustensilsFilterList.innerHTML = ""
-            //console.log('tntn', this.arrayUstensils);
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter")
@@ -364,6 +365,7 @@ export default class Search {
                 this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
                 this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
                 this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
+                this._removeDropdownFilter("ustensils")
                 this.ustensilFilterListItem.addEventListener("click", (e) => {
                     this._switchListFilter("ustensils", "hide")
                     this._displaySelectedFilter(e)
@@ -375,6 +377,7 @@ export default class Search {
     /// Filtre par tag ///
     /// Afficher les filtres sélectionnés ///
     _displaySelectedFilter(e) {
+        // console.log('01 - e.target', e.target);
         this.filterName = e.target.textContent
         this.filterType = e.target.dataset.filtertype;
         this.selectedTagContainer = document.createElement("div");
@@ -402,12 +405,60 @@ export default class Search {
         this.selectedFilterCloseBtns = document.querySelectorAll(".circleCrossBtn")
         for (this.filterCloseBtn of this.selectedFilterCloseBtns) {
             this.filterCloseBtn.addEventListener("click", (e) => {
+                this._switchListFilter("ingredients", "hide")
+                this._switchListFilter("appliances", "hide")
+                this._switchListFilter("ustensils", "hide")
                 this._deleteSelectedFilter(e)
         })}
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
         this.historySearch.push(this.filterName.toLowerCase())
         this._filterRecipes()
-    };    
+    }; 
+    
+    _removeDropdownFilter(list) {
+        // let activFilter = ""
+        //     if (list === "ingredients") {
+        //         for (activFilter of this.arrayActiveFilters) {
+        //             if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
+        //                 console.log('ingredients');
+        //                 this.ingredientFilterListItem.remove()
+        //             }
+        //         }
+        //     } else if (list === "appliances") {
+        //         for (activFilter of this.arrayActiveFilters) {
+        //             if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
+        //                 console.log('appliances');
+        //                 this.applianceFilterListitem.remove()
+        //             }
+        //         }
+        //     } else if (list === "ustensils") {
+        //         for (activFilter of this.arrayActiveFilters) {
+        //             if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
+        //                 console.log('ustensils');
+        //                 this.ustensilFilterListItem.remove()
+        //             }
+        //         }
+        //     }
+        
+        for (let activFilter of this.arrayActiveFilters) {
+            if (list === "ingredients") {
+                if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
+                    console.log('ingredients');
+                    this.ingredientFilterListItem.remove()
+                }
+            } else if (list === "appliances") {
+                if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
+                    console.log('appliances');
+                    this.applianceFilterListitem.remove()
+                }
+            } else if (list === "ustensils") {
+                if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
+                    console.log('ustensils');
+                    this.ustensilFilterListItem.remove()
+                }
+            }
+        }
+    }     
     
     /// Supprimer les filtres sélectionnés ///
     // _deleteSelectedFilter(e) {
