@@ -11,6 +11,9 @@ export default class Search {
         this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
         this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
 
+        this.advanceSearchBarFilters = document.querySelectorAll(".filter__header--input")
+        console.log('this.advanceSearchBarFilters', this.advanceSearchBarFilters);
+
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
         this.filterUstensils = document.getElementById("filterUstensils");
@@ -38,7 +41,7 @@ export default class Search {
         this.arrayAllUstensils = [];
         this.arrayFilteredRecipes = [];
         this.mainSearchInput = [];
-        this.arrayMainSearchInput = [];
+        this.arrayMainSearchInputs = [];
         this.historySearch = [];
 
         /// Mes function ///
@@ -47,14 +50,25 @@ export default class Search {
 
         //this._mainSearch();
 
-        this.processChanges = this._debounce(() => this._mainSearch());
+        this.processChangeMain = this._debounce(() => this._mainSearch());
+        this.processChangeAdvance = this._debounce(() => this._advanceSearch())
   
         /// Listener ///
         this.bindEvent();
     };
 
     bindEvent() {
-        this.mainSearchBarFilter.addEventListener("keyup", this.processChanges)
+        this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
+
+        // if (this.mainSearchBarFilter.length > 0) {
+        //     this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
+        // }
+
+        if (this.advanceSearchBarFilters.length > 0) {
+            for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
+                this.advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
+            }
+        }
 
         if (this.displayFilterMenuBtns.length > 0) {
             for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
@@ -83,21 +97,7 @@ export default class Search {
                     }
                 })
             }
-        } 
-        // if (this.displayFilterMenuBtns.length > 0) {
-        //     for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
-        //         this.displayFilterMenuBtn.addEventListener("click", (e) => {
-        //             this._displayDropdownFilterMenu(e)
-        //         })
-        //     }
-        // }
-        // if (this.hideFilterMenuBtns.length > 0) {
-        //     for (this.hideFilterMenuBtn of this.hideFilterMenuBtns) {
-        //         this.hideFilterMenuBtn.addEventListener("click", (e) => {
-        //             this._hideDropdownFilterMenu(e)
-        //         })
-        //     }
-        // }
+        }
     };
 
     // _initDisplay() {
@@ -127,7 +127,6 @@ export default class Search {
     }  
    
     _displayRecipeCard() {
-        // console.log('recipeCardData', this.arrayFilteredRecipes);
         let recipeCard = ""
         for (const recipe of this.arrayFilteredRecipes) {
             recipeCard += new RecipeCard(recipe).recipeCardContent
@@ -500,12 +499,12 @@ export default class Search {
         // console.log('0 - main search input', this.mainSearchInput);
 
         if (this.mainSearchInput.length >= 3) {
-            this.arrayMainSearchInput.push(this.mainSearchInput)
-            // console.log('1 - array main search input', this.arrayMainSearchInput);
+            this.arrayMainSearchInputs.push(this.mainSearchInput)
+            // console.log('1 - array main search input', this.arrayMainSearchInputs);
             // console.log('1- launch test main search');
             // console.log('1 - last main search input', this.historySearch);
             // console.log('1 - main search input value', this.mainSearchInput);
-            if (this.arrayMainSearchInput.includes(this.historySearch)) {
+            if (this.arrayMainSearchInputs.includes(this.historySearch)) {
                 console.log("First Simon says : Don't move !");
            } else {
                 if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
@@ -536,6 +535,39 @@ export default class Search {
         } 
     };
 
+    _advanceSearch() {
+        for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
+            if (this.advanceSearchBarFilter.value.length > 0) {
+                console.log('advance search filter value', this.advanceSearchBarFilter.value);
+                if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
+                    console.log('ingredients array filter', document.getElementsByClassName("itemFilter"));                    
+                } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
+
+                    this.itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
+                    console.log('this.itemAppliancesFilterNodeList', this.itemAppliancesFilterNodeList);
+
+                    for (let itemFilter of this.itemAppliancesFilterNodeList) {
+                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                            console.log('item', itemFilter);
+                            console.log('Say : Hourrrray !');
+                            itemFilter.classList.remove("hidden")
+                        } else {
+                            console.log('Bouh ! wrong question');
+                            itemFilter.classList.add("hidden")
+                        }
+                    }
+
+
+                    
+                    
+                } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
+                    console.log('Feeling like a fcking genius LOL nah im joking');
+                }
+            } else {
+                console.log('TODO : supp all .hidden class');
+            }
+        }
+    }
 
     /// Affichage des recettes filtrées ///
 
@@ -637,6 +669,6 @@ export default class Search {
 //     console.log('Saving data');
 //   }
   
-//   const processChanges = debounce(() => saveInput());
+//   const processChangeMain = debounce(() => saveInput());
 
-//   mainSearchBarFilter.addEventListener("keyup", processChanges)
+//   mainSearchBarFilter.addEventListener("keyup", processChangeMain)
