@@ -12,7 +12,6 @@ export default class Search {
         this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
 
         this.advanceSearchBarFilters = document.querySelectorAll(".filter__header--input");
-        console.log('this.advanceSearchBarFilters', this.advanceSearchBarFilters);
 
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
@@ -52,7 +51,8 @@ export default class Search {
         //this._mainSearch();
 
         this.processChangeMain = this._debounce(() => this._mainSearch());
-        this.processChangeAdvance = this._debounce(() => this._advanceSearch())
+        this.processChangeAdvance = this._debounce(() => this._advanceSearch());
+        
   
         /// Listener ///
         this.bindEvent();
@@ -288,6 +288,7 @@ export default class Search {
                     this.filterIngredients.classList.remove("active", "width-large");
                     this.filterIngredients.classList.add("width-small");
                     this.filterIngredients.setAttribute("aria-expand", "false");
+                    this.advanceSearchBarFilters[0].value = "";
                 }
                 break;
             case "appliances":
@@ -306,6 +307,7 @@ export default class Search {
                     this.filterAppliances.classList.remove("active", "width-large");
                     this.filterAppliances.classList.add("width-small")
                     this.filterAppliances.setAttribute("aria-expand", "false");
+                    this.advanceSearchBarFilters[1].value = "";
                 }
                 break;
             case "ustensils":
@@ -324,6 +326,7 @@ export default class Search {
                     this.filterUstensils.classList.remove("active", "width-large");
                     this.filterUstensils.classList.add("width-small")
                     this.filterUstensils.setAttribute("aria-expand", "false");
+                    this.advanceSearchBarFilters[2].value = "";
                 }
                 break;
         }
@@ -336,7 +339,7 @@ export default class Search {
             this.ingredientsFilterList.innerHTML = ""
             for (let ingredient of data) {
                 this.ingredientFilterListItem = document.createElement("li")
-                this.ingredientFilterListItem.classList.add("itemFilter")
+                this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
                 this.ingredientFilterListItem.setAttribute("tabindex", "0")
                 this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
                 this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
@@ -351,7 +354,7 @@ export default class Search {
             this.appliancesFilterList.innerHTML = ""
             for (let appliance of data) {
                 this.applianceFilterListitem = document.createElement("li")
-                this.applianceFilterListitem.classList.add("itemFilter")
+                this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
                 this.applianceFilterListitem.setAttribute("tabindex", "0")
                 this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
                 this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
@@ -366,7 +369,7 @@ export default class Search {
             this.ustensilsFilterList.innerHTML = ""
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
-                this.ustensilFilterListItem.classList.add("itemFilter")
+                this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
                 this.ustensilFilterListItem.setAttribute("tabindex", "0")
                 this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
                 this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
@@ -499,6 +502,13 @@ export default class Search {
         };
     };
     
+    _testMainSearch() {
+        this.arrayFilteredRecipes = []
+        this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
+
+
+    }
+
     /// Searchbar ///
     _mainSearch() {
         this.arrayFilteredRecipes = []
@@ -516,11 +526,13 @@ export default class Search {
            } else {
                 if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
                     console.log("Seconde Simon says : Don't move!");
+                // if (this.arrayActiveFilters.includes(this.historySearch)) {
+                //     console.log("Seconde Simon says : Don't move!");
                 } else {
                     this.historySearch.shift()
                     // console.log('2 - shift last main search input', this.historySearch);
                     this.historySearch.push(this.mainSearchInput)
-                    // console.log('2 - push last main seach input', this.historySearch);
+                    console.log('2 - history', this.historySearch);
                     // console.log('2 - array activ filter',this.arrayActiveFilters);
                     this.arrayActiveFilters.push(this.mainSearchInput)
                     // console.log('2 - after push array activ filter', this.arrayActiveFilters);
@@ -528,130 +540,86 @@ export default class Search {
                 }
            }
         } else {
-            // console.log('3 - launch test main search input = 0');
-            // console.log('3 - array activ filter', this.arrayActiveFilters);
-            // console.log('3 - array activ filter length', this.arrayActiveFilters.length);
-            if (this.arrayActiveFilters.length > 0) {
-                // console.log('4 - last main saerch input', this.historySearch);
-                this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
-                // console.log('4 - array activ filter exclude last input', this.arrayActiveFilters);
-                this.historySearch.shift()
-                // console.log('4 - last input after blanck', this.historySearch);
-                this._filterRecipes()
-            }
-        } 
+            console.log('3 - launch test main search input = 0');
+            console.log('3 - array activ filter', this.arrayActiveFilters);
+            console.log('3 - array activ filter length', this.arrayActiveFilters.length);
+            console.log('3 - history search', this.historySearch);
+            console.log('3 - array main search inputs', this.arrayMainSearchInputs);
+
+            // this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.arrayMainSearchInputs)
+            // console.log('4 - array activ filter', this.arrayActiveFilters);
+           
+
+        }
+            // if (this.arrayActiveFilters.length > 0) {
+            //     // console.log('4 - last main saerch input', this.historySearch);
+            //     this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+            //     console.log('4 - array activ filter exclude last input', this.arrayActiveFilters);
+            //     this.historySearch.shift()
+            //     console.log('4 - last input after blanck', this.historySearch);
+            //     this._filterRecipes()
+            // }
+         
     };
 
-    _advanceSearch() {
- 
+    _advanceSearch() { 
         for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
             if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
-                let itemIngredientsFilterNodeList = document.querySelectorAll(".itemFilter")
+                let itemIngredientsFilterNodeList = document.querySelectorAll(".ingredientFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
                     console.log('Simon says : go go ingredients');
-                    for (let itemFilter of itemIngredientsFilterNodeList) {
-                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                        itemFilter.classList.remove("hidden")
+                    for (let ingredientFilter of itemIngredientsFilterNodeList) {
+                        
+                        if (ingredientFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {;
+                            ingredientFilter.classList.remove("hidden")
                         } else {
-                        itemFilter.classList.add("hidden")
+                            ingredientFilter.classList.add("hidden")
                         } 
                     }
                 } else {
                     console.log('Simon says : no ingredients bouhou');
+                    for (let ingredientFilter of itemIngredientsFilterNodeList) {
+                        ingredientFilter.classList.remove("hidden")
+                    }
                 }
             } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
-                let itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
+                let itemAppliancesFilterNodeList = document.querySelectorAll(".applianceFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
                     console.log('Simon says : go go appliances');
-                    for (let itemFilter of itemAppliancesFilterNodeList) {
-                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                        itemFilter.classList.remove("hidden")
+                    for (let applianceFilter of itemAppliancesFilterNodeList) {
+                        if (applianceFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                            applianceFilter.classList.remove("hidden")
                         } else {
-                        itemFilter.classList.add("hidden")
+                            applianceFilter.classList.add("hidden")
                         } 
                     }
                 } else {
                     console.log('Simon says : no appliances bouhou');
+                    for (let applianceFilter of itemAppliancesFilterNodeList) {
+                        applianceFilter.classList.remove("hidden")
+                    }
                 }
             } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
-                let itemUstensilsFilterNodeList = document.querySelectorAll(".itemFilter")
+                let itemUstensilsFilterNodeList = document.querySelectorAll(".ustensilFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
                     console.log('Simon says : go go ustensils');
-                    for (let itemFilter of itemUstensilsFilterNodeList) {
-                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                        itemFilter.classList.remove("hidden")
+                    for (let ustensilFilter of itemUstensilsFilterNodeList) {
+                        if (ustensilFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                            ustensilFilter.classList.remove("hidden")
                         } else {
-                        itemFilter.classList.add("hidden")
+                            ustensilFilter.classList.add("hidden")
                         } 
                     }
                 } else {
                     console.log('Simon says : no ustensils bouhou');
+                    for (let ustensilFilter of itemUstensilsFilterNodeList) {
+                        ustensilFilter.classList.remove("hidden")
+                    }
                 }
             }
         }
 
     };
-
-    // _advanceSearch() {
-
-    //     for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-
-    //         if (this.advanceSearchBarFilter.value.length > 0) {
-
-    //             console.log('1 - advance search filter value', this.advanceSearchBarFilter.value.length);
-
-    //             if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
-
-    //                 this.itemIngredientsFilterNodeList = document.querySelectorAll(".itemFilter")
-    //                 console.log('this.itemIngredientsFilterNodeList', this.itemIngredientsFilterNodeList);
-  
-                    
-    //                 for (let itemFilter of this.itemIngredientsFilterNodeList) {
-    //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-    //                         itemFilter.classList.remove("hidden")
-    //                     } else {
-    //                         itemFilter.classList.add("hidden")
-    //                     }
-    //                 }
-                    
-    //             } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
-
-    //                 this.itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
-    //                 console.log('this.itemappliancesFilterNodeList', this.itemAppliancesFilterNodeList)
-
-    //                 for (let itemFilter of this.itemAppliancesFilterNodeList) {
-    //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-    //                         itemFilter.classList.remove("hidden")
-    //                     } else {
-    //                         itemFilter.classList.add("hidden")
-    //                     }
-    //                 }                    
-                    
-    //             } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
-
-    //                 this.itemUstensilsFilterNodeList = document.querySelectorAll(".itemFilter")
-    //                 console.log('this.itemUstensilsFilterNodeList', this.itemUstensilsFilterNodeList)
-
-    //                 for (let itemFilter of this.itemUstensilsFilterNodeList) {
-    //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-    //                         itemFilter.classList.remove("hidden")
-    //                     } else {
-    //                         itemFilter.classList.add("hidden")
-    //                     }
-    //                 }
-
-    //             } else {
-    //                 console.log("Simon says : dont't move");
-    //             }
-
-    //         } else if (this.advanceSearchBarFilter.value.length <= 0) {
-    //             console.log('2 - advance search filter value', this.advanceSearchBarFilter.value.length);
-    //             console.log('TODO : supp all .hidden class');
-    //         } else {
-    //             console.log("Harry says : don't move !");
-    //         }
-    //     }
-    // };
 
     /// Affichage des recettes filtrées ///
     _filterRecipes() {
