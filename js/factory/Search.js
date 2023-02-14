@@ -11,12 +11,8 @@ export default class Search {
         this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
         this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
 
-        this.advanceSearchBarFilters = document.querySelectorAll(".filter__header--input")
+        this.advanceSearchBarFilters = document.querySelectorAll(".filter__header--input");
         console.log('this.advanceSearchBarFilters', this.advanceSearchBarFilters);
-
-        
-        this.itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
-        console.log('this.itemAppliancesFilterNodeList', this.itemAppliancesFilterNodeList);
 
         this.filterIngredients = document.getElementById("filterIngredients");
         this.filterAppliances = document.getElementById("filterAppliances");
@@ -47,7 +43,7 @@ export default class Search {
         this.mainSearchInput = [];
         this.arrayMainSearchInputs = [];
         this.historySearch = [];
-        this.issetFocus = 0;
+        this.isSetFocus = 0;
 
         /// Mes function ///
         this._initDisplay();
@@ -69,15 +65,15 @@ export default class Search {
         //     this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
         // }
 
-        // if (this.advanceSearchBarFilters.length > 0) {
-        //     for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-        //         this.advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
-        //     }
-        // }
+        if (this.advanceSearchBarFilters.length > 0) {
+            for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
+                this.advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
+            }
+        }
 
         // if (this.advanceSearchBarFilters.length > 0) {
         //     for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-        //         this.advanceSearchBarFilter.addEventListener("onfocus", this.processChangeAdvance)
+        //         this.advanceSearchBarFilter.addEventListener("focus", this.processChangeAdvance)
         //     }
         // }
 
@@ -547,64 +543,57 @@ export default class Search {
     };
 
     _advanceSearch() {
+ 
         for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-
-            if (this.advanceSearchBarFilter.value.length > 0) {
-
-                console.log('1 - advance search filter value', this.advanceSearchBarFilter.value.length);
-
-                if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
-  
-                    
-                    for (let itemFilter of this.itemAppliancesFilterNodeList) {
+            if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
+                let itemIngredientsFilterNodeList = document.querySelectorAll(".itemFilter")
+                if (this.advanceSearchBarFilter.value.length > 0) {
+                    console.log('Simon says : go go ingredients');
+                    for (let itemFilter of itemIngredientsFilterNodeList) {
                         if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                            console.log('item', itemFilter);
-                            console.log('Say : Hourrrray !');
-                            itemFilter.classList.remove("hidden")
+                        itemFilter.classList.remove("hidden")
                         } else {
-                            console.log('Bouh ! wrong question');
-                            itemFilter.classList.add("hidden")
-                        }
+                        itemFilter.classList.add("hidden")
+                        } 
                     }
-                    
-                } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
-
-
-                    for (let itemFilter of this.itemAppliancesFilterNodeList) {
-                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                            itemFilter.classList.remove("hidden")
-                        } else {
-                            itemFilter.classList.add("hidden")
-                        }
-                    }
-
-
-                    
-                    
-                } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
-
-                    for (let itemFilter of this.itemAppliancesFilterNodeList) {
-                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-                            itemFilter.classList.remove("hidden")
-                        } else {
-                            itemFilter.classList.add("hidden")
-                        }
-                    }
-
                 } else {
-                    console.log("Simon says : dont't move");
+                    console.log('Simon says : no ingredients bouhou');
                 }
-
-            } else if (this.advanceSearchBarFilter.value.length <= 0) {
-                console.log('2 - advance search filter value', this.advanceSearchBarFilter.value.length);
-                console.log('TODO : supp all .hidden class');
-            } else {
-                console.log("Harry says : don't move !");
+            } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
+                let itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
+                if (this.advanceSearchBarFilter.value.length > 0) {
+                    console.log('Simon says : go go appliances');
+                    for (let itemFilter of itemAppliancesFilterNodeList) {
+                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                        itemFilter.classList.remove("hidden")
+                        } else {
+                        itemFilter.classList.add("hidden")
+                        } 
+                    }
+                } else {
+                    console.log('Simon says : no appliances bouhou');
+                }
+            } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
+                let itemUstensilsFilterNodeList = document.querySelectorAll(".itemFilter")
+                if (this.advanceSearchBarFilter.value.length > 0) {
+                    console.log('Simon says : go go ustensils');
+                    for (let itemFilter of itemUstensilsFilterNodeList) {
+                        if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                        itemFilter.classList.remove("hidden")
+                        } else {
+                        itemFilter.classList.add("hidden")
+                        } 
+                    }
+                } else {
+                    console.log('Simon says : no ustensils bouhou');
+                }
             }
         }
-    }
+
+    };
 
     // _advanceSearch() {
+
     //     for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
 
     //         if (this.advanceSearchBarFilter.value.length > 0) {
@@ -612,21 +601,23 @@ export default class Search {
     //             console.log('1 - advance search filter value', this.advanceSearchBarFilter.value.length);
 
     //             if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
+
+    //                 this.itemIngredientsFilterNodeList = document.querySelectorAll(".itemFilter")
+    //                 console.log('this.itemIngredientsFilterNodeList', this.itemIngredientsFilterNodeList);
   
                     
-    //                 for (let itemFilter of this.itemAppliancesFilterNodeList) {
+    //                 for (let itemFilter of this.itemIngredientsFilterNodeList) {
     //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
-    //                         console.log('item', itemFilter);
-    //                         console.log('Say : Hourrrray !');
     //                         itemFilter.classList.remove("hidden")
     //                     } else {
-    //                         console.log('Bouh ! wrong question');
     //                         itemFilter.classList.add("hidden")
     //                     }
     //                 }
                     
     //             } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
 
+    //                 this.itemAppliancesFilterNodeList = document.querySelectorAll(".itemFilter")
+    //                 console.log('this.itemappliancesFilterNodeList', this.itemAppliancesFilterNodeList)
 
     //                 for (let itemFilter of this.itemAppliancesFilterNodeList) {
     //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
@@ -634,14 +625,14 @@ export default class Search {
     //                     } else {
     //                         itemFilter.classList.add("hidden")
     //                     }
-    //                 }
-
-
-                    
+    //                 }                    
                     
     //             } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
 
-    //                 for (let itemFilter of this.itemAppliancesFilterNodeList) {
+    //                 this.itemUstensilsFilterNodeList = document.querySelectorAll(".itemFilter")
+    //                 console.log('this.itemUstensilsFilterNodeList', this.itemUstensilsFilterNodeList)
+
+    //                 for (let itemFilter of this.itemUstensilsFilterNodeList) {
     //                     if (itemFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
     //                         itemFilter.classList.remove("hidden")
     //                     } else {
@@ -660,35 +651,9 @@ export default class Search {
     //             console.log("Harry says : don't move !");
     //         }
     //     }
-    // }
+    // };
 
     /// Affichage des recettes filtrées ///
-
-    // _testFilterRecipe() {
-    //     let TESTarrayActiveFilters  =["limonade", "coco"]
-    //     if (TESTarrayActiveFilters.length > 0) {
-    //         TESTarrayActiveFilters.forEach(filter => {
-    //             this.arrayFilteredRecipes = []
-    //             this.arrayRecipes.forEach(recipe => {
-    //                 if (recipe.name.toLowerCase().includes(filter)
-    //                     || recipe.description.toLowerCase().includes(filter)
-    //                     || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) {   
-    //                     this.arrayFilteredRecipes.push(recipe)
-    //                 }
-    //             })
-    //             this.arrayRecipes = []
-    //             this.arrayRecipes = this.arrayFilteredRecipes
-    //         })
-    //         this._displayRecipeCard()
-    //         this._setIngredientsFilterList();
-    //         this._setAppliancesFilterList();
-    //         this._setUstensilsFilterList();
-    //     } else {
-    //         this._initDisplay()
-    //         console.log('tom');
-    // }}; 
-    
-
     _filterRecipes() {
         // console.log('A1 - launch test filter recipes');
         // console.log('A1 - array recipes', this.arrayRecipes);
@@ -729,24 +694,8 @@ export default class Search {
             // console.log('display all');
         }
     };    
-
-    // _filterRecipes() {
-    //     this.arrayFilteredRecipes = []
-    //     this.arrayRecipes.forEach(recipe => {
-    //         if (recipe.name.toLowerCase().includes(this.arrayActiveFilters)
-    //             || recipe.description.toLowerCase().includes(this.arrayActiveFilters)
-    //             || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(this.arrayActiveFilters))) {   
-    //             this.arrayFilteredRecipes.push(recipe)
-    //         }
-    //     })
-    //     this._displayRecipeCard()
-    //     this._setIngredientsFilterList(this.arrayFilteredRecipes);
-    //     this._setAppliancesFilterList(this.arrayFilteredRecipes);
-    //     this._setUstensilsFilterList(this.arrayFilteredRecipes);
-    //     //console.log('arrayFilteredRecipes', this.arrayFilteredRecipes);
-    // }
-
 };
+
  /// Js Debounce ///
 // const mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
 
