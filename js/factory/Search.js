@@ -41,7 +41,7 @@ export default class Search {
         this.arrayFilteredRecipes = [];
         this.mainSearchInput = [];
         this.arrayMainSearchInputs = [];
-        this.historySearch = [];
+        this.historySearch = "";
         this.isSetFocus = 0;
 
         /// Mes function ///
@@ -422,6 +422,7 @@ export default class Search {
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
         //this.historySearch.push(this.filterName.toLowerCase())
         //this._filterRecipes()
+        this.historySearch = "";
         this._testMainSearch()
     }; 
     
@@ -491,6 +492,7 @@ export default class Search {
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         console.log('00 - array activ filter', this.arrayActiveFilters);
         //this._filterRecipes()
+        this.historySearch = "";
         this._testMainSearch()
     };
     
@@ -507,41 +509,70 @@ export default class Search {
     _testMainSearch() {
         this.arrayFilteredRecipes = []
         this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
+
         console.log('0 - main input', this.mainSearchInput);
+        console.log('0 - array activ filter', this.arrayActiveFilters);
 
         if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length <= 0) {
+
             console.log('1 - launch test');
             console.log('1 - main input', this.mainSearchInput);
             console.log('1 - array activ filter', this.arrayActiveFilters);
+
             this._initDisplay()
+
         } else if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length > 0) {
+
             console.log('2 - launch test');
             console.log('2 - array activ filter', this.arrayActiveFilters);
             console.log('2 - history search', this.historySearch);
+            
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+
             console.log('22 - history search', this.historySearch);
             console.log('22 - array activ filter', this.arrayActiveFilters);
-            this.historySearch.shift()
+
+            // this.historySearch.shift()
+            this.historySearch = ""
+
             console.log('222 - history search', this.historySearch);
+
             this._filterRecipes()
+
         } else if (this.mainSearchInput.length >= 3) {
+
             console.log('3 - laucnh test');
-            if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
-                console.log('activ array already contains main search input !');
+            console.log('3 - history search', this.historySearch);
+            console.log('3 - activ filter', this.arrayActiveFilters);
+            // if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
+            //     console.log('activ array already contains main search input !');
+            // } 
+
+            if (this.historySearch.includes(this.mainSearchInput)) {
+                console.log('4 - same search history = main search input !');
             } else {
                 console.log('5 - launch test');
                 console.log('5 - main input', this.mainSearchInput);
                 console.log('5 - array activ filter', this.arrayActiveFilters);
                 console.log('5 - history search', this.historySearch);
-                this.historySearch.shift()
-                this.historySearch.push(this.mainSearchInput)
+
+                this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+
+                // this.historySearch.shift()
+                this.historySearch = ""
+
+                // this.historySearch.push(this.mainSearchInput)
+                this.historySearch = this.mainSearchInput
+
                 console.log('6 - history search', this.historySearch);
+
                 this.arrayActiveFilters.push(this.mainSearchInput)
+
                 console.log('6 - array activ filter', this.arrayActiveFilters);
+
                 this._filterRecipes()
             }
         }
-        console.log('7 - array filtered recipe', this.arrayFilteredRecipes); 
     }
 
     /// Searchbar ///
@@ -658,6 +689,7 @@ export default class Search {
 
     /// Affichage des recettes filtrées ///
     _filterRecipes() {
+        console.log('XX - array activ filter', this.arrayActiveFilters);
         // console.log('A1 - launch test filter recipes');
         // console.log('A1 - array recipes', this.arrayRecipes);
         this.arrayRecipes = this.arrayAllRecipes
@@ -670,20 +702,22 @@ export default class Search {
                 this.arrayFilteredRecipes = []
                 // console.log('A3 - array recipes', this.arrayRecipes);
                 this.arrayRecipes.forEach(recipe => {
-                    console.log('A4 - array recipe ustensils', recipe.ustensils);
-                    console.log('A4 - array recipe name', recipe.name);
-                    console.log('A4 - array recipe ingredients', recipe.ingredients);
-                    console.log('A4 - array reicpe description', recipe.description);
+                    // console.log('A4 - array recipe ustensils', recipe.ustensils);
+                    // console.log('A4 - array recipe name', recipe.name);
+                    // console.log('A4 - array recipe ingredients', recipe.ingredients);
+                    // console.log('A4 - array reicpe description', recipe.description);
+                    let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
+                    // console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
                     if (
                         recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
                         || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
-                        || recipe.ustensils.includes(filter))
+                        || recipeUstensils.includes(filter))
                         { 
                         // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
                         this.arrayFilteredRecipes.push(recipe)
                         // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
-                    }
+                    } 
                 })
                 // console.log('A5 - array recipes', this.arrayRecipes);
                 // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
@@ -696,7 +730,7 @@ export default class Search {
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
-            // console.log('A5 - array recipes', this.arrayRecipes);
+            console.log('XX - array recipes', this.arrayRecipes);
         } else {
             this._initDisplay()
             // console.log('display all');
