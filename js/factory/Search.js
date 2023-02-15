@@ -50,7 +50,7 @@ export default class Search {
 
         //this._mainSearch();
 
-        this.processChangeMain = this._debounce(() => this._mainSearch());
+        this.processChangeMain = this._debounce(() => this._testMainSearch());
         this.processChangeAdvance = this._debounce(() => this._advanceSearch());
         
   
@@ -420,8 +420,9 @@ export default class Search {
                 this._deleteSelectedFilter(e)
         })}
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        this.historySearch.push(this.filterName.toLowerCase())
-        this._filterRecipes()
+        //this.historySearch.push(this.filterName.toLowerCase())
+        //this._filterRecipes()
+        this._testMainSearch()
     }; 
     
     _removeDropdownFilter(list) {
@@ -486,10 +487,11 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-        this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
+        //this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
-        // console.log('00 - array activ filter', this.arrayActiveFilters);
-        this._filterRecipes()
+        console.log('00 - array activ filter', this.arrayActiveFilters);
+        //this._filterRecipes()
+        this._testMainSearch()
     };
     
     /// Main searchbar management ///
@@ -505,8 +507,41 @@ export default class Search {
     _testMainSearch() {
         this.arrayFilteredRecipes = []
         this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
+        console.log('0 - main input', this.mainSearchInput);
 
-
+        if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length <= 0) {
+            console.log('1 - launch test');
+            console.log('1 - main input', this.mainSearchInput);
+            console.log('1 - array activ filter', this.arrayActiveFilters);
+            this._initDisplay()
+        } else if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length > 0) {
+            console.log('2 - launch test');
+            console.log('2 - array activ filter', this.arrayActiveFilters);
+            console.log('2 - history search', this.historySearch);
+            this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+            console.log('22 - history search', this.historySearch);
+            console.log('22 - array activ filter', this.arrayActiveFilters);
+            this.historySearch.shift()
+            console.log('222 - history search', this.historySearch);
+            this._filterRecipes()
+        } else if (this.mainSearchInput.length >= 3) {
+            console.log('3 - laucnh test');
+            if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
+                console.log('activ array contains main search input !');
+            } else {
+                console.log('5 - launch test');
+                console.log('5 - main input', this.mainSearchInput);
+                console.log('5 - array activ filter', this.arrayActiveFilters);
+                console.log('5 - history search', this.historySearch);
+                this.historySearch.shift()
+                this.historySearch.push(this.mainSearchInput)
+                console.log('6 - history search', this.historySearch);
+                this.arrayActiveFilters.push(this.mainSearchInput)
+                console.log('6 - array activ filter', this.arrayActiveFilters);
+                this._filterRecipes()
+            }
+        }
+        console.log('7 - array filtered recipe', this.arrayFilteredRecipes); 
     }
 
     /// Searchbar ///
