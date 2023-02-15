@@ -527,7 +527,7 @@ export default class Search {
         } else if (this.mainSearchInput.length >= 3) {
             console.log('3 - laucnh test');
             if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
-                console.log('activ array contains main search input !');
+                console.log('activ array already contains main search input !');
             } else {
                 console.log('5 - launch test');
                 console.log('5 - main input', this.mainSearchInput);
@@ -670,10 +670,15 @@ export default class Search {
                 this.arrayFilteredRecipes = []
                 // console.log('A3 - array recipes', this.arrayRecipes);
                 this.arrayRecipes.forEach(recipe => {
+                    console.log('A4 - array recipe ustensils', recipe.ustensils);
+                    console.log('A4 - array recipe name', recipe.name);
+                    console.log('A4 - array recipe ingredients', recipe.ingredients);
+                    console.log('A4 - array reicpe description', recipe.description);
                     if (
                         recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
-                        || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))) 
+                        || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
+                        || recipe.ustensils.includes(filter))
                         { 
                         // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
                         this.arrayFilteredRecipes.push(recipe)
