@@ -50,7 +50,7 @@ export default class Search {
 
         //this._mainSearch();
 
-        this.processChangeMain = this._debounce(() => this._testMainSearch());
+        this.processChangeMain = this._debounce(() => this._mainSearch());
         this.processChangeAdvance = this._debounce(() => this._advanceSearch());
         
   
@@ -423,7 +423,7 @@ export default class Search {
         //this.historySearch.push(this.filterName.toLowerCase())
         //this._filterRecipes()
         // this.historySearch = "";
-        this._testMainSearch()
+        this._mainSearch()
     }; 
     
     _removeDropdownFilter(list) {
@@ -493,7 +493,7 @@ export default class Search {
         //console.log('00 - array activ filter', this.arrayActiveFilters);
         //this._filterRecipes()
         // this.historySearch = "";
-        this._testMainSearch()
+        this._mainSearch()
     };
     
     /// Main searchbar management ///
@@ -506,8 +506,8 @@ export default class Search {
         };
     };
     
-
-    _testMainSearch() {
+    /// Main searchbar ///
+    _mainSearch() {
         this.arrayFilteredRecipes = []
         this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
 
@@ -549,7 +549,18 @@ export default class Search {
 
                     this.historySearch = ""
 
-                    this._filterRecipes()
+                    if (this.arrayActiveFilters.length <= 0 ) {
+
+                        console.log('6-1 launch test');
+        
+                        this._initDisplay()
+        
+                    } else {
+        
+                        console.log('6-2 launch test');
+        
+                        this._filterRecipes()
+                    }
 
                 } else {
 
@@ -566,81 +577,9 @@ export default class Search {
             }
         }
 
-    }
-    _FIRSTtestMainSearch() {
-        this.arrayFilteredRecipes = []
-        this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
+    };
 
-        console.log('0 - main input', this.mainSearchInput);
-        console.log('0 - array activ filter', this.arrayActiveFilters);
-
-        if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length <= 0) {
-
-            console.log('1 - launch test');
-            console.log('1 - main input', this.mainSearchInput);
-            console.log('1 - array activ filter', this.arrayActiveFilters);
-
-            this._initDisplay()
-
-        } else if (this.mainSearchInput <= 0 && this.arrayActiveFilters.length > 0) {
-
-            console.log('2 - launch test');
-            console.log('2 - array activ filter', this.arrayActiveFilters);
-            console.log('2 - history search', this.historySearch);
-            
-            this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
-
-            console.log('22 - history search', this.historySearch);
-            console.log('22 - array activ filter', this.arrayActiveFilters);
-
-            // this.historySearch.shift()
-            this.historySearch = ""
-
-            console.log('222 - history search', this.historySearch);
-
-            this._filterRecipes()
-
-        } else if (this.mainSearchInput.length >= 3) {
-
-            console.log('3 - laucnh test');
-            console.log('3 - history search', this.historySearch);
-            console.log('3 - activ filter', this.arrayActiveFilters);
-            // if (this.arrayActiveFilters.includes(this.mainSearchInput)) {
-            //     console.log('activ array already contains main search input !');
-            // } 
-
-            if (this.historySearch.includes(this.mainSearchInput)) {
-                console.log('4 - same search history = main search input !');
-            } else {
-                console.log('5 - launch test');
-                console.log('5 - main input', this.mainSearchInput);
-                console.log('5 - array activ filter', this.arrayActiveFilters);
-                console.log('5 - history search', this.historySearch);
-
-                this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
-
-                // this.historySearch.shift()
-
-                this.historySearch = ""
-
-                // this.historySearch.push(this.mainSearchInput)
-
-                this.historySearch = this.mainSearchInput
-
-                console.log('6 - history search', this.historySearch);
-
-                console.log('6 - history search', this.historySearch);
-
-                this.arrayActiveFilters.push(this.mainSearchInput)
-
-                console.log('6 - array activ filter', this.arrayActiveFilters);
-
-                this._filterRecipes()
-            }
-        }
-    }
-
-    /// Searchbar ///
+    /// Tag filter searchbar ///
     
     _advanceSearch() { 
         for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
