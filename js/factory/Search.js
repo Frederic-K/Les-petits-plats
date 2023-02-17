@@ -41,15 +41,15 @@ export default class Search {
         this.arrayFilteredRecipes = [];
         this.mainSearchInput = [];
         this.arrayMainSearchInputs = [];
+        this.historyArrayActiveFilters = [];
         this.historySearch = "";
-        this.isSetFocus = 0;
 
-        /// Mes function ///
+
+        /// Function ///
+        /// Show all recipes when page loads ///
         this._initDisplay();
-        // this._testFilterRecipe();
 
-        //this._mainSearch();
-
+        /// Searchbar ///
         this.processChangeMain = this._debounce(() => this._mainSearch());
         this.processChangeAdvance = this._debounce(() => this._advanceSearch());
         
@@ -59,6 +59,8 @@ export default class Search {
     };
 
     bindEvent() {
+
+        /// Set listener for searchbar ///
         this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
 
         // if (this.mainSearchBarFilter.length > 0) {
@@ -71,12 +73,8 @@ export default class Search {
             }
         }
 
-        // if (this.advanceSearchBarFilters.length > 0) {
-        //     for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-        //         this.advanceSearchBarFilter.addEventListener("focus", this.processChangeAdvance)
-        //     }
-        // }
-
+        /// Set listener for dropdown tag menu ///
+        /// Show dropdown menu ///
         if (this.displayFilterMenuBtns.length > 0) {
             for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
                 this.displayFilterMenuBtn.addEventListener("click", (e) => {
@@ -91,6 +89,7 @@ export default class Search {
                 })
             }
         }
+        /// Hide dropdown menu ///
         if (this.hideFilterMenuBtns.length > 0) {
             for (this.hideFilterMenuBtn of this.hideFilterMenuBtns) {                
                 this.hideFilterMenuBtn.addEventListener("click", (e) => {
@@ -107,23 +106,7 @@ export default class Search {
         }
     };
 
-    // _initDisplay() {
-    //     console.log('titi', this.arrayFilteredRecipes);
-    //     if (this.arrayFilteredRecipes.length === 0){
-    //         //console.log('toto');
-    //         this.arrayFilteredRecipes = this.arrayRecipes
-    //         console.log('tutu', this.arrayFilteredRecipes);
-    //         this._displayRecipeCard()
-    //         this._setIngredientsFilterList();
-    //         this._setAppliancesFilterList();
-    //         this._setUstensilsFilterList();
-    //         // this.arrayFilteredRecipes = [];
-    //         // console.log('banana', this.arrayFilteredRecipes);
-    //     } else {
-    //         this.arrayFilteredRecipes = this.arrayFilteredRecipes
-    //     }
-    // }   
-    
+    /// Show all recipes ///
     _initDisplay() {
             this.arrayRecipes = this.arrayAllRecipes
             this.arrayFilteredRecipes = this.arrayAllRecipes
@@ -131,8 +114,10 @@ export default class Search {
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
-    }  
-   
+    };
+    
+    
+   /// Show recipe card ///
     _displayRecipeCard() {
         let recipeCard = ""
         for (const recipe of this.arrayFilteredRecipes) {
@@ -141,10 +126,13 @@ export default class Search {
         this.cardSection.innerHTML = recipeCard
     };
 
+    /// Capitalized first letter of a word ///
     _setUpperCaseFirstChar(string) {
         return string && string[0].toUpperCase() + string.slice(1);
     };
 
+
+    /// Generate ingredients, appliances nd ustensils array
     _setIngredientsFilterList() {
         this.arrayAllIngredients = []
         for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
@@ -176,100 +164,7 @@ export default class Search {
         this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
     };
 
-    // _initIngredientsFilterList() {
-    //     if (this.arrayFilteredRecipes.length === 0) {
-    //         this.arrayFilteredRecipes = this.arrayRecipes
-    //     }
-    //     for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-    //         this.ingredients = this.arrayFilteredRecipes[i].ingredients
-    //         this.ingredients.map(({ingredient}) => {
-    //             this.arrayAllIngredients.push(ingredient)
-    //         })
-    //     }
-    //     this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
-    // };
-
-    // _initAppliancesFilterList(data) {
-    //     for (let i=0; i < data.length; i++) {
-    //         this.appliance = data[i].appliance
-    //         this.arrayAllAppliances.push(this.appliance)
-    //     }
-    //     this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
-    // };
-
-    // _initUstensilsFilterList(data) {
-    //     for (let i=0; i < data.length; i++) {
-    //         for (let x=0; x < data[i].ustensils.length; x++) {
-    //             this.ustensil = data[i].ustensils[x]
-    //             this.arrayAllUstensils.push(this.ustensil)
-    //         }
-    //     }
-    //     this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
-    // };
-
-    // // Menu déroulant des filtres ///
-    // // Afficher les menus ///
-    // _displayDropdownFilterMenu(e) {
-    //     // console.log('e', e.target.parentElement.id);
-    //     // console.log('e-test-data-type', e.target.parentElement.dataset.filtertype);
-    //     this.displayMenuBtn = e.target.parentElement.id;
-    //     if (this.displayMenuBtn === "displayIndgredientsBtn") {
-    //         this.filterIngredients.classList.add("active", "width-large");
-    //         this.filterIngredients.classList.remove("width-small");
-    //         this.filterIngredients.setAttribute("aria-expanded", "true");
-    //         this.filterAppliances.classList.remove("active");
-    //         this.filterAppliances.classList.add("width-small");
-    //         this.filterAppliances.setAttribute("aria-expanded", "false");
-    //         this.filterUstensils.classList.remove("active");
-    //         this.filterUstensils.classList.add("width-small");
-    //         this.filterUstensils.setAttribute("aria-expanded", "false"); 
-    //         this._displayFilterList(this.arrayIngredients);
-
-    //     } else if (this.displayMenuBtn === "displayAppliancesBtn") {
-    //         this.filterAppliances.classList.add("active", "width-large");
-    //         this.filterAppliances.classList.remove("width-small");
-    //         this.filterAppliances.setAttribute("aria-expanded", "true");
-    //         this.filterIngredients.classList.remove("active");
-    //         this.filterIngredients.classList.add("width-small");
-    //         this.filterIngredients.setAttribute("aria-expanded", "false");
-    //         this.filterUstensils.classList.remove("active");
-    //         this.filterUstensils.classList.add("width-small");
-    //         this.filterUstensils.setAttribute("aria-expanded", "false");
-    //         this._displayFilterList(this.arrayAppliances);
-
-    //     } else if (this.displayMenuBtn === "displayUstensilsBtn") {
-    //         this.filterUstensils.classList.add("active", "width-large");
-    //         this.filterUstensils.classList.remove("width-small");
-    //         this.filterUstensils.setAttribute("aria-expanded", "true");
-    //         this.filterIngredients.classList.remove("active");
-    //         this.filterIngredients.classList.add("width-small");
-    //         this.filterIngredients.setAttribute("aria-expanded", "false");
-    //         this.filterAppliances.classList.remove("active");
-    //         this.filterAppliances.classList.add("width-small");
-    //         this.filterAppliances.setAttribute("aria-expanded", "false"); 
-    //         this._displayFilterList(this.arrayUstensils);
-    //     }
-    // };
-
-    // /// Cacher les menus ///
-    // _hideDropdownFilterMenu(e) {
-    //     this.hideMenuBtn = e.target.parentElement.id;
-    //     if (this.hideMenuBtn === "hideIngredientsBtn") {
-    //         this.filterIngredients.classList.remove("active", "width-large");
-    //         this.filterIngredients.classList.add("width-small");
-    //         this.filterIngredients.setAttribute("aria-expand", "false");
-
-    //     } else if (this.hideMenuBtn === "hideAppliancesBtn") {
-    //         this.filterAppliances.classList.remove("active", "width-large");
-    //         this.filterAppliances.classList.add("width-small")
-    //         this.filterAppliances.setAttribute("aria-expand", "false");
-
-    //     } else if (this.hideMenuBtn === "hideUstensilsBtn") {
-    //         this.filterUstensils.classList.remove("active", "width-large");
-    //         this.filterUstensils.classList.add("width-small")
-    //         this.filterUstensils.setAttribute("aria-expand", "false");
-    //     }
-    // };
+    /// Show or hide dropdownmenu ///
     _switchListFilter(filter, task) {
         switch (filter) {
             case "ingredients":
@@ -332,7 +227,7 @@ export default class Search {
         }
     };
 
-    /// Afficher la liste des filtres ///
+    /// Show dropdown menu content ///
     _displayFilterList(data) {
         if (data === this.arrayIngredients) {
             // console.log('toto', this.arrayIngredients);
@@ -383,8 +278,8 @@ export default class Search {
         }
     };
 
-    /// Filtre par tag ///
-    /// Afficher les filtres sélectionnés ///
+    /// Tag filter ///
+    /// Show selected tag filter ///
     _displaySelectedFilter(e) {
         // console.log('01 - e.target', e.target);
         this.filterName = e.target.textContent
@@ -420,37 +315,11 @@ export default class Search {
                 this._deleteSelectedFilter(e)
         })}
         this.arrayActiveFilters.push(this.filterName.toLowerCase())
-        //this.historySearch.push(this.filterName.toLowerCase())
-        //this._filterRecipes()
-        // this.historySearch = "";
         this._mainSearch()
     }; 
     
-    _removeDropdownFilter(list) {
-        // let activFilter = ""
-        //     if (list === "ingredients") {
-        //         for (activFilter of this.arrayActiveFilters) {
-        //             if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
-        //                 console.log('ingredients');
-        //                 this.ingredientFilterListItem.remove()
-        //             }
-        //         }
-        //     } else if (list === "appliances") {
-        //         for (activFilter of this.arrayActiveFilters) {
-        //             if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
-        //                 console.log('appliances');
-        //                 this.applianceFilterListitem.remove()
-        //             }
-        //         }
-        //     } else if (list === "ustensils") {
-        //         for (activFilter of this.arrayActiveFilters) {
-        //             if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
-        //                 console.log('ustensils');
-        //                 this.ustensilFilterListItem.remove()
-        //             }
-        //         }
-        //     }
-        
+    /// Remove selected tag filter from dopdown menu content///
+    _removeDropdownFilter(list) {        
         for (let activFilter of this.arrayActiveFilters) {
             if (list === "ingredients") {
                 if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
@@ -470,20 +339,8 @@ export default class Search {
             }
         }
     }     
-    
-    /// Supprimer les filtres sélectionnés ///
-    // _deleteSelectedFilter(e) {
-    //     //console.log('e.target', e.target);
-    //     this.selectedFilter = e.target.parentElement
-    //     console.log('this.selectedFilter', this.selectedTFilter);
-    //     this.indexSelectedfilter = this.arrayActiveFilters.indexOf(e.target.previousElementSibling.textContent.toLowerCase())
-    //     console.log('this.indexSelectedfilter', this.indexSelectedfilter);
-    //     this.arrayActiveFilters.splice(this.indexSelectedfilter, 1)
-    //     console.log('new arrayActiveFilters', this.arrayActiveFilters);
-    //     this.selectedFilter.remove("display-flex")
-    // }
 
-    /// Supprimer les filtres sélectionnés ///
+    /// Remove selected tag filter ///
     _deleteSelectedFilter(e) {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
@@ -513,65 +370,95 @@ export default class Search {
 
     if (this.mainSearchInput.length >= 3) {  
 
-        console.log('0 - launch test');
+        console.log('0 - launch test : si main search input > 3');
         
         if (this.historySearch.includes(this.mainSearchInput) || this.arrayActiveFilters.includes(this.mainSearchInput)) {
 
-            console.log('2 - launch test');
+            console.log('2 - launch test : si recherche principale > 3 && recherche principale présents dans historique recherche paincipale OU dans les filtres actifs');
+
+            // if (JSON.stringify(this.arrayActiveFilters) === JSON.stringify(this.historyArrayActiveFilters)) {
+
+            //     console.log('2-1 launch test');
+
+            //     console.log('2-1 array activ filter', this.arrayActiveFilters);
+            //     console.log('2-1 array history active filter', this.historyArrayActiveFilters);
+
+            //     console.log('Simon says : dont move');
+
+            // } else {
+
+            //     console.log('2-2 launch test');
+
+            //     this.historyArrayActiveFilters = this.arrayActiveFilters
+
+            //     this._filterRecipes()
+
+            // }
 
             this._filterRecipes()
 
         } else {
 
-            console.log('3 - launch test');
+            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principale OU des filtres actifs');
 
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
             this.historySearch = ""
             this.historySearch = this.mainSearchInput
             this.arrayActiveFilters.push(this.mainSearchInput)
 
+            // this.historyArrayActiveFilters = this.arrayActiveFilters
+
             this._filterRecipes()
         }
 
     } else if (this.mainSearchInput <= 0) {
 
-        console.log('4 - launch test');
+        console.log('4 - launch test : si recherche principale vide');
 
             if (this.arrayActiveFilters.length > 0) {
 
-                console.log('5 - launch test');
+                console.log('5 - launch test : si recherche prinsipale vide MAIS filtre actifs présents');
 
                 if (this.historySearch.length > 0) {
 
-                    console.log('6 - launch test');
+                    console.log('6 - launch test : si recherche prinsipale vide MAIS filtre actifs présents && si il y a un historique de recherche principale');
 
                     this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
 
                     this.historySearch = ""
 
-                    if (this.arrayActiveFilters.length <= 0 ) {
+                    if (this.arrayActiveFilters.length > 0 ) {
 
-                        console.log('6-1 launch test');
+                        console.log('6-1 launch test : si recherche prinsipale vide && si il y a un historique de recherche principale && toujours des filtres actifs après leurs filtrage avec historique de la recherche principale');
+
+                        // this.historyArrayActiveFilters = this.arrayActiveFilters
         
-                        this._initDisplay()
+                        this._filterRecipes()
+        
         
                     } else {
         
-                        console.log('6-2 launch test');
-        
-                        this._filterRecipes()
+                        console.log('6-2 launch test : si recherche prinsipale vide && si il y a un historique de recherche principale && plus de filtres actifs après leurs filtrage avec historique de la recherche principale');
+
+                        // this.historyArrayActiveFilters = []
+
+                        this._initDisplay()
                     }
 
                 } else {
 
-                    console.log('7 - launch test');
+                    console.log('7 - launch test : si recherche prinsipale vide MAIS filtre actifs présents && pas historique de recherche principale');
+
+                    // this.historyArrayActiveFilters = this.arrayActiveFilters
 
                     this._filterRecipes()
                 }
 
             } else {
 
-                console.log('8 - launch test');
+                console.log('8 - launch test : si recherche prinsipale vide && aucun filtre actif');
+                
+                // this.historyArrayActiveFilters = []
 
                 this._initDisplay()
             }
@@ -579,8 +466,7 @@ export default class Search {
 
     };
 
-    /// Tag filter searchbar ///
-    
+    /// Tag filter searchbar ///    
     _advanceSearch() { 
         for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
             if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
@@ -640,7 +526,7 @@ export default class Search {
 
     };
 
-    /// Affichage des recettes filtrées ///
+    /// Recipes filter ///
     _filterRecipes() {
         console.log('XX - array activ filter', this.arrayActiveFilters);
         // console.log('A1 - launch test filter recipes');
