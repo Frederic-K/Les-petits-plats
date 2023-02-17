@@ -68,42 +68,75 @@ export default class Search {
         // }
 
         if (this.advanceSearchBarFilters.length > 0) {
-            for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-                this.advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
+            for (let advanceSearchBarFilter of this.advanceSearchBarFilters) {
+                advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
             }
         }
 
         /// Set listener for dropdown tag menu ///
         /// Show dropdown menu ///
         if (this.displayFilterMenuBtns.length > 0) {
-            for (this.displayFilterMenuBtn of this.displayFilterMenuBtns) {
-                this.displayFilterMenuBtn.addEventListener("click", (e) => {
-                    this.displayMenuBtn = e.target.parentElement.id;
-                    if (this.displayMenuBtn === "displayIndgredientsBtn") {
+            for (let displayFilterMenuBtn of this.displayFilterMenuBtns) {
+                displayFilterMenuBtn.addEventListener("click", (e) => {
+                    let displayMenuBtn = e.target.parentElement.id;
+                    if (displayMenuBtn === "displayIndgredientsBtn") {
                         this._switchListFilter("ingredients", "display")
-                    } else if (this.displayMenuBtn === "displayAppliancesBtn") {
+                    } else if (displayMenuBtn === "displayAppliancesBtn") {
                         this._switchListFilter("appliances", "display")
-                    } else if (this.displayMenuBtn === "displayUstensilsBtn") {
+                    } else if (displayMenuBtn === "displayUstensilsBtn") {
                         this._switchListFilter("ustensils", "display")
                     }
                 })
             }
         }
+
+        /// Show dropdown menu ///
+        // if (this.displayFilterMenuBtns.length > 0) {
+        //     this.displayFilterMenuBtns.forEach(displayFilterMenuBtn => {
+        //         displayFilterMenuBtn.addEventListener("click", (e) => {
+        //             let displayMenuBtn = e.target.parentElement.id;
+        //             if (displayMenuBtn === "displayIndgredientsBtn") {
+        //                 this._switchListFilter("ingredients", "display")
+        //             } else if (displayMenuBtn === "displayAppliancesBtn") {
+        //                 this._switchListFilter("appliances", "display")
+        //             } else if (displayMenuBtn === "displayUstensilsBtn") {
+        //                 this._switchListFilter("ustensils", "display")
+        //             }
+        //         })
+        //     })
+        // }
+
         /// Hide dropdown menu ///
         if (this.hideFilterMenuBtns.length > 0) {
-            for (this.hideFilterMenuBtn of this.hideFilterMenuBtns) {                
-                this.hideFilterMenuBtn.addEventListener("click", (e) => {
-                    this.hideFilterMenuBtn = e.target.parentElement.id;
-                    if (this.hideFilterMenuBtn === "hideIngredientsBtn") {
+            for (let hideFilterMenuBtn of this.hideFilterMenuBtns) {                
+                hideFilterMenuBtn.addEventListener("click", (e) => {
+                    let hideFilterMenuBtn = e.target.parentElement.id;
+                    if (hideFilterMenuBtn === "hideIngredientsBtn") {
                         this._switchListFilter("ingredients", "hide")
-                    } else if (this.hideFilterMenuBtn === "hideAppliancesBtn") {
+                    } else if (hideFilterMenuBtn === "hideAppliancesBtn") {
                         this._switchListFilter("appliances", "hide")
-                    } else if (this.hideFilterMenuBtn === "hideUstensilsBtn") {
+                    } else if (hideFilterMenuBtn === "hideUstensilsBtn") {
                         this._switchListFilter("ustensils", "hide")
                     }
                 })
             }
         }
+
+        /// Hide dropdown menu ///
+        // if (this.hideFilterMenuBtns.length > 0) {
+        //     this.hideFilterMenuBtns.forEach(hideFilterMenuBtn => {                
+        //         hideFilterMenuBtn.addEventListener("click", (e) => {
+        //             hideFilterMenuBtn = e.target.parentElement.id;
+        //             if (hideFilterMenuBtn === "hideIngredientsBtn") {
+        //                 this._switchListFilter("ingredients", "hide")
+        //             } else if (hideFilterMenuBtn === "hideAppliancesBtn") {
+        //                 this._switchListFilter("appliances", "hide")
+        //             } else if (hideFilterMenuBtn === "hideUstensilsBtn") {
+        //                 this._switchListFilter("ustensils", "hide")
+        //             }
+        //         })
+        //     })
+        // }
     };
 
     /// Show all recipes ///
@@ -116,15 +149,24 @@ export default class Search {
             this._setUstensilsFilterList();
     };
     
-    
-   /// Show recipe card ///
+    /// Show recipe card ///
     _displayRecipeCard() {
         let recipeCard = ""
-        for (const recipe of this.arrayFilteredRecipes) {
+        for (let recipe of this.arrayFilteredRecipes) {
             recipeCard += new RecipeCard(recipe).recipeCardContent
         }
         this.cardSection.innerHTML = recipeCard
     };
+        
+   /// Show recipe card ///
+    // _displayRecipeCard() {
+    //     let recipeCard = ""
+    //     this.arrayFilteredRecipes.forEach(recipe => {
+    //         recipeCard += new RecipeCard(recipe).recipeCardContent
+    //     })
+    //     this.cardSection.innerHTML = recipeCard
+    // };
+
 
     /// Capitalized first letter of a word ///
     _setUpperCaseFirstChar(string) {
@@ -277,6 +319,56 @@ export default class Search {
         }
     };
 
+    /// Show dropdown menu content ///
+    // _displayFilterList(data) {
+    //     if (data === this.arrayIngredients) {
+    //         this.ingredientsFilterList.innerHTML = ""
+    //         data.forEach(ingredient => {
+    //             this.ingredientFilterListItem = document.createElement("li")
+    //             this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
+    //             this.ingredientFilterListItem.setAttribute("tabindex", "0")
+    //             this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
+    //             this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
+    //             this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
+    //             this._removeDropdownFilter("ingredients")
+    //             this.ingredientFilterListItem.addEventListener("click", (e) => {
+    //                 this._switchListFilter("ingredients", "hide")
+    //                 this._displaySelectedFilter(e)
+    //             })
+    //         })
+    //     } else if (data === this.arrayAppliances) {
+    //         this.appliancesFilterList.innerHTML = ""
+    //         data.forEach(appliance => {
+    //             this.applianceFilterListitem = document.createElement("li")
+    //             this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
+    //             this.applianceFilterListitem.setAttribute("tabindex", "0")
+    //             this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
+    //             this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
+    //             this.appliancesFilterList.appendChild(this.applianceFilterListitem)
+    //             this._removeDropdownFilter("appliances")
+    //             this.applianceFilterListitem.addEventListener("click", (e) => {
+    //                 this._switchListFilter("appliances", "hide")
+    //                 this._displaySelectedFilter(e)
+    //             })
+    //         })
+    //     } else if (data === this.arrayUstensils) {
+    //         this.ustensilsFilterList.innerHTML = ""
+    //         data.forEach(ustensil => {
+    //             this.ustensilFilterListItem = document.createElement("li")
+    //             this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
+    //             this.ustensilFilterListItem.setAttribute("tabindex", "0")
+    //             this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
+    //             this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
+    //             this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
+    //             this._removeDropdownFilter("ustensils")
+    //             this.ustensilFilterListItem.addEventListener("click", (e) => {
+    //                 this._switchListFilter("ustensils", "hide")
+    //                 this._displaySelectedFilter(e)
+    //             })
+    //         })
+    //     }
+    // };
+
     /// Tag filter ///
     /// Show selected tag filter ///
     _displaySelectedFilter(e) {
@@ -336,7 +428,28 @@ export default class Search {
                 }
             }
         }
-    }     
+    };
+    
+    // _removeDropdownFilter(list) {        
+    //     this.arrayActiveFilters.forEach(activFilter => {
+    //         if (list === "ingredients") {
+    //             if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
+    //                 console.log('ingredients');
+    //                 this.ingredientFilterListItem.remove()
+    //             }
+    //         } else if (list === "appliances") {
+    //             if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
+    //                 console.log('appliances');
+    //                 this.applianceFilterListitem.remove()
+    //             }
+    //         } else if (list === "ustensils") {
+    //             if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
+    //                 console.log('ustensils');
+    //                 this.ustensilFilterListItem.remove()
+    //             }
+    //         }
+    //     })
+    // };  
 
     /// Remove selected tag filter ///
     _deleteSelectedFilter(e) {
@@ -344,15 +457,15 @@ export default class Search {
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
 
-        this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
+        // this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
 
-        // let i = this.arrayActiveFilters.length
-        // while (i--) {
-        //     if (this.arrayActiveFilters[i] === this.selectedfilterItem) {
-        //         console.log('1 - launch test : while loop');
-        //         this.arrayActiveFilters.splice(i, 1)
-        //     }
-        // }
+        let i = this.arrayActiveFilters.length
+        while (i--) {
+            if (this.arrayActiveFilters[i] === this.selectedfilterItem) {
+                console.log('1 - launch test : while loop');
+                this.arrayActiveFilters.splice(i, 1)
+            }
+        }
 
         this._mainSearch()
     };
@@ -403,7 +516,7 @@ export default class Search {
 
         } else {
 
-            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principale OU des filtres actifs');
+            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principaleOU des filtres actifs (> supp ancienne saisie de la recherche principale des filtres actifs)');
 
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
 
@@ -489,60 +602,107 @@ export default class Search {
 
     /// Tag filter searchbar ///    
     _advanceSearch() { 
-        for (this.advanceSearchBarFilter of this.advanceSearchBarFilters) {
-            if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
+        for (let advanceSearchBarFilter of this.advanceSearchBarFilters) {
+            if (advanceSearchBarFilter.dataset.filtertype === "ingredients") {
                 let itemIngredientsFilterNodeList = document.querySelectorAll(".ingredientFilter")
-                if (this.advanceSearchBarFilter.value.length > 0) {
-                    for (let ingredientFilter of itemIngredientsFilterNodeList) {
-                        
-                        if (ingredientFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {;
+                if (advanceSearchBarFilter.value.length > 0) {
+                    for (let ingredientFilter of itemIngredientsFilterNodeList) {                        
+                        if (ingredientFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {;
                             ingredientFilter.classList.remove("hidden")
                         } else {
                             ingredientFilter.classList.add("hidden")
                         } 
                     }
                 } else {
-                    console.log('Simon says : no ingredients bouhou');
                     for (let ingredientFilter of itemIngredientsFilterNodeList) {
                         ingredientFilter.classList.remove("hidden")
                     }
                 }
-            } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
+            } else if (advanceSearchBarFilter.dataset.filtertype === "appliances") {
                 let itemAppliancesFilterNodeList = document.querySelectorAll(".applianceFilter")
-                if (this.advanceSearchBarFilter.value.length > 0) {
+                if (advanceSearchBarFilter.value.length > 0) {
                     for (let applianceFilter of itemAppliancesFilterNodeList) {
-                        if (applianceFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                        if (applianceFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {
                             applianceFilter.classList.remove("hidden")
                         } else {
                             applianceFilter.classList.add("hidden")
                         } 
                     }
                 } else {
-                    console.log('Simon says : no appliances bouhou');
                     for (let applianceFilter of itemAppliancesFilterNodeList) {
                         applianceFilter.classList.remove("hidden")
                     }
                 }
-            } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
+            } else if (advanceSearchBarFilter.dataset.filtertype === "ustensils") {
                 let itemUstensilsFilterNodeList = document.querySelectorAll(".ustensilFilter")
-                if (this.advanceSearchBarFilter.value.length > 0) {
+                if (advanceSearchBarFilter.value.length > 0) {
                     for (let ustensilFilter of itemUstensilsFilterNodeList) {
-                        if (ustensilFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
+                        if (ustensilFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {
                             ustensilFilter.classList.remove("hidden")
                         } else {
                             ustensilFilter.classList.add("hidden")
                         } 
                     }
                 } else {
-                    console.log('Simon says : no ustensils bouhou');
                     for (let ustensilFilter of itemUstensilsFilterNodeList) {
                         ustensilFilter.classList.remove("hidden")
                     }
                 }
             }
         }
-
     };
+
+    /// Tag filter searchbar ///  
+    // _advanceSearch() { 
+    //     this.advanceSearchBarFilters.forEach(advanceSearchBarFilter => {
+    //         if (advanceSearchBarFilter.dataset.filtertype === "ingredients") {
+    //             let itemIngredientsFilterNodeList = document.querySelectorAll(".ingredientFilter")
+    //             if (advanceSearchBarFilter.value.length > 0) {
+    //                 itemIngredientsFilterNodeList.forEach(ingredientFilter => {                        
+    //                     if (ingredientFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {;
+    //                         ingredientFilter.classList.remove("hidden")
+    //                     } else {
+    //                         ingredientFilter.classList.add("hidden")
+    //                     } 
+    //                 })
+    //             } else {
+    //                 itemIngredientsFilterNodeList.forEach(ingredientFilter => {
+    //                     ingredientFilter.classList.remove("hidden")
+    //                 })
+    //             }
+    //         } else if (advanceSearchBarFilter.dataset.filtertype === "appliances") {
+    //             let itemAppliancesFilterNodeList = document.querySelectorAll(".applianceFilter")
+    //             if (advanceSearchBarFilter.value.length > 0) {
+    //                 itemAppliancesFilterNodeList.forEach(applianceFilter => {
+    //                     if (applianceFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {
+    //                         applianceFilter.classList.remove("hidden")
+    //                     } else {
+    //                         applianceFilter.classList.add("hidden")
+    //                     } 
+    //                 })
+    //             } else {
+    //                 itemAppliancesFilterNodeList.forEach(applianceFilter => {
+    //                     applianceFilter.classList.remove("hidden")
+    //                 })
+    //             }
+    //         } else if (advanceSearchBarFilter.dataset.filtertype === "ustensils") {
+    //             let itemUstensilsFilterNodeList = document.querySelectorAll(".ustensilFilter")
+    //             if (advanceSearchBarFilter.value.length > 0) {
+    //                 itemUstensilsFilterNodeList.forEach(ustensilFilter => {
+    //                     if (ustensilFilter.innerHTML.toLowerCase().includes(advanceSearchBarFilter.value)) {
+    //                         ustensilFilter.classList.remove("hidden")
+    //                     } else {
+    //                         ustensilFilter.classList.add("hidden")
+    //                     } 
+    //                 })
+    //             } else {
+    //                 itemUstensilsFilterNodeList.forEach(ustensilFilter => {
+    //                     ustensilFilter.classList.remove("hidden")
+    //                 })
+    //             }
+    //         }
+    //     })
+    // };
 
     /// Recipes filter ///
     _filterRecipes() {
@@ -553,12 +713,12 @@ export default class Search {
         if (this.arrayActiveFilters.length > 0) {
             // console.log('A2 - array activ filter', this.arrayActiveFilters);
             // console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
-            this.arrayActiveFilters.forEach(filter => {
+            for (let filter of this.arrayActiveFilters) {
                 // console.log('A3 - launch test for each activ filter');
                 // console.log('A3 - display filter', filter);
                 this.arrayFilteredRecipes = []
                 // console.log('A3 - array recipes', this.arrayRecipes);
-                this.arrayRecipes.forEach(recipe => {
+                for (let recipe of this.arrayRecipes) {
                     // console.log('A4 - array recipe ustensils', recipe.ustensils);
                     // console.log('A4 - array recipe name', recipe.name);
                     // console.log('A4 - array recipe ingredients', recipe.ingredients);
@@ -575,14 +735,14 @@ export default class Search {
                         this.arrayFilteredRecipes.push(recipe)
                         // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
                     } 
-                })
+                }
                 // console.log('A5 - array recipes', this.arrayRecipes);
                 // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
                 this.arrayRecipes = []
                 this.arrayRecipes = this.arrayFilteredRecipes
                 // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
                 // console.log('A5 - array recipes', this.arrayRecipes);
-            })
+            }
             this._displayRecipeCard()
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
@@ -591,7 +751,56 @@ export default class Search {
         } else {
             this._initDisplay()
         }
-    };    
+    };   
+
+    /// Recipes filter ///
+    // _filterRecipes() {
+    //     console.log('XX - array activ filter', this.arrayActiveFilters);
+    //     // console.log('A1 - launch test filter recipes');
+    //     // console.log('A1 - array recipes', this.arrayRecipes);
+    //     this.arrayRecipes = this.arrayAllRecipes
+    //     if (this.arrayActiveFilters.length > 0) {
+    //         // console.log('A2 - array activ filter', this.arrayActiveFilters);
+    //         // console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
+    //         this.arrayActiveFilters.forEach(filter => {
+    //             // console.log('A3 - launch test for each activ filter');
+    //             // console.log('A3 - display filter', filter);
+    //             this.arrayFilteredRecipes = []
+    //             // console.log('A3 - array recipes', this.arrayRecipes);
+    //             this.arrayRecipes.forEach(recipe => {
+    //                 // console.log('A4 - array recipe ustensils', recipe.ustensils);
+    //                 // console.log('A4 - array recipe name', recipe.name);
+    //                 // console.log('A4 - array recipe ingredients', recipe.ingredients);
+    //                 // console.log('A4 - array reicpe description', recipe.description);
+    //                 let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
+    //                 // console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
+    //                 if (
+    //                     recipe.name.toLowerCase().includes(filter)
+    //                     || recipe.description.toLowerCase().includes(filter)
+    //                     || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
+    //                     || recipeUstensils.includes(filter))
+    //                     { 
+    //                     // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
+    //                     this.arrayFilteredRecipes.push(recipe)
+    //                     // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
+    //                 } 
+    //             })
+    //             // console.log('A5 - array recipes', this.arrayRecipes);
+    //             // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
+    //             this.arrayRecipes = []
+    //             this.arrayRecipes = this.arrayFilteredRecipes
+    //             // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
+    //             // console.log('A5 - array recipes', this.arrayRecipes);
+    //         })
+    //         this._displayRecipeCard()
+    //         this._setIngredientsFilterList();
+    //         this._setAppliancesFilterList();
+    //         this._setUstensilsFilterList();
+    //         console.log('XX - array recipes', this.arrayRecipes);
+    //     } else {
+    //         this._initDisplay()
+    //     }
+    // };    
 };
 
  /// Js Debounce ///
