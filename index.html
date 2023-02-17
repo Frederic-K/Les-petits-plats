@@ -29,10 +29,10 @@
             <input type="text" role="textbox" class="main__searchbar--input" aria-label="Champ de recherche de recettes" tabindex="0" placeholder="Rechercher une recette">
             <span class="main__searchbar--icon fa-solid fa-magnifying-glass" aria-hidden="true"></span>
         </section>
-<!--Message d'erreur : aucune recette trouvée-->
+<!-- Message d'erreur : aucune recette trouvée
         <section class="search__message hidden">
             <h2 class="search__message--recipeNotFound" aria-label="Message de cherche infructueuse">Aucune recette trouvée</h2>
-        </section>
+        </section> -->
 <!-- Zone de stockage des tags sélectiés -->
         <section class="tag__parking">
         </section> 
@@ -43,7 +43,7 @@
                 <div class="tag__filter--listbox filter__bckground--blue width-small" id="filterIngredients" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Ingredients</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--blue" placeholder="Rechercher" data-filtertype="ingredients">
+                        <input type="text" role="textbox" class="filter__header--input filter__bckground--blue" placeholder="Rechercher" data-filtertype="ingredients" tabindex="0">
                         <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
                             <div class="filter__header--chevronDown" id="displayIndgredientsBtn" data-filtertype="displayIndgredientsBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
@@ -60,7 +60,7 @@
                 <div class="tag__filter--listbox filter__bckground--green width-small" id="filterAppliances" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Appareils</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--green" placeholder="Rechercher" data-filtertype="appliances">
+                        <input type="text" role="textbox" class="filter__header--input filter__bckground--green" placeholder="Rechercher" data-filtertype="appliances" tabindex="0">
                         <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
                             <div class="filter__header--chevronDown" id="displayAppliancesBtn" data-filtertype="displayAppliancesBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
@@ -77,7 +77,7 @@
                 <div class="tag__filter--listbox filter__bckground--red width-small" id="filterUstensils" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Ustenciles</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--red" placeholder="Rechercher" data-filtertype="ustensils">
+                        <input type="text" role="textbox" class="filter__header--input filter__bckground--red" placeholder="Rechercher" data-filtertype="ustensils" tabindex="0">
                         <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
                             <div class="filter__header--chevronDown"  id="displayUstensilsBtn" data-filtertype="displayUstensilsBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
@@ -93,56 +93,6 @@
         </section>
 <!-- Zone d'affichage des recettes-->  
         <section class="recipes__section">
-            <!-- <article class="recipe__card" tabindex="0" aria-label="Recette de [...]">
-                <div class="recipe__card--imgContainer">
-                    <img src="https://picsum.photos/id/292/200/300" alt="Photo de la rectte" class="recipe__card--img" aria-label="Photo de la rectte">
-                </div>
-                <div class="recipe__card--description">
-                    <div class="recipe__card--header">
-                        <h2 class="recipe__card--title">Poisson Cru à la tahitienne</h2>
-                        <div class="recipe__card--time">
-                            <span class="recipe__card--timeIcon fa-regular fa-clock" aria-label="Icone temps de cuisson"></span>
-                            <span class="recipe__card--cookingTime">60 min</span>
-                        </div>
-                    </div>
-                    <div class="recipe__card--explanation">
-                        <p class="recipe__card--ingredients">
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                        </p>
-                        <p class="recipe__card--cookingDescription">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2 heures. (Si possible faites-le le soir pour le lendemain. Après avoir laissé mariner le poisson, coupez le concombre en fines rondelles sans la peau et les tomates en prenant soin de retirer les pépins. Rayer la carotte. Ajouter les légumes au poissons avec le citron cette fois ci dans un Saladier. Ajouter le lait de coco. Pour ajouter un peu plus de saveur vous pouvez ajouter 1 à 2 cuillères à soupe de Crème de coco</p>
-                    </div>
-                </div>
-            </article>
-            <article class="recipe__card" tabindex="0" aria-label="Recette de [...]">
-                <div class="recipe__card--imgContainer">
-                    <img src="https://picsum.photos/200" alt="Photo de la rectte" class="recipe__card--img" aria-label="Photo de la rectte">
-                </div>
-                <div class="recipe__card--description">
-                    <div class="recipe__card--header">
-                        <h2 class="recipe__card--title">Poisson Cru à la tahitienne</h2>
-                        <div class="recipe__card--time">
-                            <span class="recipe__card--timeIcon fa-regular fa-clock" aria-label="Icone temps de cuisson"></span>
-                            <span class="recipe__card--cookingTime">60 min</span>
-                        </div>
-                    </div>
-                    <div class="recipe__card--explanation">
-                        <p class="recipe__card--ingredients">
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                            <span class="recipe__card--ingredientX">Thon Rouge (ou blanc) :</span>
-                        </p>
-                        <p class="recipe__card--cookingDescription">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2 heures. (Si possible faites-le le soir pour le lendemain. Après avoir laissé mariner le poisson, coupez le concombre en fines rondelles sans la peau et les tomates en prenant soin de retirer les pépins. Rayer la carotte. Ajouter les légumes au poissons avec le citron cette fois ci dans un Saladier. Ajouter le lait de coco. Pour ajouter un peu plus de saveur vous pouvez ajouter 1 à 2 cuillères à soupe de Crème de coco</p>
-                    </div>
-                </div>
-            </article> -->
         </section>
     </main>
     <script src="/js/api/getData.js"></script>

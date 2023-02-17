@@ -493,7 +493,6 @@ export default class Search {
             if (this.advanceSearchBarFilter.dataset.filtertype === "ingredients") {
                 let itemIngredientsFilterNodeList = document.querySelectorAll(".ingredientFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
-                    console.log('Simon says : go go ingredients');
                     for (let ingredientFilter of itemIngredientsFilterNodeList) {
                         
                         if (ingredientFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {;
@@ -511,7 +510,6 @@ export default class Search {
             } else if (this.advanceSearchBarFilter.dataset.filtertype === "appliances") {
                 let itemAppliancesFilterNodeList = document.querySelectorAll(".applianceFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
-                    console.log('Simon says : go go appliances');
                     for (let applianceFilter of itemAppliancesFilterNodeList) {
                         if (applianceFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
                             applianceFilter.classList.remove("hidden")
@@ -528,7 +526,6 @@ export default class Search {
             } else if (this.advanceSearchBarFilter.dataset.filtertype === "ustensils") {
                 let itemUstensilsFilterNodeList = document.querySelectorAll(".ustensilFilter")
                 if (this.advanceSearchBarFilter.value.length > 0) {
-                    console.log('Simon says : go go ustensils');
                     for (let ustensilFilter of itemUstensilsFilterNodeList) {
                         if (ustensilFilter.innerHTML.toLowerCase().includes(this.advanceSearchBarFilter.value)) {
                             ustensilFilter.classList.remove("hidden")
