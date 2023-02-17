@@ -230,7 +230,6 @@ export default class Search {
     /// Show dropdown menu content ///
     _displayFilterList(data) {
         if (data === this.arrayIngredients) {
-            // console.log('toto', this.arrayIngredients);
             this.ingredientsFilterList.innerHTML = ""
             for (let ingredient of data) {
                 this.ingredientFilterListItem = document.createElement("li")
@@ -281,7 +280,6 @@ export default class Search {
     /// Tag filter ///
     /// Show selected tag filter ///
     _displaySelectedFilter(e) {
-        // console.log('01 - e.target', e.target);
         this.filterName = e.target.textContent
         this.filterType = e.target.dataset.filtertype;
         this.selectedTagContainer = document.createElement("div");
@@ -345,11 +343,17 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-        //this.historySearch = this.historySearch.filter(filter => filter !== this.selectedfilterItem)
+
         this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
-        //console.log('00 - array activ filter', this.arrayActiveFilters);
-        //this._filterRecipes()
-        // this.historySearch = "";
+
+        // let i = this.arrayActiveFilters.length
+        // while (i--) {
+        //     if (this.arrayActiveFilters[i] === this.selectedfilterItem) {
+        //         console.log('1 - launch test : while loop');
+        //         this.arrayActiveFilters.splice(i, 1)
+        //     }
+        // }
+
         this._mainSearch()
     };
     
@@ -402,6 +406,15 @@ export default class Search {
             console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principale OU des filtres actifs');
 
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+
+            // let i = this.arrayActiveFilters.length
+            // while (i--) {
+            //     if (this.arrayActiveFilters[i] === this.historySearch) {
+            //         console.log('3A - launch test : while loop');
+            //         this.arrayActiveFilters.splice(i, 1)
+            //     }
+            // }
+
             this.historySearch = ""
             this.historySearch = this.mainSearchInput
             this.arrayActiveFilters.push(this.mainSearchInput)
@@ -424,6 +437,14 @@ export default class Search {
                     console.log('6 - launch test : si recherche prinsipale vide MAIS filtre actifs présents && si il y a un historique de recherche principale');
 
                     this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
+
+                    // let i = this.arrayActiveFilters.length
+                    // while (i--) {
+                    //     if (this.arrayActiveFilters[i] === this.historySearch) {
+                    //         console.log('6A - launch test : while loop');
+                    //         this.arrayActiveFilters.splice(i, 1)
+                    //     }
+                    // }
 
                     this.historySearch = ""
 
@@ -572,7 +593,6 @@ export default class Search {
             console.log('XX - array recipes', this.arrayRecipes);
         } else {
             this._initDisplay()
-            // console.log('display all');
         }
     };    
 };
