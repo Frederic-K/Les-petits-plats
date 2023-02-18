@@ -256,18 +256,14 @@ export default class Search {
                 if (task === "display") {
                     this.filterIngredients.classList.add("active", "width-large");
                     this.filterIngredients.classList.remove("width-small");
-                    this.filterIngredients.setAttribute("aria-expanded", "true");
                     this.filterAppliances.classList.remove("active");
                     this.filterAppliances.classList.add("width-small");
-                    this.filterAppliances.setAttribute("aria-expanded", "false");
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
-                    this.filterUstensils.setAttribute("aria-expanded", "false"); 
                     this._displayFilterList(this.arrayIngredients);                
                 }else if (task === "hide"){
                     this.filterIngredients.classList.remove("active", "width-large");
                     this.filterIngredients.classList.add("width-small");
-                    this.filterIngredients.setAttribute("aria-expand", "false");
                     this.advanceSearchBarFilters[0].value = "";
                 }
                 break;
@@ -275,18 +271,14 @@ export default class Search {
                 if (task === "display") {
                     this.filterAppliances.classList.add("active", "width-large");
                     this.filterAppliances.classList.remove("width-small");
-                    this.filterAppliances.setAttribute("aria-expanded", "true");
                     this.filterIngredients.classList.remove("active");
                     this.filterIngredients.classList.add("width-small");
-                    this.filterIngredients.setAttribute("aria-expanded", "false");
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
-                    this.filterUstensils.setAttribute("aria-expanded", "false");
                     this._displayFilterList(this.arrayAppliances)                
                 }else if (task === "hide") {
                     this.filterAppliances.classList.remove("active", "width-large");
                     this.filterAppliances.classList.add("width-small")
-                    this.filterAppliances.setAttribute("aria-expand", "false");
                     this.advanceSearchBarFilters[1].value = "";
                 }
                 break;
@@ -294,18 +286,14 @@ export default class Search {
                 if (task === "display") {
                     this.filterUstensils.classList.add("active", "width-large");
                     this.filterUstensils.classList.remove("width-small");
-                    this.filterUstensils.setAttribute("aria-expanded", "true");
                     this.filterIngredients.classList.remove("active");
                     this.filterIngredients.classList.add("width-small");
-                    this.filterIngredients.setAttribute("aria-expanded", "false");
                     this.filterAppliances.classList.remove("active");
                     this.filterAppliances.classList.add("width-small");
-                    this.filterAppliances.setAttribute("aria-expanded", "false"); 
                     this._displayFilterList(this.arrayUstensils);               
                 }else if (task === "hide"){
                     this.filterUstensils.classList.remove("active", "width-large");
                     this.filterUstensils.classList.add("width-small")
-                    this.filterUstensils.setAttribute("aria-expand", "false");
                     this.advanceSearchBarFilters[2].value = "";
                 }
                 break;
@@ -319,7 +307,6 @@ export default class Search {
             for (let ingredient of data) {
                 this.ingredientFilterListItem = document.createElement("li")
                 this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
-                this.ingredientFilterListItem.setAttribute("tabindex", "0")
                 this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
                 this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
                 this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
@@ -334,7 +321,6 @@ export default class Search {
             for (let appliance of data) {
                 this.applianceFilterListitem = document.createElement("li")
                 this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
-                this.applianceFilterListitem.setAttribute("tabindex", "0")
                 this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
                 this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
                 this.appliancesFilterList.appendChild(this.applianceFilterListitem)
@@ -349,7 +335,6 @@ export default class Search {
             for (let ustensil of data) {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
-                this.ustensilFilterListItem.setAttribute("tabindex", "0")
                 this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
                 this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
                 this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
@@ -369,7 +354,6 @@ export default class Search {
     //         data.forEach(ingredient => {
     //             this.ingredientFilterListItem = document.createElement("li")
     //             this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
-    //             this.ingredientFilterListItem.setAttribute("tabindex", "0")
     //             this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
     //             this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
     //             this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
@@ -384,7 +368,6 @@ export default class Search {
     //         data.forEach(appliance => {
     //             this.applianceFilterListitem = document.createElement("li")
     //             this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
-    //             this.applianceFilterListitem.setAttribute("tabindex", "0")
     //             this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
     //             this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
     //             this.appliancesFilterList.appendChild(this.applianceFilterListitem)
@@ -399,7 +382,6 @@ export default class Search {
     //         data.forEach(ustensil => {
     //             this.ustensilFilterListItem = document.createElement("li")
     //             this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
-    //             this.ustensilFilterListItem.setAttribute("tabindex", "0")
     //             this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
     //             this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
     //             this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
@@ -424,8 +406,6 @@ export default class Search {
         `
         this.selectedTagContainer.innerHTML = this.selectedFilterContent
         this.selectedTagContainer.classList.add("tag__parking--items", "display-flex")
-        this.selectedTagContainer.setAttribute("aria-label", `${this.filterName}`)
-        this.selectedTagContainer.setAttribute("tabindex", "0")
         this.selectedTagContainer.setAttribute("data-filtertype", `${this.filterType}`)
 
         if (this.filterType === "filterIngredient") {
@@ -505,7 +485,6 @@ export default class Search {
         let i = this.arrayActiveFilters.length
         while (i--) {
             if (this.arrayActiveFilters[i] === this.selectedfilterItem) {
-                console.log('1 - launch test : while loop');
                 this.arrayActiveFilters.splice(i, 1)
             }
         }

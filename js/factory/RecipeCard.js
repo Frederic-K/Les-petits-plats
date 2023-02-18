@@ -11,9 +11,9 @@ export default class RecipeCard {
     };
     _createCard() {
         this.recipeCardContent = `
-        <article class="recipe__card" aria-label="${this.name}" data-index="${this.id}">
+        <article class="recipe__card" data-index="${this.id}">
             <div class="recipe__card--imgContainer">
-            <img src="https://picsum.photos/200/300" alt="${this.name}" class="recipe__card--img" aria-label="${this.name}">
+            <img src="https://picsum.photos/200/300" alt="${this.name}" class="recipe__card--img">
             </div>
             <div class="recipe__card--description">
                 <div class="recipe__card--header">
