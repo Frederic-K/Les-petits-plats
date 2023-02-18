@@ -6,7 +6,7 @@
     <!--Import CSS Prefixer : compatibilité navigateur-->
     <link rel="stylesheet" href="./css/prefixed/style.css">
     <!-- Import CSS de sortie Sass-->
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <!-- Lien Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <!-- Lien Fontawesome-->
@@ -19,14 +19,14 @@
 <!-- Logo header -->  
         <div class="header">
             <a class="header__link" href="./index.html" aria-label="Lien vers l'accueil">
-                <img  class="header__link--logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats" tabindex="0">
+                <img  class="header__link--logo" src="./assets/15973932905401_logo.png" alt="Logo du site Les petits plats" aria-label="Logo du site Les petits plats">
             </a>
         </div>
     </header>
     <main class="main">
 <!-- Barre de recherche-->
         <section class="main__searchbar">
-            <input type="text" role="textbox" class="main__searchbar--input" aria-label="Champ de recherche de recettes" tabindex="0" placeholder="Rechercher une recette">
+            <input type="text" class="main__searchbar--input" aria-label="Champ de recherche de recettes" tabindex="0" placeholder="Rechercher une recette">
             <span class="main__searchbar--icon fa-solid fa-magnifying-glass" aria-hidden="true"></span>
         </section>
 <!-- Message d'erreur : aucune recette trouvée
@@ -40,11 +40,11 @@
         <section class="tag__filter">
             <div class="tag__filter--container">
                 <!-- Filtre ingrédients -->
-                <div class="tag__filter--listbox filter__bckground--blue width-small" id="filterIngredients" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
+                <div class="tag__filter--listbox filter__bckground--blue width-small" id="filterIngredients" role="listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Ingredients</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--blue" placeholder="Rechercher" data-filtertype="ingredients" tabindex="0">
-                        <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
+                        <input type="text" class="filter__header--input filter__bckground--blue" placeholder="Rechercher" data-filtertype="ingredients" tabindex="0">
+                        <div class="filter__header--chevron" role="button" tabindex="0">
                             <div class="filter__header--chevronDown" id="displayIndgredientsBtn" data-filtertype="displayIndgredientsBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
                             </div>
@@ -57,11 +57,11 @@
                     </ul>
                 </div>
                 <!-- Filtre appareils -->
-                <div class="tag__filter--listbox filter__bckground--green width-small" id="filterAppliances" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
+                <div class="tag__filter--listbox filter__bckground--green width-small" id="filterAppliances" role="listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Appareils</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--green" placeholder="Rechercher" data-filtertype="appliances" tabindex="0">
-                        <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
+                        <input type="text" class="filter__header--input filter__bckground--green" placeholder="Rechercher" data-filtertype="appliances" tabindex="0">
+                        <div class="filter__header--chevron" role="button" tabindex="0">
                             <div class="filter__header--chevronDown" id="displayAppliancesBtn" data-filtertype="displayAppliancesBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
                             </div>
@@ -74,11 +74,11 @@
                     </ul>
                 </div>
                 <!-- Filtre ustenciles -->
-                <div class="tag__filter--listbox filter__bckground--red width-small" id="filterUstensils" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
+                <div class="tag__filter--listbox filter__bckground--red width-small" id="filterUstensils" role="listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Bouton de filtre">
                     <div class="tag__filter--header">
                         <span class="filter__header--title">Ustenciles</span>
-                        <input type="text" role="textbox" class="filter__header--input filter__bckground--red" placeholder="Rechercher" data-filtertype="ustensils" tabindex="0">
-                        <div class="filter__header--chevron" role="button" aria-role="button" tabindex="0">
+                        <input type="text" class="filter__header--input filter__bckground--red" placeholder="Rechercher" data-filtertype="ustensils" tabindex="0">
+                        <div class="filter__header--chevron" role="button" tabindex="0">
                             <div class="filter__header--chevronDown"  id="displayUstensilsBtn" data-filtertype="displayUstensilsBtn">
                                 <span class="fa-solid fa-chevron-down" aria-hidden="true"></span>
                             </div>
@@ -90,6 +90,7 @@
                     <ul class="tag__filter--list" aria-label="Liste de filtre par ustensiles">
                     </ul>
                 </div>
+            </div>    
         </section>
 <!-- Zone d'affichage des recettes-->  
         <section class="recipes__section">

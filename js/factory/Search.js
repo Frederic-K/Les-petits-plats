@@ -174,7 +174,9 @@ export default class Search {
     };
 
 
-    /// Generate ingredients, appliances nd ustensils array
+    /// Generate ingredients, appliances nd ustensils array ///
+    /// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#remove_duplicate_elements_from_the_array
+
     _setIngredientsFilterList() {
         this.arrayAllIngredients = []
         for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
