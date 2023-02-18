@@ -260,6 +260,8 @@ export default class Search {
                     this.filterAppliances.classList.add("width-small");
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
+                    this.advanceSearchBarFilters[1].value = "";
+                    this.advanceSearchBarFilters[2].value = "";
                     this._displayFilterList(this.arrayIngredients);                
                 }else if (task === "hide"){
                     this.filterIngredients.classList.remove("active", "width-large");
@@ -275,6 +277,8 @@ export default class Search {
                     this.filterIngredients.classList.add("width-small");
                     this.filterUstensils.classList.remove("active");
                     this.filterUstensils.classList.add("width-small");
+                    this.advanceSearchBarFilters[0].value = "";
+                    this.advanceSearchBarFilters[2].value = "";
                     this._displayFilterList(this.arrayAppliances)                
                 }else if (task === "hide") {
                     this.filterAppliances.classList.remove("active", "width-large");
@@ -290,6 +294,8 @@ export default class Search {
                     this.filterIngredients.classList.add("width-small");
                     this.filterAppliances.classList.remove("active");
                     this.filterAppliances.classList.add("width-small");
+                    this.advanceSearchBarFilters[0].value = "";
+                    this.advanceSearchBarFilters[1].value = "";
                     this._displayFilterList(this.arrayUstensils);               
                 }else if (task === "hide"){
                     this.filterUstensils.classList.remove("active", "width-large");
