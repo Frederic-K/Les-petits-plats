@@ -199,25 +199,25 @@ export default class Search {
         this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
     };
 
-    // _setAppliancesFilterList() {
-    //     this.arrayAllAppliances = []
-    //     for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-    //         this.appliance = this.arrayFilteredRecipes[i].appliance
-    //         this.arrayAllAppliances.push(this.appliance.toLowerCase())
-    //     }
-    //     this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
-    // };
-
     _setAppliancesFilterList() {
-        let i = 0
         this.arrayAllAppliances = []
-        this.arrayFilteredRecipes.forEach(appliance => {
-            appliance = this.arrayFilteredRecipes[i].appliance
-            this.arrayAllAppliances.push(appliance.toLowerCase())
-            i++
-        })
+        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+            this.appliance = this.arrayFilteredRecipes[i].appliance
+            this.arrayAllAppliances.push(this.appliance.toLowerCase())
+        }
         this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
     };
+
+    // _setAppliancesFilterList() {
+    //     let i = 0
+    //     this.arrayAllAppliances = []
+    //     this.arrayFilteredRecipes.forEach(appliance => {
+    //         appliance = this.arrayFilteredRecipes[i].appliance
+    //         this.arrayAllAppliances.push(appliance.toLowerCase())
+    //         i++
+    //     })
+    //     this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
+    // };
 
     _setUstensilsFilterList() {
         this.arrayAllUstensils = []
@@ -229,6 +229,22 @@ export default class Search {
         }
         this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
     };
+
+    // _setUstensilsFilterList() {
+    //     let i = 0
+    //     let x = 0
+    //     this.arrayAllUstensils = []
+    //     this.arrayFilteredRecipes.forEach(ustensils => {
+    //         ustensils = this.arrayFilteredRecipes[i].ustensils
+    //         this.arrayFilteredRecipes[i].ustensils.forEach(ustensil => {
+    //             this.arrayFilteredRecipes[i].ustensils[x]
+    //             this.arrayAllUstensils.push(ustensil.toLowerCase())
+    //             x++
+    //         })
+    //         i++
+    //     })
+    //     this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
+    // };
 
     /// Show or hide dropdownmenu ///
     _switchListFilter(filter, task) {
