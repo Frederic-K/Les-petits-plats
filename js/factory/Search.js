@@ -175,14 +175,27 @@ export default class Search {
 
 
     /// Generate ingredients, appliances nd ustensils array
+    // _setIngredientsFilterList() {
+    //     this.arrayAllIngredients = []
+    //     for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
+    //         this.ingredients = this.arrayFilteredRecipes[i].ingredients
+    //         this.ingredients.map(({ingredient}) => {
+    //             this.arrayAllIngredients.push(ingredient.toLowerCase())
+    //         })
+    //     }
+    //     this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
+    // };
+
     _setIngredientsFilterList() {
+        let i = 0
         this.arrayAllIngredients = []
-        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-            this.ingredients = this.arrayFilteredRecipes[i].ingredients
-            this.ingredients.map(({ingredient}) => {
+        this.arrayFilteredRecipes.forEach(ingredients => {
+            ingredients = this.arrayFilteredRecipes[i].ingredients
+            ingredients.map(({ingredient}) => {
                 this.arrayAllIngredients.push(ingredient.toLowerCase())
             })
-        }
+            i++
+        })
         this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
     };
 
