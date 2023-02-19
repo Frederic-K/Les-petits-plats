@@ -119,6 +119,8 @@
   width: 180px;
   color: white;
   font-size: 20px;
+  margin: 0px 0px 0px 35px;
+  padding: 10px;
   cursor: pointer;
 }
 .tag__filter--list .itemFilter:hover {
