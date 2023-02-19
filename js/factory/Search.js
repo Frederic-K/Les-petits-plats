@@ -11,6 +11,8 @@ export default class Search {
         this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
         this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
 
+        this.recipeNotfoundMsg = document.getElementsByClassName("search__message")[0];
+
         this.advanceSearchBarFilters = document.querySelectorAll(".filter__header--input");
 
         this.filterIngredients = document.getElementById("filterIngredients");
@@ -770,6 +772,11 @@ export default class Search {
                 this.arrayRecipes = this.arrayFilteredRecipes
                 // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
                 // console.log('A5 - array recipes', this.arrayRecipes);
+            }
+            if (this.arrayRecipes.length <= 0) {
+                this.recipeNotfoundMsg.classList.remove("hidden")
+            } else {
+                this.recipeNotfoundMsg.classList.add("hidden")
             }
             this._displayRecipeCard()
             this._setIngredientsFilterList();
