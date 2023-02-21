@@ -344,16 +344,7 @@ export default class Search {
         this.selectedFilter = e.target.parentElement;
         this.selectedFilter.remove("display-flex")
         this.selectedfilterItem = e.target.previousElementSibling.textContent.toLowerCase();
-
-        // this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
-
-        let i = this.arrayActiveFilters.length
-        while (i--) {
-            if (this.arrayActiveFilters[i] === this.selectedfilterItem) {
-                this.arrayActiveFilters.splice(i, 1)
-            }
-        }
-
+        this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter !== this.selectedfilterItem);
         this._mainSearch()
     };
     
