@@ -116,23 +116,14 @@ export default class Search {
             this._setUstensilsFilterList();
     };
     
-    /// Show recipe card ///
+   /// Show recipe card ///
     _displayRecipeCard() {
         let recipeCard = ""
-        for (let recipe of this.arrayFilteredRecipes) {
+        this.arrayFilteredRecipes.forEach(recipe => {
             recipeCard += new RecipeCard(recipe).recipeCardContent
-        }
+        })
         this.cardSection.innerHTML = recipeCard
     };
-        
-   /// Show recipe card ///
-    // _displayRecipeCard() {
-    //     let recipeCard = ""
-    //     this.arrayFilteredRecipes.forEach(recipe => {
-    //         recipeCard += new RecipeCard(recipe).recipeCardContent
-    //     })
-    //     this.cardSection.innerHTML = recipeCard
-    // };
 
 
     /// Capitalized first letter of a word ///

@@ -34,33 +34,18 @@ export default class RecipeCard {
         `
     };
     _getIngredientRecipeCardDOM(data) {
-        //console.log('dataFromGetIngREcipeDArdDom', data);
-        let arrayIngredients = []  
-        for (let i = 0; i < data.length; i++) {
-            //console.log('data.length', data.length);
-            let ingredients = data[i];
-            //console.log('ingredientData(i)', ingredients);
+        let i = 0
+        let arrayIngredients = []
+        data.forEach(ingredients => {
+            ingredients = data[i]
             let ingredientSection = `
-                <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
-                </br>
-            `
-            arrayIngredients.push(ingredientSection);
-        } 
-        //console.log('arrayIngredients', arrayIngredients);   
+            <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
+            </br>
+        `
+        arrayIngredients.push(ingredientSection);
+        i++
+        });
         return (arrayIngredients);
-
-        // let i = 0
-        // let arrayIngredients = []
-        // data.forEach(ingredients => {
-        //     ingredients = data[i]
-        //     let ingredientSection = `
-        //     <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
-        //     </br>
-        // `
-        // arrayIngredients.push(ingredientSection);
-        // i++
-        // });
-        // return (arrayIngredients);
     };
 };
 
