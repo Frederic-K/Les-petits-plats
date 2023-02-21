@@ -1,12 +1,9 @@
 /// Import ///
 import RecipeCard from "./RecipeCard.js";
-// import MenuTagFilter from "./MenuTagFilter.js";
 
 /// Class ///
 export default class Search {
     constructor(data) {
-        // console.log('search', data);
-
         /// DOM ///
         this.mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
         this.mainSearchBarFilterBtn = document.getElementsByClassName("main__searchbar--icon")[0];
