@@ -136,28 +136,17 @@ export default class Search {
     /// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#remove_duplicate_elements_from_the_array
 
     _setIngredientsFilterList() {
+        let i = 0
         this.arrayAllIngredients = []
-        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-            for (let x=0; x < this.arrayFilteredRecipes[i].ingredients.length; x++) {
-                let ingredient = this.arrayFilteredRecipes[i].ingredients[x].ingredient
+        this.arrayFilteredRecipes.forEach(ingredients => {
+            ingredients = this.arrayFilteredRecipes[i].ingredients
+            ingredients.map(({ingredient}) => {
                 this.arrayAllIngredients.push(ingredient.toLowerCase())
-            }
-        }
+            })
+            i++
+        })
         this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
     };
-
-    // _setIngredientsFilterList() {
-    //     let i = 0
-    //     this.arrayAllIngredients = []
-    //     this.arrayFilteredRecipes.forEach(ingredients => {
-    //         ingredients = this.arrayFilteredRecipes[i].ingredients
-    //         ingredients.map(({ingredient}) => {
-    //             this.arrayAllIngredients.push(ingredient.toLowerCase())
-    //         })
-    //         i++
-    //     })
-    //     this.arrayIngredients = new Set(this.arrayAllIngredients.sort())
-    // };
 
     _setAppliancesFilterList() {
         this.arrayAllAppliances = []
