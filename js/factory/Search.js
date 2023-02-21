@@ -103,11 +103,12 @@ export default class Search {
         //     })
         // }
 
+
         /// Hide dropdown menu ///
         if (this.hideFilterMenuBtns.length > 0) {
-            for (let hideFilterMenuBtn of this.hideFilterMenuBtns) {                
+            this.hideFilterMenuBtns.forEach(hideFilterMenuBtn => {                
                 hideFilterMenuBtn.addEventListener("click", (e) => {
-                    let hideFilterMenuBtn = e.target.parentElement.id;
+                    hideFilterMenuBtn = e.target.parentElement.id;
                     if (hideFilterMenuBtn === "hideIngredientsBtn") {
                         this._switchListFilter("ingredients", "hide")
                     } else if (hideFilterMenuBtn === "hideAppliancesBtn") {
@@ -116,24 +117,8 @@ export default class Search {
                         this._switchListFilter("ustensils", "hide")
                     }
                 })
-            }
+            })
         }
-
-        /// Hide dropdown menu ///
-        // if (this.hideFilterMenuBtns.length > 0) {
-        //     this.hideFilterMenuBtns.forEach(hideFilterMenuBtn => {                
-        //         hideFilterMenuBtn.addEventListener("click", (e) => {
-        //             hideFilterMenuBtn = e.target.parentElement.id;
-        //             if (hideFilterMenuBtn === "hideIngredientsBtn") {
-        //                 this._switchListFilter("ingredients", "hide")
-        //             } else if (hideFilterMenuBtn === "hideAppliancesBtn") {
-        //                 this._switchListFilter("appliances", "hide")
-        //             } else if (hideFilterMenuBtn === "hideUstensilsBtn") {
-        //                 this._switchListFilter("ustensils", "hide")
-        //             }
-        //         })
-        //     })
-        // }
     };
 
     /// Show all recipes ///
