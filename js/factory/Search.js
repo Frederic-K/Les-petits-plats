@@ -363,119 +363,37 @@ export default class Search {
         this.arrayFilteredRecipes = []
         this.mainSearchInput = this.mainSearchBarFilter.value.toLowerCase()
 
-    if (this.mainSearchInput.length >= 3) {  
-
-        console.log('0 - launch test : si main search input > 3');
-        
+    if (this.mainSearchInput.length >= 3) {          
         if (this.historySearch.includes(this.mainSearchInput) || this.arrayActiveFilters.includes(this.mainSearchInput)) {
-
-            console.log('2 - launch test : si recherche principale > 3 && recherche principale présents dans historique recherche paincipale OU dans les filtres actifs');
-
-            // if (JSON.stringify(this.arrayActiveFilters) === JSON.stringify(this.historyArrayActiveFilters)) {
-
-            //     console.log('2-1 launch test');
-
-            //     console.log('2-1 array activ filter', this.arrayActiveFilters);
-            //     console.log('2-1 array history active filter', this.historyArrayActiveFilters);
-
-            //     console.log('Simon says : dont move');
-
-            // } else {
-
-            //     console.log('2-2 launch test');
-
-            //     this.historyArrayActiveFilters = this.arrayActiveFilters
-
-            //     this._filterRecipes()
-
-            // }
-
             this._filterRecipes()
-
         } else {
-
-            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principale OU des filtres actifs (> supp ancienne saisie de la recherche principale des filtres actifs)');
-
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
-
-            // let i = this.arrayActiveFilters.length
-            // while (i--) {
-            //     if (this.arrayActiveFilters[i] === this.historySearch) {
-            //         console.log('3A - launch test : while loop');
-            //         this.arrayActiveFilters.splice(i, 1)
-            //     }
-            // }
-
             this.historySearch = ""
             this.historySearch = this.mainSearchInput
             this.arrayActiveFilters.push(this.mainSearchInput)
-
-            // this.historyArrayActiveFilters = this.arrayActiveFilters
-
             this._filterRecipes()
         }
 
     } else if (this.mainSearchInput <= 0) {
-
-        console.log('4 - launch test : si recherche principale vide');
-
             if (this.arrayActiveFilters.length > 0) {
-
-                console.log('5 - launch test : si recherche prinsipale vide MAIS filtre actifs présents');
-
                 if (this.historySearch.length > 0) {
-
-                    console.log('6 - launch test : si recherche prinsipale vide MAIS filtre actifs présents && si il y a un historique de recherche principale');
-
                     this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
-
-                    // let i = this.arrayActiveFilters.length
-                    // while (i--) {
-                    //     if (this.arrayActiveFilters[i] === this.historySearch) {
-                    //         console.log('6A - launch test : while loop');
-                    //         this.arrayActiveFilters.splice(i, 1)
-                    //     }
-                    // }
-
                     this.historySearch = ""
-
-                    if (this.arrayActiveFilters.length > 0 ) {
-
-                        console.log('6-1 launch test : si recherche prinsipale vide && si il y a un historique de recherche principale && toujours des filtres actifs après leurs filtrage avec historique de la recherche principale');
-
-                        // this.historyArrayActiveFilters = this.arrayActiveFilters
-        
-                        this._filterRecipes()
-        
-        
+                    if (this.arrayActiveFilters.length > 0 ) {        
+                        this._filterRecipes()     
                     } else {
-        
-                        console.log('6-2 launch test : si recherche prinsipale vide && si il y a un historique de recherche principale && plus de filtres actifs après leurs filtrage avec historique de la recherche principale');
-
-                        // this.historyArrayActiveFilters = []
                         this.recipeNotfoundMsg.classList.add("hidden")
                         this._initDisplay()
                     }
 
                 } else {
-
-                    console.log('7 - launch test : si recherche prinsipale vide MAIS filtre actifs présents && pas historique de recherche principale');
-
-                    // this.historyArrayActiveFilters = this.arrayActiveFilters
-
                     this._filterRecipes()
                 }
-
             } else {
-
-                console.log('8 - launch test : si recherche prinsipale vide && aucun filtre actif');
-                
-                // this.historyArrayActiveFilters = []
                 this.recipeNotfoundMsg.classList.add("hidden")
                 this._initDisplay()
             }
         }
-
     };
 
     /// Tag filter searchbar ///    
