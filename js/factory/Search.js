@@ -449,46 +449,23 @@ export default class Search {
     /// Recipes filter ///
     _filterRecipes() {
         console.log('XX - array activ filter', this.arrayActiveFilters);
-        // console.log('A1 - launch test filter recipes');
-        // console.log('A1 - array recipes', this.arrayRecipes);
         this.arrayRecipes = this.arrayAllRecipes
         if (this.arrayActiveFilters.length > 0) {
-            // console.log('A2 - array activ filter', this.arrayActiveFilters);
-            // console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
-            for (let filter of this.arrayActiveFilters) {
-                // console.log('A3 - launch test for each activ filter');
-                // console.log('A3 - display filter', filter);
+            this.arrayActiveFilters.forEach(filter => {
                 this.arrayFilteredRecipes = []
-                // console.log('A3 - array recipes', this.arrayRecipes);
-                for (let recipe of this.arrayRecipes) {
-                    // console.log('A4 - array recipe ustensils', recipe.ustensils);
-                    // console.log('A4 - array recipe name', recipe.name);
-                    // console.log('A4 - array recipe ingredients', recipe.ingredients);
-                    // console.log('A4 - array reicpe description', recipe.description);
-                    let recipeUstensils = []
-                    for (let ustensil of recipe.ustensils) {
-                        recipeUstensils.push(ustensil.toLowerCase())
-                    }
-                    //let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
-                    //console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
+                this.arrayRecipes.forEach(recipe => {
+                    let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
                     if (
                         recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
                         || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
                         || recipe.appliance.toLowerCase().includes(filter) || recipeUstensils.includes(filter))
-                        { 
-                        // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
-                        this.arrayFilteredRecipes.push(recipe)
-                        // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
-                    } 
-                }
-                // console.log('A5 - array recipes', this.arrayRecipes);
-                // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
+
+                        {this.arrayFilteredRecipes.push(recipe)} 
+                })
                 this.arrayRecipes = []
                 this.arrayRecipes = this.arrayFilteredRecipes
-                // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
-                // console.log('A5 - array recipes', this.arrayRecipes);
-            }
+            })
             if (this.arrayRecipes.length <= 0) {
                 this.recipeNotfoundMsg.classList.remove("hidden")
             } else {
@@ -498,78 +475,8 @@ export default class Search {
             this._setIngredientsFilterList();
             this._setAppliancesFilterList();
             this._setUstensilsFilterList();
-            console.log('XX - array recipes', this.arrayRecipes);
         } else {
-            this.recipeNotfoundMsg.classList.add("hidden")
             this._initDisplay()
         }
-    };   
-
-    /// Recipes filter ///
-    // _filterRecipes() {
-    //     console.log('XX - array activ filter', this.arrayActiveFilters);
-    //     // console.log('A1 - launch test filter recipes');
-    //     // console.log('A1 - array recipes', this.arrayRecipes);
-    //     this.arrayRecipes = this.arrayAllRecipes
-    //     if (this.arrayActiveFilters.length > 0) {
-    //         // console.log('A2 - array activ filter', this.arrayActiveFilters);
-    //         // console.log('A2 - array activ filter length', this.arrayActiveFilters.length);
-    //         this.arrayActiveFilters.forEach(filter => {
-    //             // console.log('A3 - launch test for each activ filter');
-    //             // console.log('A3 - display filter', filter);
-    //             this.arrayFilteredRecipes = []
-    //             // console.log('A3 - array recipes', this.arrayRecipes);
-    //             this.arrayRecipes.forEach(recipe => {
-    //                 // console.log('A4 - array recipe ustensils', recipe.ustensils);
-    //                 // console.log('A4 - array recipe name', recipe.name);
-    //                 // console.log('A4 - array recipe ingredients', recipe.ingredients);
-    //                 // console.log('A4 - array reicpe description', recipe.description);
-    //                 let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
-    //                 // console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
-    //                 if (
-    //                     recipe.name.toLowerCase().includes(filter)
-    //                     || recipe.description.toLowerCase().includes(filter)
-    //                     || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
-    //                     || recipe.appliance.toLowerCase().includes(filter) || recipeUstensils.includes(filter))
-    //                     { 
-    //                     // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
-    //                     this.arrayFilteredRecipes.push(recipe)
-    //                     // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);
-    //                 } 
-    //             })
-    //             // console.log('A5 - array recipes', this.arrayRecipes);
-    //             // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
-    //             this.arrayRecipes = []
-    //             this.arrayRecipes = this.arrayFilteredRecipes
-    //             // console.log('A5 - array filtered recipes', this.arrayFilteredRecipes);
-    //             // console.log('A5 - array recipes', this.arrayRecipes);
-    //         })
-    //         this._displayRecipeCard()
-    //         this._setIngredientsFilterList();
-    //         this._setAppliancesFilterList();
-    //         this._setUstensilsFilterList();
-    //         console.log('XX - array recipes', this.arrayRecipes);
-    //     } else {
-    //         this._initDisplay()
-    //     }
-    // };    
+    };    
 };
-
- /// Js Debounce ///
-// const mainSearchBarFilter = document.getElementsByClassName("main__searchbar--input")[0];
-
-// function debounce(func, timeout = 5000){
-//     let timer;
-//     return (...args) => {
-//       clearTimeout(timer);
-//       timer = setTimeout(() => { func.apply(this, args); }, timeout);
-//     };
-//   }
-    
-//   function saveInput(){
-//     console.log('Saving data');
-//   }
-  
-//   const processChangeMain = debounce(() => saveInput());
-
-//   mainSearchBarFilter.addEventListener("keyup", processChangeMain)
