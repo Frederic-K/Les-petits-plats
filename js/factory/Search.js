@@ -71,9 +71,10 @@ export default class Search {
         }
 
         /// Set listener for dropdown tag menu ///
+
         /// Show dropdown menu ///
         if (this.displayFilterMenuBtns.length > 0) {
-            for (let displayFilterMenuBtn of this.displayFilterMenuBtns) {
+            this.displayFilterMenuBtns.forEach(displayFilterMenuBtn => {
                 displayFilterMenuBtn.addEventListener("click", (e) => {
                     let displayMenuBtn = e.target.parentElement.id;
                     if (displayMenuBtn === "displayIndgredientsBtn") {
@@ -84,24 +85,8 @@ export default class Search {
                         this._switchListFilter("ustensils", "display")
                     }
                 })
-            }
+            })
         }
-
-        /// Show dropdown menu ///
-        // if (this.displayFilterMenuBtns.length > 0) {
-        //     this.displayFilterMenuBtns.forEach(displayFilterMenuBtn => {
-        //         displayFilterMenuBtn.addEventListener("click", (e) => {
-        //             let displayMenuBtn = e.target.parentElement.id;
-        //             if (displayMenuBtn === "displayIndgredientsBtn") {
-        //                 this._switchListFilter("ingredients", "display")
-        //             } else if (displayMenuBtn === "displayAppliancesBtn") {
-        //                 this._switchListFilter("appliances", "display")
-        //             } else if (displayMenuBtn === "displayUstensilsBtn") {
-        //                 this._switchListFilter("ustensils", "display")
-        //             }
-        //         })
-        //     })
-        // }
 
 
         /// Hide dropdown menu ///
