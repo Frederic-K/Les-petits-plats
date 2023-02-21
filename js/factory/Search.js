@@ -237,7 +237,7 @@ export default class Search {
     _displayFilterList(data) {
         if (data === this.arrayIngredients) {
             this.ingredientsFilterList.innerHTML = ""
-            for (let ingredient of data) {
+            data.forEach(ingredient => {
                 this.ingredientFilterListItem = document.createElement("li")
                 this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
                 this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
@@ -248,10 +248,10 @@ export default class Search {
                     this._switchListFilter("ingredients", "hide")
                     this._displaySelectedFilter(e)
                 })
-            }
+            })
         } else if (data === this.arrayAppliances) {
             this.appliancesFilterList.innerHTML = ""
-            for (let appliance of data) {
+            data.forEach(appliance => {
                 this.applianceFilterListitem = document.createElement("li")
                 this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
                 this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
@@ -262,10 +262,10 @@ export default class Search {
                     this._switchListFilter("appliances", "hide")
                     this._displaySelectedFilter(e)
                 })
-            }
+            })
         } else if (data === this.arrayUstensils) {
             this.ustensilsFilterList.innerHTML = ""
-            for (let ustensil of data) {
+            data.forEach(ustensil => {
                 this.ustensilFilterListItem = document.createElement("li")
                 this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
                 this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
@@ -276,56 +276,9 @@ export default class Search {
                     this._switchListFilter("ustensils", "hide")
                     this._displaySelectedFilter(e)
                 })
-            }
+            })
         }
     };
-
-    /// Show dropdown menu content ///
-    // _displayFilterList(data) {
-    //     if (data === this.arrayIngredients) {
-    //         this.ingredientsFilterList.innerHTML = ""
-    //         data.forEach(ingredient => {
-    //             this.ingredientFilterListItem = document.createElement("li")
-    //             this.ingredientFilterListItem.classList.add("itemFilter","ingredientFilter")
-    //             this.ingredientFilterListItem.setAttribute("data-filtertype", "filterIngredient")
-    //             this.ingredientFilterListItem.textContent = this._setUpperCaseFirstChar(ingredient)
-    //             this.ingredientsFilterList.appendChild(this.ingredientFilterListItem)
-    //             this._removeDropdownFilter("ingredients")
-    //             this.ingredientFilterListItem.addEventListener("click", (e) => {
-    //                 this._switchListFilter("ingredients", "hide")
-    //                 this._displaySelectedFilter(e)
-    //             })
-    //         })
-    //     } else if (data === this.arrayAppliances) {
-    //         this.appliancesFilterList.innerHTML = ""
-    //         data.forEach(appliance => {
-    //             this.applianceFilterListitem = document.createElement("li")
-    //             this.applianceFilterListitem.classList.add("itemFilter", "applianceFilter")
-    //             this.applianceFilterListitem.setAttribute("data-filtertype", "filterAppliance")
-    //             this.applianceFilterListitem.textContent = this._setUpperCaseFirstChar(appliance)
-    //             this.appliancesFilterList.appendChild(this.applianceFilterListitem)
-    //             this._removeDropdownFilter("appliances")
-    //             this.applianceFilterListitem.addEventListener("click", (e) => {
-    //                 this._switchListFilter("appliances", "hide")
-    //                 this._displaySelectedFilter(e)
-    //             })
-    //         })
-    //     } else if (data === this.arrayUstensils) {
-    //         this.ustensilsFilterList.innerHTML = ""
-    //         data.forEach(ustensil => {
-    //             this.ustensilFilterListItem = document.createElement("li")
-    //             this.ustensilFilterListItem.classList.add("itemFilter","ustensilFilter")
-    //             this.ustensilFilterListItem.setAttribute("data-filtertype", "filterUstensil")
-    //             this.ustensilFilterListItem.textContent = this._setUpperCaseFirstChar(ustensil)
-    //             this.ustensilsFilterList.appendChild(this.ustensilFilterListItem)
-    //             this._removeDropdownFilter("ustensils")
-    //             this.ustensilFilterListItem.addEventListener("click", (e) => {
-    //                 this._switchListFilter("ustensils", "hide")
-    //                 this._displaySelectedFilter(e)
-    //             })
-    //         })
-    //     }
-    // };
 
     /// Tag filter ///
     /// Show selected tag filter ///
