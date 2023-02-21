@@ -63,17 +63,21 @@ export default class Search {
     bindEvent() {
 
         /// Set listener for searchbar ///
-        this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
-
-        // if (this.mainSearchBarFilter.length > 0) {
-        //     this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
-        // }
+        if (this.mainSearchBarFilter !== 0) {
+            this.mainSearchBarFilter.addEventListener("keyup", this.processChangeMain)
+        }
 
         if (this.advanceSearchBarFilters.length > 0) {
             for (let advanceSearchBarFilter of this.advanceSearchBarFilters) {
                 advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
             }
         }
+
+        // if (this.advanceSearchBarFilters.length > 0) {
+        //     this.advanceSearchBarFilters.forEach(advanceSearchBarFilter => {
+        //         advanceSearchBarFilter.addEventListener("keyup", this.processChangeAdvance)
+        //     })
+        // }
 
         /// Set listener for dropdown tag menu ///
         /// Show dropdown menu ///
