@@ -48,6 +48,19 @@ export default class RecipeCard {
         } 
         //console.log('arrayIngredients', arrayIngredients);   
         return (arrayIngredients);
+
+        // let i = 0
+        // let arrayIngredients = []
+        // data.forEach(ingredients => {
+        //     ingredients = data[i]
+        //     let ingredientSection = `
+        //     <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
+        //     </br>
+        // `
+        // arrayIngredients.push(ingredientSection);
+        // i++
+        // });
+        // return (arrayIngredients);
     };
 };
 

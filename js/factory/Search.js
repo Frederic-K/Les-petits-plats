@@ -546,7 +546,7 @@ export default class Search {
 
         } else {
 
-            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principaleOU des filtres actifs (> supp ancienne saisie de la recherche principale des filtres actifs)');
+            console.log('3 - launch test : si recherche principale > 3 MAIS absente de historique recherhce principale OU des filtres actifs (> supp ancienne saisie de la recherche principale des filtres actifs)');
 
             this.arrayActiveFilters = this.arrayActiveFilters.filter(filter => filter != this.historySearch)
 
@@ -605,7 +605,7 @@ export default class Search {
                         console.log('6-2 launch test : si recherche prinsipale vide && si il y a un historique de recherche principale && plus de filtres actifs après leurs filtrage avec historique de la recherche principale');
 
                         // this.historyArrayActiveFilters = []
-
+                        this.recipeNotfoundMsg.classList.add("hidden")
                         this._initDisplay()
                     }
 
@@ -623,7 +623,7 @@ export default class Search {
                 console.log('8 - launch test : si recherche prinsipale vide && aucun filtre actif');
                 
                 // this.historyArrayActiveFilters = []
-
+                this.recipeNotfoundMsg.classList.add("hidden")
                 this._initDisplay()
             }
         }
@@ -753,13 +753,17 @@ export default class Search {
                     // console.log('A4 - array recipe name', recipe.name);
                     // console.log('A4 - array recipe ingredients', recipe.ingredients);
                     // console.log('A4 - array reicpe description', recipe.description);
-                    let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
-                    // console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
+                    let recipeUstensils = []
+                    for (let ustensil of recipe.ustensils) {
+                        recipeUstensils.push(ustensil.toLowerCase())
+                    }
+                    //let recipeUstensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase())
+                    //console.log('A4 - lowerCase array recipe ustensils', recipeUstensils);
                     if (
                         recipe.name.toLowerCase().includes(filter)
                         || recipe.description.toLowerCase().includes(filter)
                         || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
-                        || recipeUstensils.includes(filter))
+                        || recipe.appliance.toLowerCase().includes(filter) || recipeUstensils.includes(filter))
                         { 
                         // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
                         this.arrayFilteredRecipes.push(recipe)
@@ -784,6 +788,7 @@ export default class Search {
             this._setUstensilsFilterList();
             console.log('XX - array recipes', this.arrayRecipes);
         } else {
+            this.recipeNotfoundMsg.classList.add("hidden")
             this._initDisplay()
         }
     };   
@@ -813,7 +818,7 @@ export default class Search {
     //                     recipe.name.toLowerCase().includes(filter)
     //                     || recipe.description.toLowerCase().includes(filter)
     //                     || recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter))
-    //                     || recipeUstensils.includes(filter))
+    //                     || recipe.appliance.toLowerCase().includes(filter) || recipeUstensils.includes(filter))
     //                     { 
     //                     // console.log('A4 - array filtered recipes', this.arrayFilteredRecipes);      
     //                     this.arrayFilteredRecipes.push(recipe)
