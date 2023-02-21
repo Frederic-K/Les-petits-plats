@@ -448,7 +448,6 @@ export default class Search {
 
     /// Recipes filter ///
     _filterRecipes() {
-        console.log('XX - array activ filter', this.arrayActiveFilters);
         this.arrayRecipes = this.arrayAllRecipes
         if (this.arrayActiveFilters.length > 0) {
             this.arrayActiveFilters.forEach(filter => {
