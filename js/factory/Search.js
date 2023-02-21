@@ -149,24 +149,15 @@ export default class Search {
     };
 
     _setAppliancesFilterList() {
+        let i = 0
         this.arrayAllAppliances = []
-        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-            let appliance = this.arrayFilteredRecipes[i].appliance
+        this.arrayFilteredRecipes.forEach(appliance => {
+            appliance = this.arrayFilteredRecipes[i].appliance
             this.arrayAllAppliances.push(appliance.toLowerCase())
-        }
+            i++
+        })
         this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
     };
-
-    // _setAppliancesFilterList() {
-    //     let i = 0
-    //     this.arrayAllAppliances = []
-    //     this.arrayFilteredRecipes.forEach(appliance => {
-    //         appliance = this.arrayFilteredRecipes[i].appliance
-    //         this.arrayAllAppliances.push(appliance.toLowerCase())
-    //         i++
-    //     })
-    //     this.arrayAppliances = new Set(this.arrayAllAppliances.sort())
-    // };
 
     _setUstensilsFilterList() {
         this.arrayAllUstensils = []
