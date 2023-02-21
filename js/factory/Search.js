@@ -160,32 +160,21 @@ export default class Search {
     };
 
     _setUstensilsFilterList() {
+        let i = 0
+        let x = 0
         this.arrayAllUstensils = []
-        for (let i=0; i < this.arrayFilteredRecipes.length; i++) {
-            for (let x=0; x < this.arrayFilteredRecipes[i].ustensils.length; x++) {
-                let ustensil = this.arrayFilteredRecipes[i].ustensils[x]
+        this.arrayFilteredRecipes.forEach(ustensils => {
+            ustensils = this.arrayFilteredRecipes[i].ustensils
+            this.arrayFilteredRecipes[i].ustensils.forEach(ustensil => {
+                this.arrayFilteredRecipes[i].ustensils[x]
+                // ustensil = this.arrayFilteredRecipes[i].ustensils[x].ustensil
                 this.arrayAllUstensils.push(ustensil.toLowerCase())
-            }
-        }
+                x++
+            })
+            i++
+        })
         this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
     };
-
-    // _setUstensilsFilterList() {
-    //     let i = 0
-    //     let x = 0
-    //     this.arrayAllUstensils = []
-    //     this.arrayFilteredRecipes.forEach(ustensils => {
-    //         ustensils = this.arrayFilteredRecipes[i].ustensils
-    //         this.arrayFilteredRecipes[i].ustensils.forEach(ustensil => {
-    //             this.arrayFilteredRecipes[i].ustensils[x]
-    //             // ustensil = this.arrayFilteredRecipes[i].ustensils[x].ustensil
-    //             this.arrayAllUstensils.push(ustensil.toLowerCase())
-    //             x++
-    //         })
-    //         i++
-    //     })
-    //     this.arrayUstensils = new Set(this.arrayAllUstensils.sort())
-    // };
 
     /// Show or hide dropdownmenu ///
     _switchListFilter(filter, task) {
