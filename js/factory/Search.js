@@ -317,9 +317,9 @@ export default class Search {
         this._mainSearch()
     }; 
     
-    /// Remove selected tag filter from dopdown menu content///
+    /// Remove selected tag filter from dopdown menu content///    
     _removeDropdownFilter(list) {        
-        for (let activFilter of this.arrayActiveFilters) {
+        this.arrayActiveFilters.forEach(activFilter => {
             if (list === "ingredients") {
                 if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
                     console.log('ingredients');
@@ -336,29 +336,8 @@ export default class Search {
                     this.ustensilFilterListItem.remove()
                 }
             }
-        }
-    };
-    
-    // _removeDropdownFilter(list) {        
-    //     this.arrayActiveFilters.forEach(activFilter => {
-    //         if (list === "ingredients") {
-    //             if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
-    //                 console.log('ingredients');
-    //                 this.ingredientFilterListItem.remove()
-    //             }
-    //         } else if (list === "appliances") {
-    //             if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
-    //                 console.log('appliances');
-    //                 this.applianceFilterListitem.remove()
-    //             }
-    //         } else if (list === "ustensils") {
-    //             if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
-    //                 console.log('ustensils');
-    //                 this.ustensilFilterListItem.remove()
-    //             }
-    //         }
-    //     })
-    // };  
+        })
+    };  
 
     /// Remove selected tag filter ///
     _deleteSelectedFilter(e) {
