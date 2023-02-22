@@ -43,10 +43,6 @@ export default class Search {
         this.historyArrayActiveFilters = [];
         this.historySearch = "";
 
-        this.arrayRecipeCollection = [];
-        this.arrayHistoryActiveFilters = [];
-
-
         /// Function ///
         /// Show all recipes when page loads ///
         this._initDisplay();
@@ -126,6 +122,8 @@ export default class Search {
             recipeCard += new RecipeCard(recipe).recipeCardContent
         })
         this.cardSection.innerHTML = recipeCard
+        this.arrayRecipeCollection = []
+        this.arrayRecipeCollection = this.cardSection
     };
 
 
@@ -325,17 +323,14 @@ export default class Search {
         this.arrayActiveFilters.forEach(activFilter => {
             if (list === "ingredients") {
                 if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
-                    console.log('ingredients');
                     this.ingredientFilterListItem.remove()
                 }
             } else if (list === "appliances") {
                 if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
-                    console.log('appliances');
                     this.applianceFilterListitem.remove()
                 }
             } else if (list === "ustensils") {
                 if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
-                    console.log('ustensils');
                     this.ustensilFilterListItem.remove()
                 }
             }
