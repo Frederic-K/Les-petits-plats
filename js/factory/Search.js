@@ -43,6 +43,9 @@ export default class Search {
         this.historyArrayActiveFilters = [];
         this.historySearch = "";
 
+        this.arrayRecipeCollection = [];
+        this.arrayHistoryActiveFilters = [];
+
 
         /// Function ///
         /// Show all recipes when page loads ///
