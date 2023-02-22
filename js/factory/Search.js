@@ -309,17 +309,14 @@ export default class Search {
         for (let activFilter of this.arrayActiveFilters) {
             if (list === "ingredients") {
                 if (activFilter === this.ingredientFilterListItem.textContent.toLowerCase()) {
-                    console.log('ingredients');
                     this.ingredientFilterListItem.remove()
                 }
             } else if (list === "appliances") {
                 if (activFilter === this.applianceFilterListitem.textContent.toLowerCase()) {
-                    console.log('appliances');
                     this.applianceFilterListitem.remove()
                 }
             } else if (list === "ustensils") {
                 if (activFilter === this.ustensilFilterListItem.textContent.toLowerCase()) {
-                    console.log('ustensils');
                     this.ustensilFilterListItem.remove()
                 }
             }
