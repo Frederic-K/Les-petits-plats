@@ -374,7 +374,6 @@ export default class Search {
                     let i = this.arrayActiveFilters.length
                     while (i--) {
                         if (this.arrayActiveFilters[i] === this.historySearch) {
-                            console.log('6A - launch test : while loop');
                             this.arrayActiveFilters.splice(i, 1)
                         }
                     }
