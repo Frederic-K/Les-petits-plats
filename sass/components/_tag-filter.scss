@@ -95,86 +95,8 @@
 
 .tag__filter--list, .filter__header--input, .filter__header--chevronUp, .active .filter__header--chevronDown, .active .filter__header--title {
     display: none;
-}
+};
 
 .active .filter__header--chevronUp, .active .tag__filter--list, .active .filter__header--input {
     display: flex;
-}
-
-// .tag__filter {    
-//     &--ingredients {
-//         background-color: #1683FF;
-//         @include tag-filter-items;        
-//     }
-//     &--header {
-//         @include tag-filter-header;
-//         .filter__ingredients {
-//             @include tag-filter-title;
-//         }
-//         .filter__ingredients--input {
-//             background-color: #1683FF;
-//             @include tag-filter-input;
-//         }
-//         .filter__ingredients--chevron {
-//             @include tag-filter-chevron;
-//         }
-//     }
-//     .filter__ingredients--list {
-//         @include display-taglist;
-//         .itemsList {
-//             @include items-list;
-//         }
-//     }
-// };
-// .tag__filter {
-//     &--appliances {
-//         background-color: #2ecc4b;
-//         @include tag-filter-items;   
-//     }
-//     &--header {
-//         @include tag-filter-header;
-//         .filter__appliances {
-//             @include tag-filter-title;
-//         }
-//         .filter__appliances--input {
-//             background-color: #2ecc4b;
-//             @include tag-filter-input;
-//         }
-//         .filter__appliances--chevron {
-//             @include tag-filter-chevron;
-//         }
-//     }
-//     .filter__appliances--list {
-//         @include display-taglist;
-//         .itemsList {
-//             @include items-list;
-//         }
-//     }
-// }
-
-// .tag__filter {
-//     &--ustensils {
-//         background-color: #e93336;
-//         @include tag-filter-items;   
-//     }
-//     &--header {
-//         @include tag-filter-header;
-//         .filter__ustensils {
-//             @include tag-filter-title;
-//         }
-//         .filter__ustensils--input {
-//             background-color: #e93336;
-//             @include tag-filter-input;
-//         }
-//         .filter__ustensils--chevron {
-//             @include tag-filter-chevron;
-//         }
-//     }
-//     .filter__ustensils--list {
-//         @include display-taglist;
-//         .itemsList {
-//             @include items-list;
-//         }
-//     }
-// }
-
+};
