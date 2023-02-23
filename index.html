@@ -25,20 +25,20 @@
     </header>
     <main class="main">
 <!-- Barre de recherche-->
-        <section class="main__searchbar">
+        <div class="main__searchbar">
             <input type="text" class="main__searchbar--input" placeholder="Rechercher une recette">
             <span class="main__searchbar--icon fa-solid fa-magnifying-glass"></span>
-        </section>
+        </div>
 <!-- Message d'erreur : aucune recette trouvée -->
         <section class="search__message hidden">
             <h2 class="search__message--recipeNotFound">Aucune recette ne correspond à votre critère… vous pouvez
 chercher « tarte aux pommes », « poisson », etc...</h2>
         </section>
 <!-- Zone de stockage des tags sélectiés -->
-        <section class="tag__parking">
-        </section> 
+        <div class="tag__parking">
+        </div> 
 <!-- Zone de recherche par tag--> 
-        <section class="tag__filter">
+        <div class="tag__filter">
             <div class="tag__filter--container">
                 <!-- Filtre ingrédients -->
                 <div class="tag__filter--listbox filter__bckground--blue width-small" id="filterIngredients" role="listbox" >
@@ -92,10 +92,10 @@ chercher « tarte aux pommes », « poisson », etc...</h2>
                     </ul>
                 </div>
             </div>    
-        </section>
+        </div>
 <!-- Zone d'affichage des recettes-->  
-        <section class="recipes__section">
-        </section>
+        <div class="recipes__section">
+        </div>
     </main>
     <script src="/js/api/getData.js"></script>
     <script type="module" src="/js/index.js"></script>
