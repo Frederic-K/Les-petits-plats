@@ -1,16 +1,16 @@
-
-/// Class ///
+/* eslint-disable require-jsdoc, max-len*/
+// / Class ///
 export default class RecipeCard {
-    constructor(data) {
-        this.id = data.id
-        this.name = data.name;
-        this.time = data.time;
-        this.ingredients = data.ingredients;
-        this.description = data.description;
-        this._createCard();
-    };
-    _createCard() {
-        this.recipeCardContent = `
+  constructor(data) {
+    this.id = data.id;
+    this.name = data.name;
+    this.time = data.time;
+    this.ingredients = data.ingredients;
+    this.description = data.description;
+    this._createCard();
+  };
+  _createCard() {
+    this.recipeCardContent = `
         <article class="recipe__card" data-index="${this.id}">
             <div class="recipe__card--imgContainer">
             <img src="https://picsum.photos/200/300" alt="${this.name}" class="recipe__card--img">
@@ -25,42 +25,42 @@ export default class RecipeCard {
                 </div>
                 <div class="recipe__card--explanation">
                     <p class="recipe__card--ingredients">
-                        ${this._getIngredientRecipeCardDOM(this.ingredients).join("")}  
+                        ${this._getIngredientRecipeCardDOM(this.ingredients).join('')}  
                     </p>
                     <p class="recipe__card--cookingDescription">${this.description}</p>
                 </div>
             </div>
         </article>    
-        `
-    };
-    _getIngredientRecipeCardDOM(data) {
-        //console.log('dataFromGetIngREcipeDArdDom', data);
-        let arrayIngredients = []  
-        for (let i = 0; i < data.length; i++) {
-            //console.log('data.length', data.length);
-            let ingredients = data[i];
-            //console.log('ingredientData(i)', ingredients);
-            let ingredientSection = `
-                <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
+        `;
+  };
+  _getIngredientRecipeCardDOM(data) {
+    // console.log('dataFromGetIngREcipeDArdDom', data);
+    const arrayIngredients = [];
+    for (let i = 0; i < data.length; i++) {
+      // console.log('data.length', data.length);
+      const ingredients = data[i];
+      // console.log('ingredientData(i)', ingredients);
+      const ingredientSection = `
+                <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ''} : </span> <span>${ingredients.quantity ? ingredients.quantity : ''}  ${ingredients.unit ? ingredients.unit : ''}</span>
                 </br>
-            `
-            arrayIngredients.push(ingredientSection);
-        } 
-        //console.log('arrayIngredients', arrayIngredients);   
-        return (arrayIngredients);
+            `;
+      arrayIngredients.push(ingredientSection);
+    }
+    // console.log('arrayIngredients', arrayIngredients);
+    return (arrayIngredients);
 
-        // let i = 0
-        // let arrayIngredients = []
-        // data.forEach(ingredients => {
-        //     ingredients = data[i]
-        //     let ingredientSection = `
-        //     <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
-        //     </br>
-        // `
-        // arrayIngredients.push(ingredientSection);
-        // i++
-        // });
-        // return (arrayIngredients);
-    };
+    // let i = 0
+    // let arrayIngredients = []
+    // data.forEach(ingredients => {
+    //     ingredients = data[i]
+    //     let ingredientSection = `
+    //     <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ""} : </span> <span>${ingredients.quantity ? ingredients.quantity : ""}  ${ingredients.unit ? ingredients.unit : ""}</span>
+    //     </br>
+    // `
+    // arrayIngredients.push(ingredientSection);
+    // i++
+    // });
+    // return (arrayIngredients);
+  };
 };
 
