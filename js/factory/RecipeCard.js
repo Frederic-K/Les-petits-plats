@@ -33,19 +33,17 @@ export default class RecipeCard {
         </article>    
         `;
   };
+
   _getIngredientRecipeCardDOM(data) {
-    let i = 0;
-    const arrayIngredients = [];
-    data.forEach((ingredients) => {
-      ingredients = data[i];
+    let arrayIngredients = [];
+    data.forEach(ingredients => {
       const ingredientSection = `
-            <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ''} : </span> <span>${ingredients.quantity ? ingredients.quantity : ''}  ${ingredients.unit ? ingredients.unit : ''}</span>
-            </br>
-        `;
-      arrayIngredients.push(ingredientSection);
-      i++;
+                <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ''} : </span> <span>${ingredients.quantity ? ingredients.quantity : ''}  ${ingredients.unit ? ingredients.unit : ''}</span>
+                </br>
+            `;
+            arrayIngredients.push(ingredientSection);      
     });
-    return (arrayIngredients);
-  };
+    return (arrayIngredients)
+  }
 };
 
