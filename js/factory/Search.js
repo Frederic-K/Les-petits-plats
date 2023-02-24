@@ -149,15 +149,23 @@ export default class Search {
     this.arrayIngredients = new Set(this.arrayAllIngredients.sort());
   };
 
+  // _setAppliancesFilterList() {
+  //   let i = 0;
+  //   this.arrayAllAppliances = [];
+  //   this.arrayFilteredRecipes.forEach((appliance) => {
+  //     appliance = this.arrayFilteredRecipes[i].appliance;
+  //     this.arrayAllAppliances.push(appliance.toLowerCase());
+  //     i++;
+  //   });
+  //   this.arrayAppliances = new Set(this.arrayAllAppliances.sort());
+  // };
+
   _setAppliancesFilterList() {
-    let i = 0;
     this.arrayAllAppliances = [];
-    this.arrayFilteredRecipes.forEach((appliance) => {
-      appliance = this.arrayFilteredRecipes[i].appliance;
-      this.arrayAllAppliances.push(appliance.toLowerCase());
-      i++;
+    this.arrayFilteredRecipes.forEach((recipe) => {
+      this.arrayAllAppliances.push(recipe.appliance.toLowerCase())
     });
-    this.arrayAppliances = new Set(this.arrayAllAppliances.sort());
+    this.arrayAppliances = [...new Set(this.arrayAllAppliances.sort())];
   };
 
   _setUstensilsFilterList() {
@@ -168,7 +176,6 @@ export default class Search {
       ustensils = this.arrayFilteredRecipes[i].ustensils;
       this.arrayFilteredRecipes[i].ustensils.forEach((ustensil) => {
         this.arrayFilteredRecipes[i].ustensils[x];
-        // ustensil = this.arrayFilteredRecipes[i].ustensils[x].ustensil
         this.arrayAllUstensils.push(ustensil.toLowerCase());
         x++;
       });
