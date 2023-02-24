@@ -159,17 +159,6 @@ export default class Search {
     this.arrayIngredients = [...new Set(this.arrayAllIngredients.sort())];
   };
 
-  // _setAppliancesFilterList() {
-  //   let i = 0;
-  //   this.arrayAllAppliances = [];
-  //   this.arrayFilteredRecipes.forEach((appliance) => {
-  //     appliance = this.arrayFilteredRecipes[i].appliance;
-  //     this.arrayAllAppliances.push(appliance.toLowerCase());
-  //     i++;
-  //   });
-  //   this.arrayAppliances = new Set(this.arrayAllAppliances.sort());
-  // };
-
   _setAppliancesFilterList() {
     this.arrayAllAppliances = [];
     this.arrayFilteredRecipes.forEach((recipe) => {
