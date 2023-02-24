@@ -167,21 +167,33 @@ export default class Search {
     this.arrayAppliances = [...new Set(this.arrayAllAppliances.sort())];
   };
 
+  // _setUstensilsFilterList() {
+  //   let i = 0;
+  //   let x = 0;
+  //   this.arrayAllUstensils = [];
+  //   this.arrayFilteredRecipes.forEach((ustensils) => {
+  //     ustensils = this.arrayFilteredRecipes[i].ustensils;
+  //     this.arrayFilteredRecipes[i].ustensils.forEach((ustensil) => {
+  //       this.arrayFilteredRecipes[i].ustensils[x];
+  //       this.arrayAllUstensils.push(ustensil.toLowerCase());
+  //       x++;
+  //     });
+  //     i++;
+  //   });
+  //   this.arrayUstensils = new Set(this.arrayAllUstensils.sort());
+  //   console.log('arrayUstensils', this.arrayUstensils);
+  // };
+
   _setUstensilsFilterList() {
-    let i = 0;
-    let x = 0;
-    this.arrayAllUstensils = [];
-    this.arrayFilteredRecipes.forEach((ustensils) => {
-      ustensils = this.arrayFilteredRecipes[i].ustensils;
-      this.arrayFilteredRecipes[i].ustensils.forEach((ustensil) => {
-        this.arrayFilteredRecipes[i].ustensils[x];
-        this.arrayAllUstensils.push(ustensil.toLowerCase());
-        x++;
-      });
-      i++;
-    });
+    this.arrayAllUstensils = [];    
+    this.arrayFilteredRecipes.forEach((recipe) => {
+      this.arrayAllUstensils.push(recipe.ustensils)});
+      this.arrayAllUstensils = this.arrayAllUstensils.reduce(function(a, b) {
+        return a.concat(b);
+      })
+    this.arrayAllUstensils = this.arrayAllUstensils.map(ustensil => ustensil.toLowerCase())
     this.arrayUstensils = new Set(this.arrayAllUstensils.sort());
-  };
+    };
 
   // / Show or hide dropdownmenu ///
   _switchListFilter(filter, task) {
