@@ -35,15 +35,15 @@ export default class RecipeCard {
   };
 
   _getIngredientRecipeCardDOM(data) {
-    let arrayIngredients = [];
-    data.forEach(ingredients => {
+    const arrayIngredients = [];
+    data.forEach((ingredients) => {
       const ingredientSection = `
                 <span class="bold">${ingredients.ingredient ? ingredients.ingredient : ''} : </span> <span>${ingredients.quantity ? ingredients.quantity : ''}  ${ingredients.unit ? ingredients.unit : ''}</span>
                 </br>
             `;
-            arrayIngredients.push(ingredientSection);      
+      arrayIngredients.push(ingredientSection);
     });
-    return (arrayIngredients)
+    return (arrayIngredients);
   }
 };
 
