@@ -452,7 +452,7 @@ _filterRecipes() {
       this.arrayFilteredRecipes = [];
       for(let i = 0; i < this.arrayRecipes.length; i++) {
         let recipe = this.arrayRecipes[i]
-        const recipeUstensils = [];
+        let recipeUstensils = [];
         for(let i = 0;  i < recipe.ustensils.length; i++) {
           let ustensil = recipe.ustensils[i]
           recipeUstensils.push(ustensil.toLowerCase());
