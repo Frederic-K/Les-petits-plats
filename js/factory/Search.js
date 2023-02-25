@@ -451,10 +451,10 @@ _filterRecipes() {
       let filter = this.arrayActiveFilters[i];   
       this.arrayFilteredRecipes = [];
       for(let i = 0; i < this.arrayRecipes.length; i++) {
-        let recipe = this.arrayRecipes[i]
+        let recipe = this.arrayRecipes[i];
         let recipeUstensils = [];
         for(let i = 0;  i < recipe.ustensils.length; i++) {
-          let ustensil = recipe.ustensils[i]
+          let ustensil = recipe.ustensils[i];
           recipeUstensils.push(ustensil.toLowerCase());
         }
         if (
