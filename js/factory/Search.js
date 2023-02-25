@@ -136,20 +136,7 @@ export default class Search {
   // / Generate ingredients, appliances nd ustensils array ///
   // / https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#remove_duplicate_elements_from_the_array
 
-  _setIngredientsFilterList() {
-    let i = 0;
-    this.arrayAllIngredients = [];
-    this.arrayFilteredRecipes.forEach((ingredients) => {
-      ingredients = this.arrayFilteredRecipes[i].ingredients;
-      ingredients.map(({ingredient}) => {
-        this.arrayAllIngredients.push(ingredient.toLowerCase());
-      });
-      i++;
-    });
-    this.arrayIngredients = new Set(this.arrayAllIngredients.sort());
-  };
-
-  _setIngredientsFilterList() {
+   _setIngredientsFilterList() {
     this.arrayAllIngredients = [];
     this.arrayFilteredRecipes.forEach((recipe) => {
       recipe.ingredients.map(({ingredient}) => {
