@@ -444,27 +444,31 @@ export default class Search {
     }
   };
 
-  // / Recipes filter ///
-  _filterRecipes() {
-    this.arrayRecipes = this.arrayAllRecipes;
-    if (this.arrayActiveFilters.length > 0) {
-      for (const filter of this.arrayActiveFilters) {
-        this.arrayFilteredRecipes = [];
-        for (const recipe of this.arrayRecipes) {
-          const recipeUstensils = [];
-          for (const ustensil of recipe.ustensils) {
-            recipeUstensils.push(ustensil.toLowerCase());
-          }
-          if (
-            recipe.name.toLowerCase().includes(filter) ||
-                        recipe.description.toLowerCase().includes(filter) ||
-                        recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter)) ||
-                        recipe.appliance.toLowerCase().includes(filter) || recipeUstensils.includes(filter)) {
-            this.arrayFilteredRecipes.push(recipe);
-          }
+_filterRecipes() {
+  this.arrayRecipes = this.arrayAllRecipes;
+  if (this.arrayActiveFilters.length > 0) {
+    for(let i = 0;  i < this.arrayActiveFilters.length; i++) {
+      let filter = this.arrayActiveFilters[i];   
+      this.arrayFilteredRecipes = [];
+      for(let i = 0; i < this.arrayRecipes.length; i++) {
+        let recipe = this.arrayRecipes[i]
+        const recipeUstensils = [];
+        for(let i = 0;  i < recipe.ustensils.length; i++) {
+          let ustensil = recipe.ustensils[i]
+          recipeUstensils.push(ustensil.toLowerCase());
         }
-        this.arrayRecipes = [];
-        this.arrayRecipes = this.arrayFilteredRecipes;
+        if (
+          recipe.name.toLowerCase().includes(filter) ||
+          recipe.description.toLowerCase().includes(filter) ||
+          recipe.ingredients.some((ingredients) => ingredients.ingredient.toLowerCase().includes(filter)) ||
+          recipe.appliance.toLowerCase().includes(filter) || 
+          recipeUstensils.includes(filter)) 
+        {
+          this.arrayFilteredRecipes.push(recipe);
+        }
+      }
+      this.arrayRecipes = [];
+      this.arrayRecipes = this.arrayFilteredRecipes;
       }
       if (this.arrayRecipes.length <= 0) {
         this.recipeNotfoundMsg.classList.remove('hidden');
