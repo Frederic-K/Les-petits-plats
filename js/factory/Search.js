@@ -441,7 +441,7 @@ export default class Search {
       this.arrayActiveFilters.forEach((filter) => {
         this.arrayFilteredRecipes = [];
         this.arrayRecipes.forEach((recipe) => {
-          const recipeUstensils = recipe.ustensils.map((ustensil) => ustensil.toLowerCase());
+          let  recipeUstensils = recipe.ustensils.map((ustensil) => ustensil.toLowerCase());
           if (
             recipe.name.toLowerCase().includes(filter) ||
                         recipe.description.toLowerCase().includes(filter) ||
